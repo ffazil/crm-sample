@@ -5,6 +5,7 @@
 # Mobile Tools for Java (J2ME)
 .idea/
 *.iml
+target/
 
 # Package Files #
 *.jar
