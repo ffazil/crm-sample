@@ -12,6 +12,8 @@ import java.util.UUID;
  */
 public class Command<T> extends Event<T> {
 
+    private static final String prefix = "Command|";
+
     @Id
     private String cid;
 
@@ -61,5 +63,12 @@ public class Command<T> extends Event<T> {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public static String name(String name){
+        return new StringBuilder()
+                .append(prefix)
+                .append(name)
+                .toString();
     }
 }
