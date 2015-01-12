@@ -1,6 +1,5 @@
 package com.tracebucket.crm.config;
 
-import com.tracebucket.infrastructure.ddd.repository.jpa.BaseJpaRepositoryFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -27,7 +25,7 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.tracebucket.crm.repository.jpa", "com.tracebucket.infrastructure.ddd.repository.jpa"}, repositoryFactoryBeanClass = BaseJpaRepositoryFactoryBean.class)
+@EnableJpaRepositories(basePackages = {"com.tracebucket.crm.repository.jpa", "com.tracebucket.infrastructure.ddd.repository.jpa"})
 @EntityScan(basePackages = {"com.tracebucket.crm.domain", "com.tracebucket.infrastructure.ddd.domain"})
 @PropertySource(value = "classpath:jpa.properties")
 @EnableTransactionManagement(proxyTargetClass = true)

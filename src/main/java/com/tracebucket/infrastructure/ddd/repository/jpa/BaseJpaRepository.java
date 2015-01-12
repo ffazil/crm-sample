@@ -10,7 +10,5 @@ import org.springframework.data.repository.NoRepositoryBean;
  */
 @NoRepositoryBean
 public interface BaseJpaRepository<T extends BaseAggregateRoot, ID extends AggregateId> extends JpaRepository<T, ID>{
-    public T load(ID id);
-    public void persist(T aggregate);
-    public void remove(ID id);
+
 }

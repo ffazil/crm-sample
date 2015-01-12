@@ -19,13 +19,19 @@
 package com.tracebucket.infrastructure.ddd.domain;
 
 import com.tracebucket.infrastructure.ddd.exception.DomainOperationException;
+import com.tracebucket.infrastructure.event.domain.EventHandlerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import reactor.core.Reactor;
+import reactor.event.Event;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Configurable
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
@@ -50,7 +56,12 @@ public abstract class  BaseAggregateRoot {
 
     @Transient
     @Autowired
-    private Reactor eventBus;
+    private EventHandlerHelper eventHandlerHelper;
+
+    @Transient
+    private static Map<String, Event> events = new HashMap<String, Event>(0);
+
+
 
     public BaseAggregateRoot(){
 
@@ -71,6 +82,10 @@ public abstract class  BaseAggregateRoot {
 	protected void domainError(String message) {
 		throw new DomainOperationException(aggregateId, message);
 	}
+
+    protected EventHandlerHelper eventHandlerHelper(){
+        return eventHandlerHelper;
+    }
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -87,6 +102,20 @@ public abstract class  BaseAggregateRoot {
 		
 		return false;
 	}
+
+    protected BaseAggregateRoot queue(String name, Event event){
+        events.put(name, event);
+        return this;
+    }
+
+    @PrePersist
+    @PreUpdate
+    @PreRemove
+    public void publishEvents(){
+        eventHandlerHelper.notify(events);
+    }
+
+
 	
 	@Override
 	public int hashCode() {	

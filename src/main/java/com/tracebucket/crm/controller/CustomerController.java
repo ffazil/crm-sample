@@ -5,6 +5,7 @@ import com.tracebucket.crm.domain.Customer;
 import com.tracebucket.crm.resource.CustomerResource;
 import com.tracebucket.crm.service.CustomerService;
 import com.tracebucket.infrastructure.cqrs.support.Command;
+import com.tracebucket.infrastructure.cqrs.support.CommandControllerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.async.DeferredResult;
 import reactor.core.Reactor;
 
 /**
@@ -26,14 +28,17 @@ public class CustomerController {
     private Reactor commandBus;
 
     @Autowired
+    private CommandControllerHelper commandControllerHelper;
+
+    @Autowired
     private CustomerService customerService;
 
 
-    @RequestMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
-    public ResponseEntity<CustomerResource> changeCustomerStatus(@RequestBody ChangeCustomerStatusCommand command){
-
-        commandBus.notify("Command|changeCustomerStatus", Command.wrap(command));
-        return null;
+    @RequestMapping(value = "/customer/status", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.PUT)
+    public DeferredResult<CustomerResource> changeCustomerStatus(@RequestBody ChangeCustomerStatusCommand command){
+        DeferredResult<CustomerResource> deferredResult = new DeferredResult<CustomerResource>();
+        commandControllerHelper.intent(Command.name("changeCustomerStatus"), command, deferredResult);
+        return deferredResult;
 
     }
 

@@ -17,7 +17,7 @@ public class AggregateId implements Serializable{
 		this.aggregateId = aggregateId;
 	}
 
-	protected AggregateId() {
+    protected AggregateId() {
 	}
 	
 	public static AggregateId generate(){

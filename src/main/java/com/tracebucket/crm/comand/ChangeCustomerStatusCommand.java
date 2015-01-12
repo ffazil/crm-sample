@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class ChangeCustomerStatusCommand implements Serializable{
 
-	private AggregateId customerId;
+    private String customerId;
 	
 	private Customer.CustomerStatus status;
 
@@ -17,7 +17,7 @@ public class ChangeCustomerStatusCommand implements Serializable{
 
     }
 
-    public void setCustomerId(AggregateId customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -25,13 +25,13 @@ public class ChangeCustomerStatusCommand implements Serializable{
         this.status = status;
     }
 
-    public ChangeCustomerStatusCommand(AggregateId customerId, Customer.CustomerStatus status) {
+    public ChangeCustomerStatusCommand(String customerId, Customer.CustomerStatus status) {
 		super();
 		this.customerId = customerId;
 		this.status = status;
 	}
 
-	public AggregateId getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
 

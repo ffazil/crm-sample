@@ -14,20 +14,8 @@ import reactor.spring.context.config.EnableReactor;
 @Configuration
 @ComponentScan(basePackages = {"com.tracebucket.crm.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableReactor
-@EnableSpringConfigured
 public class ServiceConfig {
 
-    @Bean
-     public Reactor commandBus(Environment env) {
-        // implicit Environment is injected into bean def method
-        return Reactors.reactor().env(env).get();
-    }
 
-    @Bean
-    public Reactor eventBus(Environment env) {
-        // implicit Environment is injected into bean def method
-        return Reactors.reactor().env(env).get();
-    }
 
 }

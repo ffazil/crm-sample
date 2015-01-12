@@ -14,7 +14,7 @@ public class ChangeCustomerStatusCommandTest {
 
     @Test
     public void testCommand() throws JsonProcessingException {
-        ChangeCustomerStatusCommand command = new ChangeCustomerStatusCommand(AggregateId.generate(), Customer.CustomerStatus.PLATINUM);
+        ChangeCustomerStatusCommand command = new ChangeCustomerStatusCommand(AggregateId.generate().toString(), Customer.CustomerStatus.PLATINUM);
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(mapper.writeValueAsString(command));
     }
