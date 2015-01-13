@@ -24,7 +24,7 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.tracebucket.crm.repository.jpa")
+@EnableJpaRepositories(basePackages = "com.tracebucket.**.repository.jpa")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class JPATestConfig {
     private static final Logger log = LoggerFactory.getLogger(JPATestConfig.class);
