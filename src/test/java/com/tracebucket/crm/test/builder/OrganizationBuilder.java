@@ -3,6 +3,7 @@ package com.tracebucket.crm.test.builder;
 import com.tracebucket.aggregates.organization.Organization;
 import com.tracebucket.aggregates.organization.OrganizationUnit;
 import com.tracebucket.common.domain.*;
+import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import java.util.Set;
  * Created by sadath on 25-Nov-14.
  */
 public class OrganizationBuilder {
+    private AggregateId aggregateId;
     private String code;
     private String name;
     private String description;
@@ -28,6 +30,11 @@ public class OrganizationBuilder {
 
     public static OrganizationBuilder anOrganizationBuilder(){
         return new OrganizationBuilder();
+    }
+
+    public OrganizationBuilder withAggregateId(AggregateId aggregateId){
+        this.aggregateId = aggregateId;
+        return this;
     }
 
     public OrganizationBuilder withCode(String code){
