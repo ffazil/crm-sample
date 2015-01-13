@@ -28,10 +28,7 @@ import reactor.core.Reactor;
 import reactor.event.Event;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Configurable
 @Scope("prototype")//created in common factories, not in spring container, therefore we don't want eager creation
@@ -109,10 +106,15 @@ public abstract class  BaseAggregateRoot {
     }
 
     @PrePersist
+    public void publishEvents1(){
+        this.aggregateId = AggregateId.generate();
+        // eventHandlerHelper.notify(events);
+    }
+
     @PreUpdate
     @PreRemove
-    public void publishEvents(){
-        eventHandlerHelper.notify(events);
+    public void publishEvents2(){
+       // eventHandlerHelper.notify(events);
     }
 
 
