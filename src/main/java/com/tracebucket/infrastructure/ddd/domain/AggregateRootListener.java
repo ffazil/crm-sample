@@ -1,0 +1,28 @@
+package com.tracebucket.infrastructure.ddd.domain;
+
+import com.tracebucket.infrastructure.event.domain.EventHandlerHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Scope;
+
+import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
+
+/**
+ * Created by ffl on 13-01-2015.
+ */
+@Configurable
+@Scope("singleton")
+public class AggregateRootListener {
+
+    @Autowired
+    private EventHandlerHelper eventHandlerHelper;
+
+    @PrePersist
+    @PreUpdate
+    @PreRemove
+    public void publishEvents(BaseAggregateRoot aggregateRoot){
+        eventHandlerHelper.notify(aggregateRoot.getEvents());
+    }
+}

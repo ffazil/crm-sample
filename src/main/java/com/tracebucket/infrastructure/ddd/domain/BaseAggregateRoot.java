@@ -36,6 +36,7 @@ import java.util.Set;
 @Configurable
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
+@EntityListeners(AggregateRootListener.class)
 public abstract class  BaseAggregateRoot {
 	public static enum AggregateStatus {
 		ACTIVE, ARCHIVE
@@ -59,7 +60,7 @@ public abstract class  BaseAggregateRoot {
     private EventHandlerHelper eventHandlerHelper;
 
     @Transient
-    private static Map<String, Event> events = new HashMap<String, Event>(0);
+    private Map<String, Event> events = new HashMap<String, Event>(0);
 
 
 
@@ -108,16 +109,11 @@ public abstract class  BaseAggregateRoot {
         return this;
     }
 
-    @PrePersist
-    @PreUpdate
-    @PreRemove
-    public void publishEvents(){
-        eventHandlerHelper.notify(events);
+    public Map<String, Event> getEvents() {
+        return events;
     }
 
-
-	
-	@Override
+    @Override
 	public int hashCode() {	
 		return aggregateId.hashCode();
 	}
