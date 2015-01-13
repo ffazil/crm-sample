@@ -6,6 +6,7 @@ import com.tracebucket.common.domain.Address;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import java.util.Set;
 @Table(name = "PARTNER_ROLE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "PARTNER_ROLE", discriminatorType = DiscriminatorType.STRING)
-public abstract class PartnerRole extends BaseEntity {
+public abstract class PartnerRole extends BaseEntity implements Serializable{
 
     @Column(name = "NAME")
     @Basic(fetch = FetchType.EAGER)

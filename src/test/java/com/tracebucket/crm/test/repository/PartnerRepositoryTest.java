@@ -4,7 +4,11 @@ import com.tracebucket.aggregates.partner.Partner;
 import com.tracebucket.crm.repository.jpa.PartnerRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.crm.test.fixture.AddressFixture;
+import com.tracebucket.crm.test.fixture.CustomerFixture;
 import com.tracebucket.crm.test.fixture.PartnerFixture;
+import com.tracebucket.crm.test.fixture.PersonFixture;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +39,34 @@ public class PartnerRepositoryTest {
     private void createPartner() throws Exception{
         partner = PartnerFixture.allRoles();
         partner = partnerRepository.save(partner);
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        createPartner();
+        partner.getPartnerRoles().clear();
+        partner = partnerRepository.save(partner);
+        Assert.assertEquals(0, partner.getPartnerRoles().size());
+        partner.getPartnerRoles().add(CustomerFixture.standardCustomer());
+        partner = partnerRepository.save(partner);
+        Assert.assertEquals(1, partner.getPartnerRoles().size());
+    }
+
+    @Test
+    @Rollback(false)
+    public void testFindById() throws Exception {
+        createPartner();
+        partner = partnerRepository.findOne(partner.getAggregateId());
+        Assert.assertNotNull(partner);
+    }
+
+    @After
+    public void tearDown(){
+        /*if(partner != null && partner.getAggregateId() != null) {
+            partnerRepository.delete(partner.getAggregateId());
+            partner = partnerRepository.findOne(partner.getAggregateId());
+            Assert.assertNull(partner);
+        }*/
     }
 
     @Test
