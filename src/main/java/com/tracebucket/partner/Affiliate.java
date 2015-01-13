@@ -1,6 +1,6 @@
 package com.tracebucket.partner;
 
-import com.mmpsoftware.aurora.common.domain.Person;
+import com.tracebucket.common.domain.Person;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,12 +37,9 @@ public class Affiliate extends PartnerRole {
     @Basic(fetch = FetchType.EAGER)
     private String website;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinTable(
-            name="AFFILIATE_PERSON",
-            joinColumns={ @JoinColumn(name="AFFILIATE__ID", referencedColumnName="ID") },
-            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=false) }
-    )
+    @ElementCollection
+    @JoinTable(name = "PARTNER_CONTACT_PERSON", joinColumns = @JoinColumn(name = "PARTNER__ID"))
+
     private Set<Person> persons = new HashSet<Person>(0);
 
 /*    @OneToMany(mappedBy = "partner", fetch = FetchType.EAGER)

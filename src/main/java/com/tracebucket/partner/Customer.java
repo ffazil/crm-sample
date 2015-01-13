@@ -1,7 +1,7 @@
 package com.tracebucket.partner;
 
-import com.mmpsoftware.aurora.common.dictionary.Gender;
-import com.mmpsoftware.aurora.common.dictionary.Salutation;
+import com.tracebucket.common.dictionary.Gender;
+import com.tracebucket.common.dictionary.Salutation;
 
 import javax.persistence.*;
 import java.util.Date;

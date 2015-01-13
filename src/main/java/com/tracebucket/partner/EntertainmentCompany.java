@@ -1,7 +1,6 @@
 package com.tracebucket.partner;
 
-import com.mmpsoftware.aurora.common.domain.Person;
-
+import com.tracebucket.common.domain.Person;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +8,10 @@ import java.util.Set;
 /**
  * Created by ffl on 29-10-2014.
  */
+@Entity
+@Table(name = "ENTERTAINMENT_COMPANY")
+@PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
+@DiscriminatorValue(value = "ENTERTAINMENT_COMPANY")
 public class EntertainmentCompany extends PartnerRole{
     private static final String simpleName = "Entertainment Company";
 
@@ -29,8 +32,8 @@ public class EntertainmentCompany extends PartnerRole{
     @Basic(fetch = FetchType.EAGER)
     protected String logo;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "PERSON_ID")
+    @ElementCollection
+    @JoinTable(name = "PARTNER_CONTACT_PERSON", joinColumns = @JoinColumn(name = "PARTNER__ID"))
     protected Set<Person> contactPersons = new HashSet<Person>(0);
 
 /**Contract terms to be defined*/

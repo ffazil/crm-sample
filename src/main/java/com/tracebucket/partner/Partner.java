@@ -1,21 +1,24 @@
 package com.tracebucket.partner;
 
 
-import com.mmpsoftware.aurora.common.dictionary.PartnerCategory;
-import com.mmpsoftware.aurora.common.domain.BaseEntity;
+
+import com.tracebucket.common.dictionary.PartnerCategory;
+import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
+import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
+import com.tracebucket.organization.Organization;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by sadath on 05-Aug-14.
  */
+@AggregateRoot
 @Entity
 @Table(name = "PARTNER")
-public class Partner extends BaseEntity{
+public class Partner extends BaseAggregateRoot{
     @Column(name = "TITLE", nullable = false)
     @Basic(fetch = FetchType.EAGER)
     protected String title;
@@ -47,8 +50,6 @@ public class Partner extends BaseEntity{
     }
 
     public Partner category(PartnerCategory partnerCategory){
-        checkNotNull(partnerCategory, "Partner category cannot be null");
-
         this.partnerCategory = partnerCategory;
         return this;
     }
@@ -58,15 +59,11 @@ public class Partner extends BaseEntity{
     }
 
     public Partner owner(Organization owner){
-        checkNotNull(owner, "Owner cannot be null");
-
         this.owner = owner;
         return this;
     }
 
     public Partner role(PartnerRole role){
-        checkNotNull(role, role.simpleName() + " cannot be null");
-
         this.partnerRoles.add(role);
         return this;
     }

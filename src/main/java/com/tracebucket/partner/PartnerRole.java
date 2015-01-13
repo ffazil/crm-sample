@@ -1,7 +1,9 @@
 package com.tracebucket.partner;
 
-import com.mmpsoftware.aurora.common.domain.Address;
-import com.mmpsoftware.aurora.common.domain.BaseEntity;
+
+
+import com.tracebucket.common.domain.Address;
+import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,12 +22,8 @@ public abstract class PartnerRole extends BaseEntity {
     @Basic(fetch = FetchType.EAGER)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinTable(
-            name="PARTNER_ADDRESS",
-            joinColumns={ @JoinColumn(name="PARTNER__ID", referencedColumnName="ID") },
-            inverseJoinColumns={ @JoinColumn(name="ADDRESS__ID", referencedColumnName="ID", unique=true) }
-    )
+    @ElementCollection
+    @JoinTable(name = "PARTNER_ADDRESS", joinColumns = @JoinColumn(name = "PARTNER__ID"))
     private Set<Address> addresses = new HashSet<Address>(0);
 
     public abstract String simpleName();
