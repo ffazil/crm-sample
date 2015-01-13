@@ -1,6 +1,7 @@
 package com.tracebucket.common.domain;
 
-import com.mmpsoftware.aurora.common.dictionary.CurrencyType;
+import com.tracebucket.common.dictionary.CurrencyType;
+import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "COUNTRY_CURRENCY")
-public class CountryCurrency extends BaseEntity{
+public class CountryCurrency extends BaseEntity {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "CURRENCY__ID")

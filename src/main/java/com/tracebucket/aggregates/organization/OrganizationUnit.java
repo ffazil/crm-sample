@@ -1,4 +1,4 @@
-package com.tracebucket.organization;
+package com.tracebucket.aggregates.organization;
 
 import com.tracebucket.common.dictionary.OrganizationFunction;
 import com.tracebucket.common.domain.*;

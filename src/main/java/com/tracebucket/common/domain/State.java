@@ -1,5 +1,7 @@
 package com.tracebucket.common.domain;
 
+import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
