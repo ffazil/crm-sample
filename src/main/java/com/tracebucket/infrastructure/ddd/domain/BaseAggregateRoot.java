@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Configurable
-@Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
+@Scope("prototype")//created in common factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
 public abstract class  BaseAggregateRoot {
 	public static enum AggregateStatus {
