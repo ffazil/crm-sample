@@ -2,6 +2,7 @@ package com.tracebucket.aggregates.organization;
 
 import com.tracebucket.common.dictionary.SaleChannelType;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+import com.tracebucket.partner.PartnerRole;
 
 import javax.persistence.*;
 

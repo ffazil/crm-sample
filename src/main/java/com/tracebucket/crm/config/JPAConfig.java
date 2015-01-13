@@ -26,7 +26,7 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.tracebucket.crm.repository.jpa", "com.tracebucket.infrastructure.ddd.repository.jpa"})
-@EntityScan(basePackages = {"com.tracebucket.crm.domain", "com.tracebucket.infrastructure.ddd.domain"})
+@EntityScan(basePackages = {"com.tracebucket.crm.common", "com.tracebucket.infrastructure.ddd.common"})
 @PropertySource(value = "classpath:jpa.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class JPAConfig {
