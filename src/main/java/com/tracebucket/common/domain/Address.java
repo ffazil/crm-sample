@@ -2,6 +2,7 @@ package com.tracebucket.common.domain;
 
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.infrastructure.ddd.annotation.ValueObject;
+import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,57 +16,44 @@ public class Address {
     @Basic(fetch = FetchType.EAGER)
     private String name;
 
-    @Column(name = "BUILDING")
+    @Column(name = "BUILDING", length = 75)
     @Basic(fetch = FetchType.EAGER)
     private String building;
 
-    @Column(name = "STREET")
+    @Column(name = "STREET", length = 100)
     @Basic(fetch = FetchType.EAGER)
     private String street;
 
-    @Column(name = "REGION")
+    @Column(name = "REGION", length = 75)
     @Basic(fetch = FetchType.EAGER)
     private String region;
 
-    @Column(name = "CITY", nullable = false)
+    @Column(name = "CITY", nullable = false, length = 75)
     @Basic(fetch = FetchType.EAGER)
     private String city;
 
-    @Column(name = "DISTRICT", nullable = false)
+    @Column(name = "DISTRICT", nullable = false, length = 75)
     @Basic(fetch = FetchType.EAGER)
     private String district;
 
-    @Column(name = "STATE", nullable = false)
+    @Column(name = "STATE", nullable = false, length = 75)
     @Basic(fetch = FetchType.EAGER)
     private String state;
 
-    @Column(name = "COUNTRY", nullable = false)
+    @Column(name = "COUNTRY", nullable = false, length = 50)
     @Basic(fetch = FetchType.EAGER)
     private String country;
 
-    @Column(name = "ZIP", nullable = false)
+    @Column(name = "ZIP", nullable = false, length = 20)
     @Basic(fetch = FetchType.EAGER)
     private String zip;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @JoinTable(name = "ADDRESS_TYPE", joinColumns = @JoinColumn(name = "ADDRESS__ID"))
+    @Column(name = "ADDRESS_TYPE", nullable = false, columnDefinition = "ENUM('HEAD_OFFICE','BRANCH') default 'HEAD_OFFICE'")
     @Enumerated(EnumType.STRING)
-    @Column(name = "TYPE", nullable = false, columnDefinition = "ENUM('HEAD_OFFICE','BRANCH') default 'HEAD_OFFICE'")
-    private Set<AddressType> addressTypes = new HashSet<AddressType>();
+    private AddressType addressType;
 
     public Address() {
     }
-
-    public Address addressType(AddressType addressType){
-        this.addressTypes.add(addressType);
-        return this;
-    }
-
-    public Set<AddressType> addressTypes(){
-        return this.addressTypes;
-    }
-
-
 
     public String getName() {
         return name;
@@ -139,12 +127,12 @@ public class Address {
         this.zip = zip;
     }
 
-    public Set<AddressType> getAddressTypes() {
-        return addressTypes;
+    public AddressType getAddressType() {
+        return addressType;
     }
 
-    public void setAddressTypes(Set<AddressType> addressTypes) {
-        this.addressTypes = addressTypes;
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
     }
 
     @Override

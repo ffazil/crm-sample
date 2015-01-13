@@ -10,9 +10,9 @@ import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 import javax.persistence.*;
 import java.util.*;
 
-@ValueObject
-@Embeddable
-public class Person {
+@Entity
+@Table(name = "PERSON")
+public class Person extends BaseEntity {
 
     @Column(name = "FIRST_NAME", nullable = false)
     @Basic(fetch = FetchType.EAGER)

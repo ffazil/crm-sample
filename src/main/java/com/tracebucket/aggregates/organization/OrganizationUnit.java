@@ -40,8 +40,12 @@ public class OrganizationUnit extends BaseEntity {
     @JoinTable(name = "ORGANIZATION_UNIT_ADDRESS", joinColumns = @JoinColumn(name = "ORGANIZATION_UNIT__ID"))
     private Set<Address> addresses = new HashSet<Address>(0);
 
-    @ElementCollection
-    @JoinTable(name = "ORGANIZATION_UNIT_CONTACT_PERSON", joinColumns = @JoinColumn(name = "ORGANIZATION_UNIT__ID"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(
+            name="ORGANIZATION_UNIT_CONTACT_PERSONS",
+            joinColumns={ @JoinColumn(name="ORGANIZATION_UNIT__ID", referencedColumnName="ID") },
+            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=true) }
+    )
     private Set<Person> contactPersons = new HashSet<Person>(0);
 
     @ElementCollection

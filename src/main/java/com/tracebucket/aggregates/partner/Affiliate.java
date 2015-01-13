@@ -38,7 +38,7 @@ public class Affiliate extends PartnerRole {
     private String website;
 
     @ElementCollection
-    @JoinTable(name = "PARTNER_CONTACT_PERSON", joinColumns = @JoinColumn(name = "PARTNER__ID"))
+    @JoinTable(name = "PARTNER_CONTACT_PERSON"/*, joinColumns = @JoinColumn(name = "PARTNER__ID")*/)
 
     private Set<Person> persons = new HashSet<Person>(0);
 

@@ -56,8 +56,12 @@ public class Organization extends BaseAggregateRoot {
     )
     private Set<Timezone> timezones = new HashSet<Timezone>(0);
 
-    @ElementCollection
-    @JoinTable(name = "ORGANIZATION_CONTACT_PERSON", joinColumns = @JoinColumn(name = "ORGANIZATION_UNIT__ID"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(
+            name="ORGANIZATION_CONTACT_PERSON",
+            joinColumns={ @JoinColumn(name="ORGANIZATION__ID", referencedColumnName="ID") },
+            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=true) }
+    )
     private Set<Person> contactPersons = new HashSet<Person>(0);
 
     @OneToMany(mappedBy="organization", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
