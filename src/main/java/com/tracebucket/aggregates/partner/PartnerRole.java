@@ -1,4 +1,4 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 
 

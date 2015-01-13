@@ -1,4 +1,4 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 import com.tracebucket.common.dictionary.Gender;
 import com.tracebucket.common.dictionary.Salutation;
@@ -9,10 +9,10 @@ import java.util.Date;
 /**
  * Created by sadath on 05-Aug-14.
  */
-@Entity
-@Table(name = "CUSTOMER")
+@Entity(name = "PARTNER_CUSTOMER")
+@Table(name = "PARTNER_CUSTOMER")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
-@DiscriminatorValue(value = "CUSTOMER")
+@DiscriminatorValue(value = "PARTNER_CUSTOMER")
 public class Customer extends PartnerRole {
     private static final String simpleName = "Customer";
 

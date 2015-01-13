@@ -1,4 +1,4 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 import com.tracebucket.common.domain.Person;
 import javax.persistence.*;
@@ -8,10 +8,10 @@ import java.util.Set;
 /**
  * Created by ffl on 29-10-2014.
  */
-@Entity
-@Table(name = "ENTERTAINMENT_COMPANY")
+@Entity(name = "PARTNER_ENTERTAINMENT_COMPANY")
+@Table(name = "PARTNER_ENTERTAINMENT_COMPANY")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
-@DiscriminatorValue(value = "ENTERTAINMENT_COMPANY")
+@DiscriminatorValue(value = "PARTNER_ENTERTAINMENT_COMPANY")
 public class EntertainmentCompany extends PartnerRole{
     private static final String simpleName = "Entertainment Company";
 

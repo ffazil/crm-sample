@@ -43,7 +43,7 @@ public abstract class  BaseAggregateRoot {
 
 	@EmbeddedId
 	@AttributeOverrides({
-		  @AttributeOverride(name = "idValue", column = @Column(name = "aggregateId", nullable = false))})
+		  @AttributeOverride(name = "aggregateId", column = @Column(name = "ID", nullable = false))})
 	protected AggregateId aggregateId;
 
 
@@ -121,4 +121,6 @@ public abstract class  BaseAggregateRoot {
 	public int hashCode() {	
 		return aggregateId.hashCode();
 	}
+
+
 }

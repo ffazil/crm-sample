@@ -1,4 +1,4 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 import com.tracebucket.common.domain.Person;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 /**
  * Created by sadath on 05-Aug-14.
  */
-@Entity
-@Table(name = "AFFILIATE")
+@Entity(name = "PARTNER_AFFILIATE")
+@Table(name = "PARTNER_AFFILIATE")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
-@DiscriminatorValue(value = "AFFILIATE")
+@DiscriminatorValue(value = "PARTNER_AFFILIATE")
 public class Affiliate extends PartnerRole {
     private static final String simpleName = "Affiliate";
 

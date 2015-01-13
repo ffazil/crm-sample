@@ -1,4 +1,4 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -8,13 +8,13 @@ import javax.persistence.Table;
 /**
  * Created by vishwa on 10-12-2014.
  */
-@Entity
-@Table(name = "TOURCOMPANY")
+@Entity(name = "PARTNER_TRANSPORT_PROVIDER")
+@Table(name = "PARTNER_TRANSPORT_PROVIDER")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
-@DiscriminatorValue(value = "TOURCOMPANY")
-public class TourCompany extends PartnerRole {
+@DiscriminatorValue(value = "PARTNER_TRANSPORT_PROVIDER")
+public class TransportProvider extends PartnerRole {
 
-    private static final String simpleName = "Tour Company";
+    private static final String simpleName = "Transport Provider";
 
     @Override
     public String simpleName() {

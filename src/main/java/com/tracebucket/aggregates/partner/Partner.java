@@ -1,11 +1,11 @@
-package com.tracebucket.partner;
+package com.tracebucket.aggregates.partner;
 
 
 
+import com.tracebucket.aggregates.organization.Organization;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
-import com.tracebucket.organization.Organization;
 
 import javax.persistence.*;
 import java.util.HashSet;
