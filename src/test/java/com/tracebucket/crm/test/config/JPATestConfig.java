@@ -1,14 +1,12 @@
-package com.tracebucket.crm.config;
+package com.tracebucket.crm.test.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -17,6 +15,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 /**
@@ -25,12 +24,10 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.tracebucket.crm.repository.jpa", "com.tracebucket.infrastructure.ddd.repository.jpa"})
-@EntityScan(basePackages = {"com.tracebucket.crm.common", "com.tracebucket.infrastructure.ddd.common"})
-@PropertySource(value = "classpath:jpa.properties")
+@EnableJpaRepositories(basePackages = "com.tracebucket.**.repository.jpa")
 @EnableTransactionManagement(proxyTargetClass = true)
-public class JPAConfig {
-    private static final Logger log = LoggerFactory.getLogger(JPAConfig.class);
+public class JPATestConfig {
+    private static final Logger log = LoggerFactory.getLogger(JPATestConfig.class);
 
     @Value("${connection.driver_class}")
     private String driverClass;
@@ -59,8 +56,8 @@ public class JPAConfig {
     @Value("${generateDdl}")
     private String generateDdl;
 
-    @Bean
-    public HikariDataSource dataSource() throws PropertyVetoException
+    @Bean(destroyMethod = "close")
+    public DataSource dataSource() throws PropertyVetoException
     {
         HikariConfig config = new HikariConfig();
         config.setMaximumPoolSize(Integer.parseInt(maxPoolSize));
@@ -96,6 +93,7 @@ public class JPAConfig {
     {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
+        factoryBean.setPackagesToScan("com.tracebucket.**.domain", "com.tracebucket.aggregates");
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         return factoryBean;
     }
