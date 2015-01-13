@@ -47,7 +47,7 @@ public class OrganizationRepositoryTest {
         Assert.assertNotNull(organization.getAggregateId());
     }
 
-/*    @Test
+    @Test
     public void testUpdate() throws Exception {
         createOrganization();
         organization.getContactPersons().clear();
@@ -66,24 +66,16 @@ public class OrganizationRepositoryTest {
     @Rollback(false)
     public void testFindById() throws Exception {
         createOrganization();
-        organization = organizationRepository.findOne(organization.getId());
-        Assert.assertNotNull(organization);
-    }
-
-    @Test
-    @Rollback(false)
-    public void testFindByUid() throws Exception {
-        createOrganization();
-        organization = organizationRepository.findByUid(organization.getUid());
+        organization = organizationRepository.findOne(organization.getAggregateId());
         Assert.assertNotNull(organization);
     }
 
     @After
     public void tearDown(){
-        if(organization != null && organization.getUid() != null) {
-            organizationRepository.delete(organization.getId());
-            organization = organizationRepository.findByUid(organization.getUid());
+        if(organization != null && organization.getAggregateId() != null) {
+            organizationRepository.delete(organization.getAggregateId());
+            organization = organizationRepository.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
         }
-    }*/
+    }
 }
