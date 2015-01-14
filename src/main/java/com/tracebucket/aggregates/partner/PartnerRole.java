@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "PARTNER_ROLE")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "PARTNER_ROLE", discriminatorType = DiscriminatorType.STRING)
-public abstract class PartnerRole extends BaseEntity implements Serializable{
+public abstract class PartnerRole extends BaseEntity implements Serializable {
 
     @Column(name = "NAME")
     @Basic(fetch = FetchType.EAGER)

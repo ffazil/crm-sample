@@ -3,6 +3,7 @@ package com.tracebucket.aggregates.partner;
 import com.tracebucket.common.domain.Person;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "PARTNER_AFFILIATE")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
 @DiscriminatorValue(value = "PARTNER_AFFILIATE")
-public class Affiliate extends PartnerRole {
+public class Affiliate extends PartnerRole implements Serializable {
     private static final String simpleName = "Affiliate";
 
     @Column(name = "BUSINESS_NAME")

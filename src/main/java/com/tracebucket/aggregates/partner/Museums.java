@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by vishwa on 10-12-2014.
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "PARTNER_MUSEUMS")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
 @DiscriminatorValue(value = "PARTNER_MUSEUMS")
-public class Museums extends PartnerRole {
+public class Museums extends PartnerRole implements Serializable {
 
     private static final String simpleName = "Museums";
 

@@ -54,6 +54,14 @@ public class Partner extends BaseAggregateRoot{
         return this;
     }
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
     public Organization owner(){
         return owner;
     }

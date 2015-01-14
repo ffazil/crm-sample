@@ -2,6 +2,7 @@ package com.tracebucket.crm.test.builder;
 
 
 
+import com.tracebucket.aggregates.organization.Organization;
 import com.tracebucket.aggregates.partner.Partner;
 import com.tracebucket.aggregates.partner.PartnerRole;
 import com.tracebucket.common.dictionary.PartnerCategory;
@@ -15,6 +16,8 @@ import java.util.Set;
 public class PartnerBuilder {
     private String title;
     private String image;
+    private String website;
+    private Organization owner;
     private PartnerCategory partnerCategory;
     private Set<PartnerRole> partnerRoles = null;
 
@@ -26,6 +29,16 @@ public class PartnerBuilder {
 
     public PartnerBuilder withTitle(String title){
         this.title = title;
+        return this;
+    }
+
+    public PartnerBuilder withWebsite(String website) {
+        this.website = website;
+        return this;
+    }
+
+    public PartnerBuilder withOwner(Organization owner) {
+        this.owner = owner;
         return this;
     }
 
@@ -48,6 +61,8 @@ public class PartnerBuilder {
         Partner partner = new Partner();
         partner.setTitle(title);
         partner.setImage(image);
+        partner.setWebsite(website);
+        partner.setOwner(owner);
         partner.setPartnerCategory(partnerCategory);
         partner.setPartnerRoles(partnerRoles);
         return partner;

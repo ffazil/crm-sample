@@ -1,6 +1,8 @@
 package com.tracebucket.crm.test.repository;
 
+import com.tracebucket.aggregates.organization.Organization;
 import com.tracebucket.aggregates.partner.Partner;
+import com.tracebucket.crm.repository.jpa.OrganizationRepository;
 import com.tracebucket.crm.repository.jpa.PartnerRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
@@ -29,7 +31,12 @@ public class PartnerRepositoryTest {
     @Autowired
     private PartnerRepository partnerRepository;
 
+    @Autowired
+    private OrganizationRepository organizationRepository;
+
     private Partner partner = null;
+
+    private Organization organization = null;
 
     @Before
     public void setUp() throws Exception{
@@ -38,6 +45,7 @@ public class PartnerRepositoryTest {
 
     private void createPartner() throws Exception{
         partner = PartnerFixture.allRoles();
+        organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
     }
 
@@ -62,10 +70,15 @@ public class PartnerRepositoryTest {
 
     @After
     public void tearDown(){
-        /*if(partner != null && partner.getAggregateId() != null) {
+     /*   if(partner != null && partner.getAggregateId() != null) {
             partnerRepository.delete(partner.getAggregateId());
             partner = partnerRepository.findOne(partner.getAggregateId());
             Assert.assertNull(partner);
+        }
+        if(organization != null && organization.getAggregateId() != null) {
+            organizationRepository.delete(organization.getAggregateId());
+            organization = organizationRepository.findOne(organization.getAggregateId());
+            Assert.assertNull(organization);
         }*/
     }
 

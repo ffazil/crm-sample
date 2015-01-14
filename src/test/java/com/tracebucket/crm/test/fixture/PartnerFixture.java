@@ -1,9 +1,7 @@
 package com.tracebucket.crm.test.fixture;
 
-import com.tracebucket.aggregates.partner.Affiliate;
-import com.tracebucket.aggregates.partner.Customer;
-import com.tracebucket.aggregates.partner.Partner;
-import com.tracebucket.aggregates.partner.PartnerRole;
+import com.tracebucket.aggregates.organization.Organization;
+import com.tracebucket.aggregates.partner.*;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.crm.test.builder.PartnerBuilder;
 
@@ -19,18 +17,22 @@ public class PartnerFixture {
 
         Customer customer = CustomerFixture.standardCustomer();
         Affiliate affiliate = AffiliateFixture.standardAffiliate();
-
+        EntertainmentCompany entertainmentCompany = EntertainmentCompanyFixture.standardEntertainmentCompany();
+        Organization owner = OrganizationFixture.standardOrganization();
 
         Set<PartnerRole> PartnerRoles = new HashSet<PartnerRole>();
        // PartnerRoles.add(supplier);
         PartnerRoles.add(customer);
         PartnerRoles.add(affiliate);
+        PartnerRoles.add(entertainmentCompany);
         /*PartnerRoles.add(warehouseProvider);
         PartnerRoles.add(logisticsProvider);
         PartnerRoles.add(paymentProvider);*/
         Partner partner = PartnerBuilder.anPartner()
                 .withTitle("Partner " + new Date().getTime())
                 .withImage("Image" + new Date().getTime())
+                .withWebsite("wwww.zzz.nl")
+                .withOwner(owner)
                 .withPartnerCategory(PartnerCategory.GROUP)
                 .withPartnerRoles(PartnerRoles)
                 .build();
