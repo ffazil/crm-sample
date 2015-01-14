@@ -1,4 +1,4 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 import com.tracebucket.common.dictionary.Gender;
 import com.tracebucket.common.dictionary.Salutation;

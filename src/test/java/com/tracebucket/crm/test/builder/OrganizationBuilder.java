@@ -1,7 +1,7 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.organization.Organization;
-import com.tracebucket.aggregates.organization.OrganizationUnit;
+import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.organization.domain.OrganizationUnit;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 

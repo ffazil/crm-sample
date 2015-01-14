@@ -1,9 +1,9 @@
 package com.tracebucket.crm.test.repository;
 
-import com.tracebucket.aggregates.organization.Organization;
-import com.tracebucket.crm.repository.jpa.OrganizationRepository;
-import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
+import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.fixture.AddressFixture;
 import com.tracebucket.crm.test.fixture.OrganizationFixture;
 import com.tracebucket.crm.test.fixture.PersonFixture;
@@ -12,8 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.partner.Affiliate;
+import com.tracebucket.partner.domain.Affiliate;
 import com.tracebucket.common.domain.Address;
 import com.tracebucket.common.domain.Person;
 

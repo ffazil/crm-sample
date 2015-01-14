@@ -1,15 +1,13 @@
 package com.tracebucket.crm.test.repository;
 
-import com.tracebucket.aggregates.organization.Organization;
-import com.tracebucket.aggregates.partner.Partner;
-import com.tracebucket.crm.repository.jpa.OrganizationRepository;
-import com.tracebucket.crm.repository.jpa.PartnerRepository;
-import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
-import com.tracebucket.crm.test.fixture.AddressFixture;
+import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.partner.domain.Partner;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
+import com.tracebucket.partner.repository.jpa.PartnerRepository;
+import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.fixture.CustomerFixture;
 import com.tracebucket.crm.test.fixture.PartnerFixture;
-import com.tracebucket.crm.test.fixture.PersonFixture;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,7 +43,7 @@ public class PartnerRepositoryTest {
 
     private void createPartner() throws Exception{
         partner = PartnerFixture.allRoles();
-        organization = organizationRepository.save(partner.getOwner());
+        //organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
     }
 

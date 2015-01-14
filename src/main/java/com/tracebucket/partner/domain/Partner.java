@@ -1,8 +1,8 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 
 
-import com.tracebucket.aggregates.organization.Organization;
+import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;

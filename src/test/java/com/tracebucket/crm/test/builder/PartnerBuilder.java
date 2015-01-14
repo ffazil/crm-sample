@@ -2,12 +2,11 @@ package com.tracebucket.crm.test.builder;
 
 
 
-import com.tracebucket.aggregates.organization.Organization;
-import com.tracebucket.aggregates.partner.Partner;
-import com.tracebucket.aggregates.partner.PartnerRole;
+import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.partner.domain.Partner;
+import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.common.dictionary.PartnerCategory;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**

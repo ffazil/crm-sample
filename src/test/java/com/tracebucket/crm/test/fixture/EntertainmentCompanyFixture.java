@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.fixture;
 
-import com.tracebucket.aggregates.partner.EntertainmentCompany;
+import com.tracebucket.partner.domain.EntertainmentCompany;
 import com.tracebucket.common.domain.Person;
 import com.tracebucket.crm.test.builder.EntertainmentCompanyBuilder;
 

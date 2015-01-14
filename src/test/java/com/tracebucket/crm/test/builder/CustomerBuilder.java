@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.partner.Customer;
+import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.common.dictionary.Gender;
 import com.tracebucket.common.domain.Address;
 

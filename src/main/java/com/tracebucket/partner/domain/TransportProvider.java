@@ -1,4 +1,4 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -9,13 +9,13 @@ import java.io.Serializable;
 /**
  * Created by vishwa on 10-12-2014.
  */
-@Entity(name = "PARTNER_MUSEUMS")
-@Table(name = "PARTNER_MUSEUMS")
+@Entity(name = "PARTNER_TRANSPORT_PROVIDER")
+@Table(name = "PARTNER_TRANSPORT_PROVIDER")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
-@DiscriminatorValue(value = "PARTNER_MUSEUMS")
-public class Museums extends PartnerRole implements Serializable {
+@DiscriminatorValue(value = "PARTNER_TRANSPORT_PROVIDER")
+public class TransportProvider extends PartnerRole implements Serializable {
 
-    private static final String simpleName = "Museums";
+    private static final String simpleName = "Transport Provider";
 
     @Override
     public String simpleName() {
