@@ -1,8 +1,8 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.organization.OrganizationUnit;
-import com.tracebucket.aggregates.organization.SaleChannel;
-import com.tracebucket.aggregates.partner.PartnerRole;
+import com.tracebucket.organization.domain.OrganizationUnit;
+import com.tracebucket.organization.domain.SaleChannel;
+import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.common.dictionary.SaleChannelType;
 
 /**

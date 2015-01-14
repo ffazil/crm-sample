@@ -5,8 +5,10 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -15,7 +17,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
 /**
@@ -24,7 +25,9 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.tracebucket.**.repository.jpa")
+@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"})
+@EntityScan(basePackages = {"com.tracebucket.**.domain"})
+@PropertySource(value = "classpath:jpa-test.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class JPATestConfig {
     private static final Logger log = LoggerFactory.getLogger(JPATestConfig.class);
@@ -56,8 +59,8 @@ public class JPATestConfig {
     @Value("${generateDdl}")
     private String generateDdl;
 
-    @Bean(destroyMethod = "close")
-    public DataSource dataSource() throws PropertyVetoException
+    @Bean
+    public HikariDataSource dataSource() throws PropertyVetoException
     {
         HikariConfig config = new HikariConfig();
         config.setMaximumPoolSize(Integer.parseInt(maxPoolSize));
@@ -93,7 +96,6 @@ public class JPATestConfig {
     {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan("com.tracebucket.**.domain", "com.tracebucket.aggregates");
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         return factoryBean;
     }

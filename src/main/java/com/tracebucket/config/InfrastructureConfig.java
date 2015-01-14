@@ -1,4 +1,4 @@
-package com.tracebucket.crm.config;
+package com.tracebucket.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

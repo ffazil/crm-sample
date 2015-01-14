@@ -1,6 +1,6 @@
-package com.tracebucket.crm.repository.jpa;
+package com.tracebucket.organization.repository.jpa;
 
-import com.tracebucket.aggregates.organization.Organization;
+import com.tracebucket.organization.domain.Organization;
 
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseJpaRepository;

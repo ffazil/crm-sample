@@ -1,9 +1,10 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 import com.tracebucket.common.dictionary.Gender;
 import com.tracebucket.common.dictionary.Salutation;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
 @Table(name = "PARTNER_CUSTOMER")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
 @DiscriminatorValue(value = "PARTNER_CUSTOMER")
-public class Customer extends PartnerRole {
+public class Customer extends PartnerRole implements Serializable {
     private static final String simpleName = "Customer";
 
     @Column(name = "INITIAL")

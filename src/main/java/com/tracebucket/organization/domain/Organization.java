@@ -1,4 +1,4 @@
-package com.tracebucket.aggregates.organization;
+package com.tracebucket.organization.domain;
 
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;

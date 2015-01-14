@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.organization.Department;
+import com.tracebucket.organization.domain.Department;
 
 /**
  * Created by sadath on 25-Nov-14.

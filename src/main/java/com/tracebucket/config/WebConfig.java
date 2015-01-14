@@ -1,4 +1,4 @@
-package com.tracebucket.crm.config;
+package com.tracebucket.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dozer.DozerBeanMapper;
