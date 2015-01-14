@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.fixture;
 
-import com.tracebucket.aggregates.organization.Department;
+import com.tracebucket.organization.domain.Department;
 import com.tracebucket.crm.test.builder.DepartmentBuilder;
 
 /**

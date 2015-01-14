@@ -11,6 +11,10 @@ public abstract class BaseEntity {
     @Column(name = "ID", nullable = false, columnDefinition = "BIGINT UNSIGNED")
     private Long id;
 
+    public BaseEntity(){
+
+    }
+
     public Long getId() {
         return id;
     }

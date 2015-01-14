@@ -1,4 +1,4 @@
-package com.tracebucket.crm.config;
+package com.tracebucket.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -25,8 +25,8 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.tracebucket.crm.repository.jpa", "com.tracebucket.infrastructure.ddd.repository.jpa"})
-@EntityScan(basePackages = {"com.tracebucket.crm.common", "com.tracebucket.infrastructure.ddd.common"})
+@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"})
+@EntityScan(basePackages = {"com.tracebucket.**.domain"})
 @PropertySource(value = "classpath:jpa.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class JPAConfig {

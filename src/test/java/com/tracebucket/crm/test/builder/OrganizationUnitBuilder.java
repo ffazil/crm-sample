@@ -1,11 +1,11 @@
 package com.tracebucket.crm.test.builder;
 
-import com.tracebucket.aggregates.organization.*;
 import com.tracebucket.common.dictionary.OrganizationFunction;
 import com.tracebucket.common.domain.Address;
 import com.tracebucket.common.domain.Email;
 import com.tracebucket.common.domain.Person;
 import com.tracebucket.common.domain.Phone;
+import com.tracebucket.organization.domain.*;
 
 import java.util.HashSet;
 import java.util.Set;

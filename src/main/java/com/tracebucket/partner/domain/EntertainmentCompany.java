@@ -1,7 +1,8 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 import com.tracebucket.common.domain.Person;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Table(name = "PARTNER_ENTERTAINMENT_COMPANY")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
 @DiscriminatorValue(value = "PARTNER_ENTERTAINMENT_COMPANY")
-public class EntertainmentCompany extends PartnerRole{
+public class EntertainmentCompany extends PartnerRole implements Serializable{
     private static final String simpleName = "Entertainment Company";
 
     @Override
@@ -32,8 +33,12 @@ public class EntertainmentCompany extends PartnerRole{
     @Basic(fetch = FetchType.EAGER)
     protected String logo;
 
-    @ElementCollection
-    @JoinTable(name = "PARTNER_CONTACT_PERSON", joinColumns = @JoinColumn(name = "PARTNER__ID"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(
+            name="ENT_COMP_PERSONS",
+            joinColumns={ @JoinColumn(name="ENTERTAINMENT_COMPANY__ID", referencedColumnName="ID") },
+            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=false) }
+    )
     protected Set<Person> contactPersons = new HashSet<Person>(0);
 
 /**Contract terms to be defined*/

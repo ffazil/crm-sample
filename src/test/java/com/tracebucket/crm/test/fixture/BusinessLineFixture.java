@@ -1,6 +1,6 @@
 package com.tracebucket.crm.test.fixture;
 
-import com.tracebucket.aggregates.organization.BusinessLine;
+import com.tracebucket.organization.domain.BusinessLine;
 import com.tracebucket.crm.test.builder.BusinessLineBuilder;
 
 /**

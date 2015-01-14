@@ -1,9 +1,9 @@
 package com.tracebucket.crm.test.repository;
 
-import com.tracebucket.aggregates.organization.Organization;
-import com.tracebucket.crm.repository.jpa.OrganizationRepository;
-import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
+import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.fixture.AddressFixture;
 import com.tracebucket.crm.test.fixture.OrganizationFixture;
 import com.tracebucket.crm.test.fixture.PersonFixture;
@@ -12,8 +12,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
@@ -47,7 +45,7 @@ public class OrganizationRepositoryTest {
         Assert.assertNotNull(organization.getAggregateId());
     }
 
-/*    @Test
+    @Test
     public void testUpdate() throws Exception {
         createOrganization();
         organization.getContactPersons().clear();
@@ -66,24 +64,16 @@ public class OrganizationRepositoryTest {
     @Rollback(false)
     public void testFindById() throws Exception {
         createOrganization();
-        organization = organizationRepository.findOne(organization.getId());
-        Assert.assertNotNull(organization);
-    }
-
-    @Test
-    @Rollback(false)
-    public void testFindByUid() throws Exception {
-        createOrganization();
-        organization = organizationRepository.findByUid(organization.getUid());
+        organization = organizationRepository.findOne(organization.getAggregateId());
         Assert.assertNotNull(organization);
     }
 
     @After
     public void tearDown(){
-        if(organization != null && organization.getUid() != null) {
-            organizationRepository.delete(organization.getId());
-            organization = organizationRepository.findByUid(organization.getUid());
+        if(organization != null && organization.getAggregateId() != null) {
+            organizationRepository.delete(organization.getAggregateId());
+            organization = organizationRepository.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
         }
-    }*/
+    }
 }

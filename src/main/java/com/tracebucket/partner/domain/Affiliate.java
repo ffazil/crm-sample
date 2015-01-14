@@ -1,8 +1,9 @@
-package com.tracebucket.aggregates.partner;
+package com.tracebucket.partner.domain;
 
 import com.tracebucket.common.domain.Person;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "PARTNER_AFFILIATE")
 @PrimaryKeyJoinColumn(name="PARTNER_ROLE__ID")
 @DiscriminatorValue(value = "PARTNER_AFFILIATE")
-public class Affiliate extends PartnerRole {
+public class Affiliate extends PartnerRole implements Serializable {
     private static final String simpleName = "Affiliate";
 
     @Column(name = "BUSINESS_NAME")
@@ -37,9 +38,12 @@ public class Affiliate extends PartnerRole {
     @Basic(fetch = FetchType.EAGER)
     private String website;
 
-    @ElementCollection
-    @JoinTable(name = "PARTNER_CONTACT_PERSON"/*, joinColumns = @JoinColumn(name = "PARTNER__ID")*/)
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinTable(
+            name="AFFILIATE_PERSON",
+            joinColumns={ @JoinColumn(name="AFFILIATE__ID", referencedColumnName="ID") },
+            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=false) }
+    )
     private Set<Person> persons = new HashSet<Person>(0);
 
 /*    @OneToMany(mappedBy = "partner", fetch = FetchType.EAGER)
