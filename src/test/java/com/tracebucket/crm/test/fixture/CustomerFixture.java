@@ -1,11 +1,9 @@
 package com.tracebucket.crm.test.fixture;
 
-
-
+import com.tracebucket.crm.test.builder.CustomerBuilder;
 import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.common.dictionary.Gender;
 import com.tracebucket.common.domain.Address;
-import com.tracebucket.crm.test.builder.CustomerBuilder;
 
 import java.util.Date;
 import java.util.HashSet;
