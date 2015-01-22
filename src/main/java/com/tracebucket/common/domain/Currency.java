@@ -58,4 +58,29 @@ public class Currency extends BaseEntity {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Currency)) return false;
+
+        Currency currency = (Currency) o;
+
+        if (image != null ? !image.equals(currency.image) : currency.image != null) return false;
+        if (iso4217Code != null ? !iso4217Code.equals(currency.iso4217Code) : currency.iso4217Code != null)
+            return false;
+        if (!name.equals(currency.name)) return false;
+        if (subUnit110 != null ? !subUnit110.equals(currency.subUnit110) : currency.subUnit110 != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (iso4217Code != null ? iso4217Code.hashCode() : 0);
+        result = 31 * result + (subUnit110 != null ? subUnit110.hashCode() : 0);
+        result = 31 * result + (image != null ? image.hashCode() : 0);
+        return result;
+    }
 }

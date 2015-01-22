@@ -48,4 +48,26 @@ public class Phone {
     public void setPhoneType(PhoneType phoneType) {
         this.phoneType = phoneType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Phone)) return false;
+
+        Phone phone = (Phone) o;
+
+        if (extension != null ? !extension.equals(phone.extension) : phone.extension != null) return false;
+        if (!number.equals(phone.number)) return false;
+        if (phoneType != phone.phoneType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = number.hashCode();
+        result = 31 * result + (extension != null ? extension.hashCode() : 0);
+        result = 31 * result + (phoneType != null ? phoneType.hashCode() : 0);
+        return result;
+    }
 }

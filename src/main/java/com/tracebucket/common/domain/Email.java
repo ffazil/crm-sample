@@ -32,4 +32,24 @@ public class Email {
     public void setEmailType(EmailType emailType) {
         this.emailType = emailType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Email)) return false;
+
+        Email email1 = (Email) o;
+
+        if (!email.equals(email1.email)) return false;
+        if (emailType != email1.emailType) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = email.hashCode();
+        result = 31 * result + (emailType != null ? emailType.hashCode() : 0);
+        return result;
+    }
 }

@@ -86,15 +86,15 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addBaseCurrency(Currency baseCurrency){
-        //TODO
+        this.currencies.put(baseCurrency, CurrencyType.Base);
     }
 
     public void addTimezone(Timezone timezone){
-        //TODO
+        this.timezones.add(timezone);
     }
 
     public void addOrganizationUnit(OrganizationUnit organizationUnit){
-        //TODO
+        this.organizationUnits.add(organizationUnit);
     }
 
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
@@ -102,35 +102,35 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addContactPerson(Person contactPerson){
-        //TODO
+        this.contactPersons.add(contactPerson);
     }
 
     public void setDefaultContactPerson(Person defaultContactPerson){
-        //TODO
+        this.contactPersons.add(defaultContactPerson);
     }
 
     public void addContactNumber(Phone phone){
-        //TODO
+        this.phones.add(phone);
     }
 
     public void setDefaultContactNumber(Phone defaultContactNumber){
-        //TODO
+        this.phones.add(defaultContactNumber);
     }
 
     public void addEmail(Email email){
-        //TODO
+        this.emails.add(email);
     }
 
     public void setDefaultEmail(Email defaultEmail){
-        //TODO
+        this.emails.add(defaultEmail);
     }
 
     public void setHeadOffice(Address headOfficeAddress){
-        //TODO
+        this.addresses.add(headOfficeAddress);
     }
 
     public void moveHeadOfficeTo(Address newHeadOfficeAddress){
-        //TODO
+        this.addresses.add(newHeadOfficeAddress);
     }
 
     public String getCode() {
@@ -164,17 +164,14 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public Set<OrganizationUnit> getOrganizationUnits(){
-        //TODO
-        return null;
+        return this.organizationUnits;
     }
 
     public Set<Phone> getContactNumbers(){
-        //TODO
-        return null;
+        return this.phones;
     }
 
     public Set<Email> getEmails(){
-        //TODO
-        return null;
+        return this.emails;
     }
 }
