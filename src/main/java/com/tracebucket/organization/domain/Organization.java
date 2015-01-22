@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -167,10 +168,18 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public Set<Currency> getBaseCurrencies(){
-        Set<Map.Entry<Currency, CurrencyType>> entries = currencies.entrySet();
-        entries.parallelStream().filter(t -> t.getValue() == CurrencyType.Base)
-                .collect(toSet());
-        return null;
+          Set<Currency> baseCurrencies = new HashSet<Currency>();
+/*        Set<Map.Entry<Currency, CurrencyType>> baseCurrency = currencies.entrySet().parallelStream()
+                    .filter(t -> t.getValue() == CurrencyType.Base)
+                    .collect(Collectors.toMap(t -> t.getKey(), t -> t.getValue())).entrySet();*/
+        if(currencies != null && currencies.size() > 0) {
+            for (Map.Entry<Currency, CurrencyType> currencyTypeEntry : currencies.entrySet()) {
+                if(currencyTypeEntry.getValue().equals(CurrencyType.Base)) {
+                    baseCurrencies.add(currencyTypeEntry.getKey());
+                }
+            }
+        }
+        return baseCurrencies;
     }
 
     public Set<OrganizationUnit> getOrganizationUnits(){
