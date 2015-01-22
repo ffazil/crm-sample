@@ -44,7 +44,7 @@ public abstract class  BaseAggregateRoot {
 
 	@EmbeddedId
 	@AttributeOverrides({
-		  @AttributeOverride(name = "idValue", column = @Column(name = "aggregateId", nullable = false))})
+		  @AttributeOverride(name = "aggregateId", column = @Column(name = "ID", nullable = false))})
 	protected AggregateId aggregateId;
 
 
@@ -60,7 +60,7 @@ public abstract class  BaseAggregateRoot {
     private EventHandlerHelper eventHandlerHelper;
 
     @Transient
-    private Map<String, Event> events = new HashMap<String, Event>(0);
+    transient private Map<String, Event> events = new HashMap<String, Event>(0);
 
 
 

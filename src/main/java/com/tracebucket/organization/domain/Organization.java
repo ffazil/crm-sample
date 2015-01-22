@@ -5,7 +5,9 @@ import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -40,13 +42,18 @@ public class Organization extends BaseAggregateRoot {
     @JoinTable(name = "ORGANIZATION_ADDRESS", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     private Set<Address> addresses = new HashSet<Address>(0);
 
+    public enum CurrencyType{
+        Base,
+        Optional
+    }
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinTable(
             name="ORGANIZATION_CURRENCY",
             joinColumns={ @JoinColumn(name="ORGANIZATION__ID", referencedColumnName="ID") },
             inverseJoinColumns={ @JoinColumn(name="CURRENCY__ID", referencedColumnName="ID", unique=true) }
     )
-    private Set<Currency> currencies = new HashSet<Currency>(0);
+    private Map<Currency, CurrencyType> currencies = new HashMap<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinTable(
@@ -78,175 +85,96 @@ public class Organization extends BaseAggregateRoot {
     public Organization() {
     }
 
-    public Boolean hasAddresses(){
-        if(this.addresses == null)
-            return false;
-        if(this.addresses.size() <= 0)
-            return false;
-        return true;
-
+    public void addBaseCurrency(Currency baseCurrency){
+        //TODO
     }
 
-    public Organization address(Address address){
-        this.addresses.add(address);
-        return this;
+    public void addTimezone(Timezone timezone){
+        //TODO
     }
 
-    public Set<Address> addresses(){
-        return this.addresses;
+    public void addOrganizationUnit(OrganizationUnit organizationUnit){
+        //TODO
     }
 
-    public Boolean hasContactPersons(){
-        if(this.contactPersons == null)
-            return false;
-        if(this.contactPersons.size() <= 0)
-            return false;
-        return true;
+    public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
+        //TODO
     }
 
-    public Organization contactPerson(Person person){
-        this.contactPersons.add(person);
-        return this;
+    public void addContactPerson(Person contactPerson){
+        //TODO
     }
 
-    public Set<Person> contactPersons(){
-        return this.contactPersons;
+    public void setDefaultContactPerson(Person defaultContactPerson){
+        //TODO
     }
 
-    public Organization organizationUnit(OrganizationUnit organizationUnit){
-        this.organizationUnits.add(organizationUnit);
-        return this;
+    public void addContactNumber(Phone phone){
+        //TODO
     }
 
-    public Boolean hasOrganizationUnits(){
-        if(this.organizationUnits == null)
-            return false;
-        if(this.organizationUnits.size() <= 0)
-            return false;
-        return true;
+    public void setDefaultContactNumber(Phone defaultContactNumber){
+        //TODO
     }
 
-    public Set<OrganizationUnit> organizationUnits(){
-        return this.organizationUnits;
+    public void addEmail(Email email){
+        //TODO
     }
 
-
-
-    public String getName() {
-        return name;
+    public void setDefaultEmail(Email defaultEmail){
+        //TODO
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setHeadOffice(Address headOfficeAddress){
+        //TODO
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
+    public void moveHeadOfficeTo(Address newHeadOfficeAddress){
+        //TODO
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getWebsite() {
+        return website;
     }
 
     public String getImage() {
         return image;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public Address getHeadOfficeAddress(){
+        //TODO
+        return null;
     }
 
-    public Set<Address> getAddresses() {
-        return addresses;
+    public Set<Currency> getBaseCurrencies(){
+        //TODO
+        return null;
     }
 
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
+    public Set<OrganizationUnit> getOrganizationUnits(){
+        //TODO
+        return null;
     }
 
-    public Set<Person> getContactPersons() {
-        return contactPersons;
+    public Set<Phone> getContactNumbers(){
+        //TODO
+        return null;
     }
 
-    public void setContactPersons(Set<Person> contactPersons) {
-        this.contactPersons = contactPersons;
-    }
-
-    public Set<OrganizationUnit> getOrganizationUnits() {
-        return organizationUnits;
-    }
-
-    public void setOrganizationUnits(Set<OrganizationUnit> organizationUnits) {
-        this.organizationUnits = organizationUnits;
-    }
-
-    public Set<Currency> getCurrencies() {
-        return currencies;
-    }
-
-    public void setCurrencies(Set<Currency> currencies) {
-        this.currencies = currencies;
-    }
-
-    public Set<Timezone> getTimezones() {
-        return timezones;
-    }
-
-    public void setTimezones(Set<Timezone> timezones) {
-        this.timezones = timezones;
-    }
-
-    public Set<Phone> getPhones() {
-        return phones;
-    }
-
-    public void setPhones(Set<Phone> phones) {
-        this.phones = phones;
-    }
-
-    public Set<Email> getEmails() {
-        return emails;
-    }
-
-    public void setEmails(Set<Email> emails) {
-        this.emails = emails;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Organization)) return false;
-        if (!super.equals(o)) return false;
-
-        Organization that = (Organization) o;
-
-        if (!code.equals(that.code)) return false;
-        if (!name.equals(that.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + code.hashCode();
-        result = 31 * result + name.hashCode();
-        return result;
+    public Set<Email> getEmails(){
+        //TODO
+        return null;
     }
 }

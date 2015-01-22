@@ -4,6 +4,7 @@ import com.tracebucket.infrastructure.event.domain.EventHandlerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
@@ -12,7 +13,7 @@ import javax.persistence.PreUpdate;
 /**
  * Created by ffl on 13-01-2015.
  */
-@Configurable
+@Component
 @Scope("singleton")
 public class AggregateRootListener {
 
