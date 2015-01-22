@@ -1,12 +1,12 @@
 package com.tracebucket.crm.test.repository;
 
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.crm.test.fixture.CustomerFixture;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.partner.domain.Partner;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.partner.repository.jpa.PartnerRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
-import com.tracebucket.crm.test.fixture.CustomerFixture;
 import com.tracebucket.crm.test.fixture.PartnerFixture;
 import org.junit.After;
 import org.junit.Assert;
@@ -18,12 +18,15 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by vishwa on 13-01-2015.
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class})
+@Transactional
 public class PartnerRepositoryTest {
 
     @Autowired
@@ -43,7 +46,7 @@ public class PartnerRepositoryTest {
 
     private void createPartner() throws Exception{
         partner = PartnerFixture.allRoles();
-        //organization = organizationRepository.save(partner.getOwner());
+        organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
     }
 
@@ -68,7 +71,7 @@ public class PartnerRepositoryTest {
 
     @After
     public void tearDown(){
-     /*   if(partner != null && partner.getAggregateId() != null) {
+        if(partner != null && partner.getAggregateId() != null) {
             partnerRepository.delete(partner.getAggregateId());
             partner = partnerRepository.findOne(partner.getAggregateId());
             Assert.assertNull(partner);
@@ -77,7 +80,7 @@ public class PartnerRepositoryTest {
             organizationRepository.delete(organization.getAggregateId());
             organization = organizationRepository.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
-        }*/
+        }
     }
 
     @Test

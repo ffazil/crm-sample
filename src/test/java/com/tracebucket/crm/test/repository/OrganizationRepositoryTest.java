@@ -39,7 +39,6 @@ public class OrganizationRepositoryTest {
     }
 
     @Test
-    @Rollback(false)
     public void testCreate() throws Exception{
         createOrganization();
         Assert.assertNotNull(organization.getAggregateId());
@@ -61,7 +60,6 @@ public class OrganizationRepositoryTest {
     }
 
     @Test
-    @Rollback(false)
     public void testFindById() throws Exception {
         createOrganization();
         organization = organizationRepository.findOne(organization.getAggregateId());

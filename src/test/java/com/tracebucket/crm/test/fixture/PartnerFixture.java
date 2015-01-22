@@ -32,7 +32,7 @@ public class PartnerFixture {
                 .withTitle("Partner " + new Date().getTime())
                 .withImage("Image" + new Date().getTime())
                 .withWebsite("wwww.zzz.nl")
-                //.withOwner(owner)
+                .withOwner(owner)
                 .withPartnerCategory(PartnerCategory.GROUP)
                 .withPartnerRoles(PartnerRoles)
                 .build();
