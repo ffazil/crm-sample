@@ -52,6 +52,10 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private AddressType addressType;
 
+    @Column(name = "CURRENT_ADDRESS", nullable = false, columnDefinition = "boolean default true")
+    @Basic(fetch = FetchType.EAGER)
+    private boolean currentAddress;
+
     public Address() {
     }
 
@@ -133,6 +137,14 @@ public class Address {
 
     public void setAddressType(AddressType addressType) {
         this.addressType = addressType;
+    }
+
+    public boolean isCurrentAddress() {
+        return currentAddress;
+    }
+
+    public void setCurrentAddress(boolean currentAddress) {
+        this.currentAddress = currentAddress;
     }
 
     @Override

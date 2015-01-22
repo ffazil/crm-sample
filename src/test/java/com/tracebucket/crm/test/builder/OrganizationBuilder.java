@@ -98,7 +98,7 @@ public class OrganizationBuilder {
     }
 
     public Organization build(){
-        Organization organization = new Organization();
+/*        Organization organization = new Organization();
         organization.setName(name);
         organization.setCode(code);
         organization.setContactPersons(contactPersons);
@@ -116,6 +116,7 @@ public class OrganizationBuilder {
         organization.setOrganizationUnits(organizationUnits);
         organization.setWebsite(website);
         organization.setPhones(phones);
-        return organization;
+        return organization;*/
+        return null;
     }
 }

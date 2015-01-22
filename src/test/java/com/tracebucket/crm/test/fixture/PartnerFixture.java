@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by sadath on 11-Aug-14.
  */
 public class PartnerFixture {
-    public static Partner allRoles() {
+/*    public static Partner allRoles() {
 
         Customer customer = CustomerFixture.standardCustomer();
         Affiliate affiliate = AffiliateFixture.standardAffiliate();
@@ -25,10 +25,10 @@ public class PartnerFixture {
        PartnerRoles.add(customer);
        PartnerRoles.add(affiliate);
         PartnerRoles.add(entertainmentCompany);
-       /* PartnerRoles.add(warehouseProvider);
+       *//* PartnerRoles.add(warehouseProvider);
         PartnerRoles.add(logisticsProvider);
         PartnerRoles.add(paymentProvider);
-       */ Partner partner = PartnerBuilder.anPartner()
+       *//* Partner partner = PartnerBuilder.anPartner()
                 .withTitle("Partner " + new Date().getTime())
                 .withImage("Image" + new Date().getTime())
                 .withWebsite("wwww.zzz.nl")
@@ -37,5 +37,5 @@ public class PartnerFixture {
                 .withPartnerRoles(PartnerRoles)
                 .build();
         return partner;
-    }
+    }*/
 }

@@ -75,7 +75,7 @@ public class CustomerBuilder {
         customer.setBirthDay(birthDay);
         customer.setGender(gender);
         customer.setEmail(email);
-        customer.setAddresses(addresses);
+//        customer.setAddresses(addresses);
         return customer;
     }
 }

@@ -1,5 +1,6 @@
 package com.tracebucket.organization.domain;
 
+import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
@@ -9,6 +10,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Created by ffl on 11-04-2014.
@@ -47,12 +52,10 @@ public class Organization extends BaseAggregateRoot {
         Optional
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinTable(
-            name="ORGANIZATION_CURRENCY",
-            joinColumns={ @JoinColumn(name="ORGANIZATION__ID", referencedColumnName="ID") },
-            inverseJoinColumns={ @JoinColumn(name="CURRENCY__ID", referencedColumnName="ID", unique=true) }
-    )
+    @ElementCollection
+    @CollectionTable(name="ORGANIZATION_CURRENCY", joinColumns=@JoinColumn(name="ORGANIZATION__ID"))
+    @Column(name="CURRENCY_TYPE")
+    @MapKeyJoinColumn(name="CURRENCY__ID", referencedColumnName="ID")
     private Map<Currency, CurrencyType> currencies = new HashMap<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -154,12 +157,19 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public Address getHeadOfficeAddress(){
-        //TODO
-        return null;
+        Address headOfficeAddress =
+                addresses.parallelStream()
+                        .filter(t -> t.getAddressType() == AddressType.HEAD_OFFICE)
+                        .filter(t -> t.isCurrentAddress())
+                        .findFirst()
+                        .get();
+        return headOfficeAddress;
     }
 
     public Set<Currency> getBaseCurrencies(){
-        //TODO
+        Set<Map.Entry<Currency, CurrencyType>> entries = currencies.entrySet();
+        entries.parallelStream().filter(t -> t.getValue() == CurrencyType.Base)
+                .collect(toSet());
         return null;
     }
 
