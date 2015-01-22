@@ -40,9 +40,5 @@ public abstract class PartnerRole extends BaseEntity implements Serializable {
     public Set<Address> getAddresses() {
         return addresses;
     }
-
-    public void setAddresses(Set<Address> addresses) {
-        this.addresses = addresses;
-    }
 }
 
