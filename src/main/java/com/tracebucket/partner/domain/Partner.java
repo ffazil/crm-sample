@@ -1,5 +1,7 @@
 package com.tracebucket.partner.domain;
 
+import com.tracebucket.common.domain.Address;
+import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
@@ -36,9 +38,8 @@ public class Partner extends BaseAggregateRoot{
     @Basic(fetch = FetchType.EAGER)
     protected PartnerCategory partnerCategory;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="OWNER_ID")
-    private Organization owner;
+    @Embedded
+    private Owner owner;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -49,88 +50,38 @@ public class Partner extends BaseAggregateRoot{
 
     }
 
-    public Partner category(PartnerCategory partnerCategory){
-        this.partnerCategory = partnerCategory;
-        return this;
+    public void setPartnerCategory(PartnerCategory partnerCategory){
+        //TODO
     }
 
-    public String getWebsite() {
-        return website;
+    public void movePartnerToCategory(PartnerCategory newPartnerCategory){
+        //TODO
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void addPartnerRole(PartnerRole newPartnerRole){
+        //TODO
     }
 
-    public Organization owner(){
-        return owner;
+    public Boolean hasPartnerRole(PartnerRole partnerRole){
+        //TODO
+        return null;
     }
 
-    public Partner owner(Organization owner){
-        this.owner = owner;
-        return this;
+    public void addAddressToRole(PartnerRole partnerRole, Address address){
+        //TODO
     }
 
-    public Partner role(PartnerRole role){
-        this.partnerRoles.add(role);
-        return this;
+    public void moveRoleAddressTo(PartnerRole partnerRole, Address newAddress){
+        //TODO
     }
 
-    public Set<PartnerRole> roles(){
-        return this.partnerRoles;
+    public void changeOwner(Owner newOwner){
+        //TODO
     }
 
-    public PartnerCategory category(){
-        return this.partnerCategory;
+    public Set<PartnerRole> getAllAssignedRoles(){
+        //TODO
+        return null;
     }
 
-
-
-    public PartnerCategory getPartnerCategory() {
-        return partnerCategory;
-    }
-
-    public void setPartnerCategory(PartnerCategory partnerCategory) {
-        this.partnerCategory = partnerCategory;
-    }
-
-/*    public PartnerRole getPartnerRole() {
-        return partnerRole;
-    }
-
-    public void setPartnerRole(PartnerRole partnerRole) {
-        this.partnerRole = partnerRole;
-    }*/
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Set<PartnerRole> getPartnerRoles() {
-        return partnerRoles;
-    }
-
-    public void setPartnerRoles(Set<PartnerRole> partnerRoles) {
-        this.partnerRoles = partnerRoles;
-    }
-
-    public Organization getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Organization owner) {
-        this.owner = owner;
-    }
 }
