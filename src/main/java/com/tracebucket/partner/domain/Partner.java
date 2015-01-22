@@ -38,7 +38,8 @@ public class Partner extends BaseAggregateRoot{
     @Basic(fetch = FetchType.EAGER)
     protected PartnerCategory partnerCategory;
 
-    private AggregateId owner;
+    @Embedded
+    private Owner owner;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -74,11 +75,7 @@ public class Partner extends BaseAggregateRoot{
         //TODO
     }
 
-    public void setOwner(AggregateId organizationAggregateId){
-        //TODO
-    }
-
-    public void changeOwner(AggregateId newAggregateId){
+    public void changeOwner(Owner newOwner){
         //TODO
     }
 
