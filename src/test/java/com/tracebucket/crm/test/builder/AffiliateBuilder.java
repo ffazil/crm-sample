@@ -82,7 +82,7 @@ public class AffiliateBuilder {
         affiliate.setBusinessName(businessName);
         affiliate.setDateOfIncorporation(dateOfIncorporation);
         affiliate.setLogo(logo);
-        affiliate.setAddresses(addresses);
+        //affiliate.setAddresses(addresses);
         affiliate.setPersons(persons);
        // affiliate.setSaleChannels(saleChannels);
         affiliate.setWebsite(website);

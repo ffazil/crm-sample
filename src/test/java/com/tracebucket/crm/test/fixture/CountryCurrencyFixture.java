@@ -11,7 +11,7 @@ public class CountryCurrencyFixture {
     public static CountryCurrency standardCountryCurrency() {
         CountryCurrency countryCurrency = CountryCurrencyBuilder.aCountryCurrencyBuilder()
                 .withCurrency(CurrencyFixture.standardCurrency())
-                .withCurrencyType(CurrencyType.DEFAULT)
+                .withCurrencyType(CurrencyType.BASE)
                 .build();
         return countryCurrency;
     }

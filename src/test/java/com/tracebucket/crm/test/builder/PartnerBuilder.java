@@ -13,7 +13,7 @@ import java.util.Set;
  * Created by sadath on 11-Aug-14.
  */
 public class PartnerBuilder {
-    private String title;
+/*    private String title;
     private String image;
     private String website;
     private Organization owner;
@@ -65,6 +65,6 @@ public class PartnerBuilder {
         partner.setPartnerCategory(partnerCategory);
         partner.setPartnerRoles(partnerRoles);
         return partner;
-    }
+    }*/
     
 }

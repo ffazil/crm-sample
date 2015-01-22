@@ -24,12 +24,12 @@ import javax.transaction.Transactional;
  * Created by vishwa on 13-01-2015.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class})
-@Transactional
+@Transactional*/
 public class PartnerRepositoryTest {
 
-    @Autowired
+/*    @Autowired
     private PartnerRepository partnerRepository;
 
     @Autowired

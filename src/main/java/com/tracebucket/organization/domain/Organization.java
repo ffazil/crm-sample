@@ -1,5 +1,6 @@
 package com.tracebucket.organization.domain;
 
+import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
@@ -9,6 +10,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * Created by ffl on 11-04-2014.
@@ -47,12 +52,10 @@ public class Organization extends BaseAggregateRoot {
         Optional
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinTable(
-            name="ORGANIZATION_CURRENCY",
-            joinColumns={ @JoinColumn(name="ORGANIZATION__ID", referencedColumnName="ID") },
-            inverseJoinColumns={ @JoinColumn(name="CURRENCY__ID", referencedColumnName="ID", unique=true) }
-    )
+    @ElementCollection
+    @CollectionTable(name="ORGANIZATION_CURRENCY", joinColumns=@JoinColumn(name="ORGANIZATION__ID"))
+    @Column(name="CURRENCY_TYPE")
+    @MapKeyJoinColumn(name="CURRENCY__ID", referencedColumnName="ID")
     private Map<Currency, CurrencyType> currencies = new HashMap<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -86,15 +89,15 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addBaseCurrency(Currency baseCurrency){
-        //TODO
+        this.currencies.put(baseCurrency, CurrencyType.Base);
     }
 
     public void addTimezone(Timezone timezone){
-        //TODO
+        this.timezones.add(timezone);
     }
 
     public void addOrganizationUnit(OrganizationUnit organizationUnit){
-        //TODO
+        this.organizationUnits.add(organizationUnit);
     }
 
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
@@ -102,35 +105,35 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addContactPerson(Person contactPerson){
-        //TODO
+        this.contactPersons.add(contactPerson);
     }
 
     public void setDefaultContactPerson(Person defaultContactPerson){
-        //TODO
+        this.contactPersons.add(defaultContactPerson);
     }
 
     public void addContactNumber(Phone phone){
-        //TODO
+        this.phones.add(phone);
     }
 
     public void setDefaultContactNumber(Phone defaultContactNumber){
-        //TODO
+        this.phones.add(defaultContactNumber);
     }
 
     public void addEmail(Email email){
-        //TODO
+        this.emails.add(email);
     }
 
     public void setDefaultEmail(Email defaultEmail){
-        //TODO
+        this.emails.add(defaultEmail);
     }
 
     public void setHeadOffice(Address headOfficeAddress){
-        //TODO
+        this.addresses.add(headOfficeAddress);
     }
 
     public void moveHeadOfficeTo(Address newHeadOfficeAddress){
-        //TODO
+        this.addresses.add(newHeadOfficeAddress);
     }
 
     public String getCode() {
@@ -154,27 +157,31 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public Address getHeadOfficeAddress(){
-        //TODO
-        return null;
+        Address headOfficeAddress =
+                addresses.parallelStream()
+                        .filter(t -> t.getAddressType() == AddressType.HEAD_OFFICE)
+                        .filter(t -> t.isCurrentAddress())
+                        .findFirst()
+                        .get();
+        return headOfficeAddress;
     }
 
     public Set<Currency> getBaseCurrencies(){
-        //TODO
+        Set<Map.Entry<Currency, CurrencyType>> entries = currencies.entrySet();
+        entries.parallelStream().filter(t -> t.getValue() == CurrencyType.Base)
+                .collect(toSet());
         return null;
     }
 
     public Set<OrganizationUnit> getOrganizationUnits(){
-        //TODO
-        return null;
+        return this.organizationUnits;
     }
 
     public Set<Phone> getContactNumbers(){
-        //TODO
-        return null;
+        return this.phones;
     }
 
     public Set<Email> getEmails(){
-        //TODO
-        return null;
+        return this.emails;
     }
 }
