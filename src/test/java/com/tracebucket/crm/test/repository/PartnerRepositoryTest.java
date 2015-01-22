@@ -44,7 +44,7 @@ public class PartnerRepositoryTest {
 
     }
 
-    private void createPartner() throws Exception{
+  /*  private void createPartner() throws Exception{
         partner = PartnerFixture.allRoles();
         organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
@@ -60,14 +60,14 @@ public class PartnerRepositoryTest {
         partner = partnerRepository.save(partner);
         Assert.assertEquals(1, partner.getPartnerRoles().size());
     }
-
-    @Test
+*/
+  /*  @Test
     @Rollback(false)
     public void testFindById() throws Exception {
         createPartner();
         partner = partnerRepository.findOne(partner.getAggregateId());
         Assert.assertNotNull(partner);
-    }
+    }*/
 
     @After
     public void tearDown(){
@@ -83,11 +83,11 @@ public class PartnerRepositoryTest {
         }
     }
 
-    @Test
+   /* @Test
     @Rollback(false)
     public void testCreate() throws Exception{
         createPartner();
         Assert.assertNotNull(partner.getAggregateId());
-    }
+    }*/
 
 }
