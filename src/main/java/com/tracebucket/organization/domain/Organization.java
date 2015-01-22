@@ -102,7 +102,13 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
-        //TODO
+        OrganizationUnit parentOrganizationUnitFetched = organizationUnits.parallelStream()
+                .filter(t -> t.getId() == parentOrganizationUnit.getId())
+                .findFirst()
+                .get();
+        if(parentOrganizationUnitFetched != null) {
+            parentOrganizationUnitFetched.addChild(organizationUnit);
+        }
     }
 
     public void addContactPerson(Person contactPerson){
