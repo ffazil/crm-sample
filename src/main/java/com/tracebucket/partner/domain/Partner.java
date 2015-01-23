@@ -47,8 +47,21 @@ public class Partner extends BaseAggregateRoot{
     protected Set<PartnerRole> partnerRoles = new HashSet<PartnerRole>(0);
 
     public Partner() {
-
     }
+
+    public Partner(String title, String website){
+
+        this.title = title;
+        this.website = website;
+    }
+
+    public Partner (String title, String website, String image){
+
+        this.title = title;
+        this.website = website;
+        this.image = image;
+    }
+
 
     public void setPartnerCategory(PartnerCategory partnerCategory){
 
@@ -95,5 +108,4 @@ public class Partner extends BaseAggregateRoot{
         return partnerRoles;  //iteration
 
     }
-
 }
