@@ -28,6 +28,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public Organization findOne(AggregateId aggregateId) {
+        return organizationRepository.findOne(aggregateId);
+    }
+
+    @Override
     public boolean delete(AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
@@ -38,111 +43,123 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
+    public Organization addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addBaseCurrency(baseCurrency);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addTimezone(Timezone timezone, AggregateId organizationAggregateId) {
+    public Organization addTimezone(Timezone timezone, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addTimezone(timezone);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addOrganizationUnit(OrganizationUnit organizationUnit, AggregateId organizationAggregateId) {
+    public Organization addOrganizationUnit(OrganizationUnit organizationUnit, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addOrganizationUnit(organizationUnit);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit, AggregateId organizationAggregateId) {
+    public Organization addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addOrganizationUnitBelow(organizationUnit, parentOrganizationUnit);
-            organizationRepository.save(organization);
+            return  organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addContactPerson(Person contactPerson, AggregateId organizationAggregateId) {
+    public Organization addContactPerson(Person contactPerson, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addContactPerson(contactPerson);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void setDefaultContactPerson(Person defaultContactPerson, AggregateId organizationAggregateId) {
+    public Organization setDefaultContactPerson(Person defaultContactPerson, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultContactPerson(defaultContactPerson);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addContactNumber(Phone phone, AggregateId organizationAggregateId) {
+    public Organization addContactNumber(Phone phone, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addContactNumber(phone);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void setDefaultContactNumber(Phone defaultContactNumber, AggregateId organizationAggregateId) {
+    public Organization setDefaultContactNumber(Phone defaultContactNumber, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultContactNumber(defaultContactNumber);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void addEmail(Email email, AggregateId organizationAggregateId) {
+    public Organization addEmail(Email email, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addEmail(email);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void setDefaultEmail(Email defaultEmail, AggregateId organizationAggregateId) {
+    public Organization setDefaultEmail(Email defaultEmail, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultEmail(defaultEmail);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void setHeadOffice(Address headOfficeAddress, AggregateId organizationAggregateId) {
+    public Organization setHeadOffice(Address headOfficeAddress, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setHeadOffice(headOfficeAddress);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
-    public void moveHeadOfficeTo(Address newHeadOfficeAddress, AggregateId organizationAggregateId) {
+    public Organization moveHeadOfficeTo(Address newHeadOfficeAddress, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.moveHeadOfficeTo(newHeadOfficeAddress);
-            organizationRepository.save(organization);
+            return organizationRepository.save(organization);
         }
+        return null;
     }
 
     @Override
