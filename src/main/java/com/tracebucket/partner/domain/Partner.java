@@ -51,37 +51,52 @@ public class Partner extends BaseAggregateRoot{
     }
 
     public void setPartnerCategory(PartnerCategory partnerCategory){
-        //TODO
+
+        this.partnerCategory = partnerCategory;
     }
 
     public void movePartnerToCategory(PartnerCategory newPartnerCategory){
         //TODO
+        this.partnerCategory = newPartnerCategory;
     }
 
     public void addPartnerRole(PartnerRole newPartnerRole){
-        //TODO
+        //
+        this.partnerRoles.add(newPartnerRole);
     }
 
     public Boolean hasPartnerRole(PartnerRole partnerRole){
-        //TODO
-        return null;
+        Long found = partnerRoles.parallelStream()
+            .filter(t -> t.getId() == partnerRole.getId())
+            .count();
+        return (found != null && found > 0) ? true : false;
     }
 
     public void addAddressToRole(PartnerRole partnerRole, Address address){
         //TODO
+       partnerRole.getAddresses().add(address);
     }
 
     public void moveRoleAddressTo(PartnerRole partnerRole, Address newAddress){
         //TODO
+        Long foundId = partnerRoles.parallelStream()
+                .filter(t -> t.getId() == partnerRole.getId())
+                .count();
+
+        if(partnerRole.getId() == foundId){
+
+            partnerRole.getAddresses().add(newAddress);
+        }
     }
 
     public void changeOwner(Owner newOwner){
-        //TODO
+        this.owner = newOwner;
     }
 
     public Set<PartnerRole> getAllAssignedRoles(){
-        //TODO
-        return null;
+
+        return partnerRoles;  //iteration
+
     }
 
 }
