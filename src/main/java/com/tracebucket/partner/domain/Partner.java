@@ -56,12 +56,10 @@ public class Partner extends BaseAggregateRoot{
     }
 
     public void movePartnerToCategory(PartnerCategory newPartnerCategory){
-        //TODO
         this.partnerCategory = newPartnerCategory;
     }
 
     public void addPartnerRole(PartnerRole newPartnerRole){
-        //
         this.partnerRoles.add(newPartnerRole);
     }
 
@@ -73,12 +71,11 @@ public class Partner extends BaseAggregateRoot{
     }
 
     public void addAddressToRole(PartnerRole partnerRole, Address address){
-        //TODO
        partnerRole.getAddresses().add(address);
     }
 
     public void moveRoleAddressTo(PartnerRole partnerRole, Address newAddress){
-        //TODO
+
         Long foundId = partnerRoles.parallelStream()
                 .filter(t -> t.getId() == partnerRole.getId())
                 .count();
