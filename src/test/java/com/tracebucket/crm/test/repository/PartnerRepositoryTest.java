@@ -71,7 +71,7 @@ public class PartnerRepositoryTest {
 
     @After
     public void tearDown(){
-        if(partner != null && partner.getAggregateId() != null) {
+/*        if(partner != null && partner.getAggregateId() != null) {
             partnerRepository.delete(partner.getAggregateId());
             partner = partnerRepository.findOne(partner.getAggregateId());
             Assert.assertNull(partner);
@@ -80,7 +80,7 @@ public class PartnerRepositoryTest {
             organizationRepository.delete(organization.getAggregateId());
             organization = organizationRepository.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
-        }
+        }*/
     }
 
    /* @Test
