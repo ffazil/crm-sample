@@ -16,7 +16,7 @@ public class CustomerFixture {
     public static Customer standardCustomer(){
         Set<Address> addresses = new HashSet<Address>(0);
         addresses.add(AddressFixture.standardAddress());
-        addresses.add(AddressFixture.standardAddress2());
+        addresses.add(AddressFixture.headOffice());
         Customer customer = CustomerBuilder.aCustomer()
                 .withName("Customer " + new Date().getTime())
                 .withBirthday(new Date())

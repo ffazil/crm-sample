@@ -14,46 +14,71 @@ import java.util.UUID;
  * Created by sadath on 25-Nov-14.
  */
 public class OrganizationFixture {
+
     public static Organization standardOrganization() {
-        Set<Address> addresses = new HashSet<Address>();
-        addresses.add(AddressFixture.standardAddress());
-        addresses.add(AddressFixture.standardAddress2());
-
-        Set<Currency> currencies = new HashSet<Currency>();
-        currencies.add(CurrencyFixture.standardCurrency());
-        currencies.add(CurrencyFixture.standardCurrency2());
-
-        Set<Timezone> timezones = new HashSet<Timezone>();
-        timezones.add(TimezoneFixture.standardTimezone());
-        timezones.add(TimezoneFixture.standardTimezone2());
-
-        Set<Person> contactPersons = new HashSet<Person>();
-        contactPersons.add(PersonFixture.standardPerson());
-        contactPersons.add(PersonFixture.standardPerson2());
-
-        Set<OrganizationUnit> organizationUnits = new HashSet<OrganizationUnit>();
-        organizationUnits.add(OrganizationUnitFixture.standardOrganizationUnit());
-
-        Set<Phone> phones = new HashSet<Phone>();
-        phones.add(PhoneFixture.standardPhone());
-
-        Set<Email> emails = new HashSet<Email>();
-        emails.add(EmailFixture.standardEmail());
-
         Organization organization = OrganizationBuilder.anOrganizationBuilder()
-                .withName("Organization " + new Date().getTime())
-                .withImage("image")
-                .withCode(UUID.randomUUID().toString())
-                .withDescription(UUID.randomUUID().toString())
-                .withWebsite(UUID.randomUUID().toString())
-                .withAddresses(addresses)
-                .withCurrencies(currencies)
-                .withTimezones(timezones)
-                .withContactPersons(contactPersons)
-                .withOrganizationUnits(organizationUnits)
-                .withPhones(phones)
-                .withEmails(emails)
-                .build();
+                .build("Organization " + new Date().getTime(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), "image");
         return organization;
     }
+
+    public static Organization addBaseCurrency(Currency baseCurrency, Organization organization) {
+        organization.addBaseCurrency(baseCurrency);
+        return organization;
+    }
+    
+    public static  Organization addTimezone(Timezone timezone, Organization organization) {
+        organization.addTimezone(timezone);
+        return organization;
+    }
+    
+    public static  Organization addOrganizationUnit(OrganizationUnit organizationUnit, Organization organization) {
+        organization.addOrganizationUnit(organizationUnit);
+        return organization;
+    }
+    
+    public static  Organization addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit, Organization organization) {
+        organization.addOrganizationUnitBelow(organizationUnit, parentOrganizationUnit);
+        return organization;
+    }
+    
+    public static  Organization addContactPerson(Person contactPerson, Organization organization) {
+        organization.addContactPerson(contactPerson);
+        return organization;
+    }
+    
+    public static  Organization setDefaultContactPerson(Person defaultContactPerson, Organization organization) {
+        organization.setDefaultContactPerson(defaultContactPerson);
+        return organization;
+    }
+    
+    public static  Organization addContactNumber(Phone phone, Organization organization) {
+        organization.addContactNumber(phone);
+        return organization;
+    }
+    
+    public static  Organization setDefaultContactNumber(Phone defaultContactNumber, Organization organization) {
+        organization.setDefaultContactNumber(defaultContactNumber);
+        return organization;
+    }
+    
+    public static  Organization addEmail(Email email, Organization organization) {
+        organization.addEmail(email);
+        return organization;
+    }
+    
+    public static  Organization setDefaultEmail(Email defaultEmail, Organization organization) {
+        organization.setDefaultEmail(defaultEmail);
+        return organization;
+    }
+    
+    public static  Organization setHeadOffice(Address headOfficeAddress, Organization organization) {
+        organization.setHeadOffice(headOfficeAddress);
+        return organization;
+    }
+    
+    public static  Organization moveHeadOfficeTo(Address newHeadOfficeAddress, Organization organization) {
+        organization.moveHeadOfficeTo(newHeadOfficeAddress);
+        return organization;
+    }
+
 }

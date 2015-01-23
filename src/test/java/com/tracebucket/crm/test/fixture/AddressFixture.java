@@ -30,7 +30,7 @@ public class AddressFixture {
         return address;
     }
 
-    public static Address standardAddress2() {
+    public static Address headOffice() {
         Set<AddressType> addressTypes = new HashSet<AddressType>();
         addressTypes.add(AddressType.HEAD_OFFICE);
         Address address = AddressBuilder.anAddress()

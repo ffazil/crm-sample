@@ -69,7 +69,7 @@ public class Currency extends BaseEntity {
         if (image != null ? !image.equals(currency.image) : currency.image != null) return false;
         if (iso4217Code != null ? !iso4217Code.equals(currency.iso4217Code) : currency.iso4217Code != null)
             return false;
-        if (!name.equals(currency.name)) return false;
+        if (name != null ? !name.equals(currency.name) : currency.name != null) return false;
         if (subUnit110 != null ? !subUnit110.equals(currency.subUnit110) : currency.subUnit110 != null) return false;
 
         return true;
@@ -77,7 +77,7 @@ public class Currency extends BaseEntity {
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (iso4217Code != null ? iso4217Code.hashCode() : 0);
         result = 31 * result + (subUnit110 != null ? subUnit110.hashCode() : 0);
         result = 31 * result + (image != null ? image.hashCode() : 0);

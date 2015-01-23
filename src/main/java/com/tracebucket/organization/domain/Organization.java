@@ -89,6 +89,20 @@ public class Organization extends BaseAggregateRoot {
     public Organization() {
     }
 
+    public Organization(String name, String code, String description) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+    }
+
+    public Organization(String name, String code, String description, String website, String image) {
+        this.name = name;
+        this.code = code;
+        this.description = description;
+        this.website = website;
+        this.image = image;
+    }
+
     public void addBaseCurrency(Currency baseCurrency){
         this.currencies.put(baseCurrency, CurrencyType.Base);
     }
@@ -167,7 +181,7 @@ public class Organization extends BaseAggregateRoot {
         Address headOfficeAddress =
                 addresses.parallelStream()
                         .filter(t -> t.getAddressType() == AddressType.HEAD_OFFICE)
-                        .filter(t -> t.isCurrentAddress())
+                        //.filter(t -> t.isCurrentAddress())
                         .findFirst()
                         .get();
         return headOfficeAddress;
@@ -198,5 +212,25 @@ public class Organization extends BaseAggregateRoot {
 
     public Set<Email> getEmails(){
         return this.emails;
+    }
+
+    public Set<Timezone> getTimezones(){
+        return this.timezones;
+    }
+
+    public Set<Person> getContactPersons() {
+        return contactPersons;
+    }
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public Set<Address> getAddresses() {
+        return addresses;
+    }
+
+    public Map<Currency, CurrencyType> getCurrencies() {
+        return currencies;
     }
 }

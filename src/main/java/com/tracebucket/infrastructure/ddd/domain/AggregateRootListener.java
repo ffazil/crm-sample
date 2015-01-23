@@ -20,10 +20,15 @@ public class AggregateRootListener {
     @Autowired
     private EventHandlerHelper eventHandlerHelper;
 
-    @PrePersist
     @PreUpdate
     @PreRemove
     public void publishEvents(BaseAggregateRoot aggregateRoot){
-        eventHandlerHelper.notify(aggregateRoot.getEvents());
+//        eventHandlerHelper.notify(aggregateRoot.getEvents());
+    }
+
+    @PrePersist
+    public void initAggregateId(BaseAggregateRoot aggregateRoot) {
+        aggregateRoot.aggregateId = AggregateId.generate();
+//        eventHandlerHelper.notify(aggregateRoot.getEvents());
     }
 }

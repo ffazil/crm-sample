@@ -16,7 +16,7 @@ public class AffiliateFixture {
     public static Affiliate standardAffiliate() {
         Set<Address> addresses = new HashSet<Address>(0);
         addresses.add(AddressFixture.standardAddress());
-        addresses.add(AddressFixture.standardAddress2());
+        addresses.add(AddressFixture.headOffice());
 
         Set<Person> persons = new HashSet<Person>(0);
         persons.add(PersonFixture.standardPerson());

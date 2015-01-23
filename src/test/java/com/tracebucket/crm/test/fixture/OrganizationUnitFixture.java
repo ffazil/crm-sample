@@ -36,7 +36,7 @@ public class OrganizationUnitFixture {
 
         Set<Address> addresses = new HashSet<Address>();
         addresses.add(AddressFixture.standardAddress());
-        addresses.add(AddressFixture.standardAddress2());
+        addresses.add(AddressFixture.headOffice());
 
         Set<Department> departments = new HashSet<Department>();
         departments.add(DepartmentFixture.standardDepartment());
