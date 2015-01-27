@@ -1,6 +1,7 @@
 package com.tracebucket.crm.service.impl;
 
 import com.tracebucket.common.domain.*;
+import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.crm.service.OrganizationService;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
@@ -21,6 +22,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     private OrganizationRepository organizationRepository;
+
+    @Autowired
+    private CurrencyService currencyService;
 
     @Override
     public Organization save(Organization organization) {
@@ -46,8 +50,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
-            organization.addBaseCurrency(baseCurrency);
-            return organizationRepository.save(organization);
+            Currency currency = currencyService.findOne(baseCurrency.getId());
+            if(currency != null) {
+                organization.addBaseCurrency(baseCurrency);
+                return organizationRepository.save(organization);
+            }
         }
         return null;
     }

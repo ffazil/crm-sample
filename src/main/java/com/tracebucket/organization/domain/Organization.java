@@ -4,8 +4,12 @@ import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -54,9 +58,9 @@ public class Organization extends BaseAggregateRoot {
     }
 
     @ElementCollection
-    @CollectionTable(name="ORGANIZATION_CURRENCY", joinColumns=@JoinColumn(name="ORGANIZATION__ID"))
-    @Column(name="CURRENCY_TYPE")
-    @MapKeyJoinColumn(name="CURRENCY__ID", referencedColumnName="ID")
+    @CollectionTable(name = "ORGANIZATION_CURRENCY", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
+    @Column(name = "CURRENCY_TYPE")
+    @MapKeyJoinColumn(name = "CURRENCY__ID", referencedColumnName = "ID")
     private Map<Currency, CurrencyType> currencies = new HashMap<>(0);
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -69,13 +73,13 @@ public class Organization extends BaseAggregateRoot {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinTable(
-            name="ORGANIZATION_CONTACT_PERSON",
-            joinColumns={ @JoinColumn(name="ORGANIZATION__ID", referencedColumnName="ID") },
-            inverseJoinColumns={ @JoinColumn(name="PERSON__ID", referencedColumnName="ID", unique=true) }
+            name = "ORGANIZATION_CONTACT_PERSON",
+            joinColumns = { @JoinColumn(name = "ORGANIZATION__ID", referencedColumnName = "ID") },
+            inverseJoinColumns = { @JoinColumn(name = "PERSON__ID", referencedColumnName = "ID", unique = true) }
     )
     private Set<Person> contactPersons = new HashSet<Person>(0);
 
-    @OneToMany(mappedBy="organization", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<OrganizationUnit> organizationUnits = new HashSet<OrganizationUnit>(0);
 
     @ElementCollection
@@ -112,7 +116,10 @@ public class Organization extends BaseAggregateRoot {
     }
 
     public void addOrganizationUnit(OrganizationUnit organizationUnit){
-        this.organizationUnits.add(organizationUnit);
+        if(organizationUnit != null) {
+            organizationUnit.setOrganization(this);
+            this.organizationUnits.add(organizationUnit);
+        }
     }
 
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){

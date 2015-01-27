@@ -1,5 +1,9 @@
 package com.tracebucket.crm.test.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -12,4 +16,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"com.tracebucket.crm.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
 @EnableTransactionManagement(proxyTargetClass = true)
 public class ServiceTestConfig {
+    @Bean
+    public Mapper mapper() {
+        return new DozerBeanMapper();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper()
+    {
+        return new ObjectMapper();
+    }
 }
