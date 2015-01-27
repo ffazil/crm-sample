@@ -23,8 +23,8 @@ public class PartnerBuilder {
         return new Partner(title, website);
     }
 
-    public Partner build(String title, String website, String image){
-        return new Partner(title, website, image);
+    public Partner build(String title, String website, String image, PartnerCategory partnerCategory){
+        return new Partner(title, website, image, partnerCategory);
     }
 
     

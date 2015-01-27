@@ -16,4 +16,11 @@ public class OwnerFixture {
                 .build();
         return owner;
     }
+
+    public static Owner standardOwner2() {
+        Owner owner = OwnerBuilder.anOwnerBuilder()
+                .withName("Name_UPDT " + new Date().getTime())
+                .build();
+        return owner;
+    }
 }

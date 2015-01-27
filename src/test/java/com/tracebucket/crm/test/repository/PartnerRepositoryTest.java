@@ -1,10 +1,14 @@
 package com.tracebucket.crm.test.repository;
 
+import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.fixture.CustomerFixture;
+import com.tracebucket.crm.test.fixture.OwnerFixture;
 import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.partner.domain.Owner;
 import com.tracebucket.partner.domain.Partner;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
+import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.partner.repository.jpa.PartnerRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.fixture.PartnerFixture;
@@ -39,6 +43,8 @@ public class PartnerRepositoryTest {
 
     private Organization organization = null;
 
+    private Owner owner = null;
+
     @Before
     public void setUp() throws Exception{
 
@@ -46,19 +52,29 @@ public class PartnerRepositoryTest {
 
     private void createPartner() throws Exception{
         partner = PartnerFixture.standardPartner();
+        owner = OwnerFixture.standardOwner();
+        partner.setOwner(owner);
         //organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
     }
 
-  /*  @Test
+    @Test
+    @Rollback(false)
+    public void testCreate() throws Exception{
+        createPartner();
+        Assert.assertNotNull(partner.getAggregateId());
+    }
+
+    @Test
     public void testUpdate() throws Exception {
         createPartner();
-        partner.getPartnerRoles().clear();
+
+        partner.getAllAssignedRoles().clear();
         partner = partnerRepository.save(partner);
-        Assert.assertEquals(0, partner.getPartnerRoles().size());
-        partner.getPartnerRoles().add(CustomerFixture.standardCustomer());
-        partner = partnerRepository.save(partner);
-        Assert.assertEquals(1, partner.getPartnerRoles().size());
+        Assert.assertEquals(0, partner.getAllAssignedRoles().size());
+        Customer customer = CustomerFixture.standardCustomer();
+        partner.getAllAssignedRoles().add(customer);
+        Assert.assertEquals(1, partner.getAllAssignedRoles().size());
     }
     @Test
     @Rollback(false)
@@ -67,7 +83,6 @@ public class PartnerRepositoryTest {
         partner = partnerRepository.findOne(partner.getAggregateId());
         Assert.assertNotNull(partner);
     }
-
     @After
     public void tearDown(){
         if(partner != null && partner.getAggregateId() != null) {
@@ -75,18 +90,12 @@ public class PartnerRepositoryTest {
             partner = partnerRepository.findOne(partner.getAggregateId());
             Assert.assertNull(partner);
         }
-        if(organization != null && organization.getAggregateId() != null) {
+        /*if(organization != null && organization.getAggregateId() != null) {
             organizationRepository.delete(organization.getAggregateId());
             organization = organizationRepository.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
-        }
-    }*/
-
-    @Test
-    @Rollback(false)
-    public void testCreate() throws Exception{
-        createPartner();
-        Assert.assertNotNull(partner.getAggregateId());
+        }*/
     }
+
 
 }

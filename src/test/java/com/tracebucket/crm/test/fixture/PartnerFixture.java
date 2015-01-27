@@ -18,7 +18,7 @@ public class PartnerFixture {
 
     public static Partner standardPartner() {
         Partner partner = PartnerBuilder.aPartnerBuilder()
-                .build("Title " + new Date().getTime(), UUID.randomUUID().toString(),"image");
+                .build("Title " + new Date().getTime(), UUID.randomUUID().toString(),"image", PartnerCategory.INDIVIDUAL);
         return partner;
     }
 
