@@ -2,6 +2,7 @@ package com.tracebucket.crm.test.service;
 
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
+import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.crm.service.OrganizationService;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
@@ -29,7 +30,12 @@ public class OrganizationServiceTest {
     @Autowired
     private OrganizationService organizationService;
 
+    @Autowired
+    private CurrencyService currencyService;
+
     private Organization organization = null;
+
+    private Currency currency = null;
 
     @Before
     public void setUp() throws Exception{
@@ -49,13 +55,15 @@ public class OrganizationServiceTest {
 
     @Test
     public void testAddBaseCurrency() throws Exception {
-        //TODO
-/*        createOrganization();
-        organization = OrganizationFixture.addBaseCurrency(CurrencyFixture.standardCurrency(), organization);
+        createOrganization();
+        currency = CurrencyFixture.standardCurrency();
+        currency = currencyService.create(currency);
+        Assert.assertNotNull(currency);
+        organization = OrganizationFixture.addBaseCurrency(currency, organization);
         organization = organizationService.save(organization);
         Assert.assertNotNull(organization.getAggregateId());
         Assert.assertNotNull(organization.getBaseCurrencies());
-        Assert.assertEquals(1, organization.getBaseCurrencies().size());*/
+        Assert.assertEquals(1, organization.getBaseCurrencies().size());
     }
 
     @Test
@@ -78,7 +86,7 @@ public class OrganizationServiceTest {
 
     @Test
     public void testAddOrganizationUnitBelow() throws Exception {
-/*        createOrganization();
+        createOrganization();
         organization = organizationService.addOrganizationUnit(OrganizationUnitFixture.standardOrganizationUnit(), organization.getAggregateId());
         Assert.assertNotNull(organization);
         Assert.assertNotNull(organization.getOrganizationUnits());
@@ -91,8 +99,7 @@ public class OrganizationServiceTest {
         organization = organizationService.addOrganizationUnitBelow(childOrganizationUnit, parentOrganizationUnit, organization.getAggregateId());
         Assert.assertNotNull(organization);
         Assert.assertNotNull(organization.getOrganizationUnits());
-        Assert.assertEquals(1, organization.getOrganizationUnits().size());*/
-        //TODO Failed To be checked with database
+        Assert.assertEquals(1, organization.getOrganizationUnits().size());
     }
 
     @Test
@@ -182,13 +189,15 @@ public class OrganizationServiceTest {
 
     @Test
     public void testGetBaseCurrencies() throws Exception {
-        //TODO
-/*        createOrganization();
-        organization = OrganizationFixture.addBaseCurrency(CurrencyFixture.standardCurrency(), organization);
+        createOrganization();
+        currency = CurrencyFixture.standardCurrency();
+        currency = currencyService.create(currency);
+        Assert.assertNotNull(currency);
+        organization = OrganizationFixture.addBaseCurrency(currency, organization);
         organization = organizationService.save(organization);
         Assert.assertNotNull(organization.getAggregateId());
         Assert.assertNotNull(organization.getBaseCurrencies());
-        Assert.assertEquals(1, organization.getBaseCurrencies().size());*/
+        Assert.assertEquals(1, organization.getBaseCurrencies().size());
     }
 
     @Test
@@ -231,6 +240,11 @@ public class OrganizationServiceTest {
             organizationService.delete(organization.getAggregateId());
             organization = organizationService.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
+        }
+        if(currency != null && currency.getId() != null) {
+            currencyService.deleteOne(currency.getId());
+            currency = currencyService.findOne(currency.getId());
+            Assert.assertNull(currency);
         }
     }
 }

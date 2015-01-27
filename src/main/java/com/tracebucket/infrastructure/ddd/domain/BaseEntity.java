@@ -6,7 +6,7 @@ import javax.persistence.*;
 public abstract class BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
     @Column(name = "ID", nullable = false, columnDefinition = "BIGINT UNSIGNED")
     private Long id;
