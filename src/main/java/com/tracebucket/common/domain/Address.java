@@ -3,6 +3,7 @@ package com.tracebucket.common.domain;
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.infrastructure.ddd.annotation.ValueObject;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+import com.tracebucket.infrastructure.ddd.domain.BaseValueObject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 @ValueObject
 @Embeddable
-public class Address {
+public class Address extends BaseValueObject {
 
     @Column(name = "NAME")
     @Basic(fetch = FetchType.EAGER)
@@ -52,9 +53,9 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private AddressType addressType;
 
-    @Column(name = "CURRENT_ADDRESS", nullable = false, columnDefinition = "boolean default true")
+    @Column(name = "DEFAULT_ADDRESS", nullable = false, columnDefinition = "boolean default true")
     @Basic(fetch = FetchType.EAGER)
-    private boolean currentAddress;
+    private boolean defaultAddress;
 
     public Address() {
     }
@@ -139,12 +140,12 @@ public class Address {
         this.addressType = addressType;
     }
 
-    public boolean isCurrentAddress() {
-        return currentAddress;
+    public boolean isDefaultAddress() {
+        return defaultAddress;
     }
 
-    public void setCurrentAddress(boolean currentAddress) {
-        this.currentAddress = currentAddress;
+    public void setDefaultAddress(boolean defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 
     @Override

@@ -2,12 +2,13 @@ package com.tracebucket.common.domain;
 
 import com.tracebucket.common.dictionary.PhoneType;
 import com.tracebucket.infrastructure.ddd.annotation.ValueObject;
+import com.tracebucket.infrastructure.ddd.domain.BaseValueObject;
 
 import javax.persistence.*;
 
 @ValueObject
 @Embeddable
-public class Phone {
+public class Phone extends BaseValueObject {
 
     @Column(name = "NUMBER")
     @Basic(fetch = FetchType.EAGER)
@@ -20,6 +21,10 @@ public class Phone {
     @Column(name = "PHONE_TYPE", nullable = false, columnDefinition = "ENUM('MOBILE', 'WORK', 'HOME') default 'WORK'")
     @Enumerated(EnumType.STRING)
     private PhoneType phoneType;
+
+    @Column(name = "DEFAULT_PHONE", nullable = false, columnDefinition = "boolean default true")
+    @Basic(fetch = FetchType.EAGER)
+    private boolean defaultPhone;
 
     public Phone(){
 
@@ -47,6 +52,14 @@ public class Phone {
 
     public void setPhoneType(PhoneType phoneType) {
         this.phoneType = phoneType;
+    }
+
+    public boolean isDefaultPhone() {
+        return defaultPhone;
+    }
+
+    public void setDefaultPhone(boolean defaultPhone) {
+        this.defaultPhone = defaultPhone;
     }
 
     @Override
