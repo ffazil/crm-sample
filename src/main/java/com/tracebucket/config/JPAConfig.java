@@ -1,5 +1,6 @@
 package com.tracebucket.config;
 
+import com.tracebucket.infrastructure.ddd.repository.jpa.CustomRepositoryFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -98,5 +99,10 @@ public class JPAConfig {
         factoryBean.setDataSource(dataSource());
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         return factoryBean;
+    }
+
+    @Bean
+    public CustomRepositoryFactoryBean customRepositoryFactoryBean() {
+        return new CustomRepositoryFactoryBean();
     }
 }
