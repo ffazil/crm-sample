@@ -14,14 +14,13 @@ import java.io.Serializable;
 /**
  * Created by sadath on 28-Jan-15.
  */
-@NoRepositoryBean
 public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I extends Serializable> extends JpaRepositoryFactoryBean<R, T, I> {
     protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
 
         return new CustomRepositoryFactory(entityManager);
     }
 
-   private static class CustomRepositoryFactory<T extends BaseDomain, I extends Serializable> extends JpaRepositoryFactory {
+   private static class CustomRepositoryFactory<T extends BaseDomain, ID extends Serializable> extends JpaRepositoryFactory {
 
         private EntityManager entityManager;
 
@@ -31,7 +30,7 @@ public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I ex
         }
 
         protected Object getTargetRepository(RepositoryMetadata metadata) {
-            return new BaseRepositoryImpl<T, I>((Class<T>) metadata.getDomainType(), entityManager);
+            return new BaseRepositoryImpl<T, ID>((Class<T>) metadata.getDomainType(), entityManager);
         }
 
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
