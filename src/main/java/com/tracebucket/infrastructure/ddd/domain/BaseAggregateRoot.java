@@ -37,7 +37,7 @@ import java.util.Set;
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
 @EntityListeners(AggregateRootListener.class)
-public abstract class  BaseAggregateRoot {
+public abstract class  BaseAggregateRoot extends BaseDomain{
 	public static enum AggregateStatus {
 		ACTIVE, ARCHIVE
 	}

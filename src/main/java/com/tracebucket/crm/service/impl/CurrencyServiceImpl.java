@@ -3,7 +3,7 @@ package com.tracebucket.crm.service.impl;
 import com.tracebucket.common.domain.Currency;
 import com.tracebucket.crm.repository.jpa.CurrencyRepository;
 import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.infrastructure.ddd.repository.jpa.BaseEntityRepository;
+import com.tracebucket.infrastructure.ddd.repository.jpa.BaseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class CurrencyServiceImpl extends BaseEntityServiceImpl<Currency> impleme
     }
 
     @Override
-    protected BaseEntityRepository<Currency, Long> getDao() {
+    protected BaseRepository<Currency, Long> getDao() {
         return currencyRepository;
     }
 }

@@ -1,8 +1,6 @@
 package com.tracebucket.infrastructure.ddd.repository.jpa;
 
-import com.tracebucket.exception.CoreException;
-import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
-import org.springframework.dao.EmptyResultDataAccessException;
+import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -16,29 +14,36 @@ import java.io.Serializable;
  * Created by sadath on 28-Jan-15.
  */
 @NoRepositoryBean
-public class BaseEntityRepositoryImpl<T extends BaseEntity, ID extends Serializable> extends SimpleJpaRepository<T , ID> implements BaseEntityRepository<T, ID> {
+public class BaseRepositoryImpl<T extends BaseDomain, ID extends Serializable> extends SimpleJpaRepository<T , ID> implements BaseRepository<T, ID> {
 
     private EntityManager entityManager;
 
-    public BaseEntityRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
     }
 
-    public BaseEntityRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
+    public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
         super(domainClass, entityManager);
         this.entityManager = entityManager;
     }
 
     @Override
     @Transactional
-    public boolean deleteEntity(ID id) {
+    public void delete(ID id) {
         Assert.notNull(id, "The given id must not be null!");
         T entity = findOne(id);
         Assert.notNull(entity, "Entity with Id : " + id + "doesn't exist");
         entity.setPassive(true);
-        entity = save(entity);
-        entity = super.findOne((ID) entity.getId());
-        return entity != null ? false : true;
+        save(entity);
+    }
+
+    @Override
+    @Transactional
+    public void delete(T entity) {
+        Assert.notNull(entity, "The entity must not be null!");
+        entity = entityManager.contains(entity) ? entity : entityManager.merge(entity);
+        entity.setPassive(true);
+        save(entity);
     }
 }

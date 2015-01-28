@@ -26,7 +26,7 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"})
+@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"}, repositoryFactoryBeanClass = CustomRepositoryFactoryBean.class)
 @EntityScan(basePackages = {"com.tracebucket.**.domain"})
 @PropertySource(value = "classpath:jpa.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
@@ -101,8 +101,4 @@ public class JPAConfig {
         return factoryBean;
     }
 
-    @Bean
-    public CustomRepositoryFactoryBean customRepositoryFactoryBean() {
-        return new CustomRepositoryFactoryBean();
-    }
 }
