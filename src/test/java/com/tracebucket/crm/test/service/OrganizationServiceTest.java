@@ -59,8 +59,7 @@ public class OrganizationServiceTest {
         currency = CurrencyFixture.standardCurrency();
         currency = currencyService.create(currency);
         Assert.assertNotNull(currency);
-        organization = OrganizationFixture.addBaseCurrency(currency, organization);
-        organization = organizationService.save(organization);
+        organization = organizationService.addBaseCurrency(currency, organization.getAggregateId());
         Assert.assertNotNull(organization.getAggregateId());
         Assert.assertNotNull(organization.getBaseCurrencies());
         Assert.assertEquals(1, organization.getBaseCurrencies().size());
@@ -193,8 +192,7 @@ public class OrganizationServiceTest {
         currency = CurrencyFixture.standardCurrency();
         currency = currencyService.create(currency);
         Assert.assertNotNull(currency);
-        organization = OrganizationFixture.addBaseCurrency(currency, organization);
-        organization = organizationService.save(organization);
+        organization = organizationService.addBaseCurrency(currency, organization.getAggregateId());
         Assert.assertNotNull(organization.getAggregateId());
         Assert.assertNotNull(organization.getBaseCurrencies());
         Assert.assertEquals(1, organization.getBaseCurrencies().size());
