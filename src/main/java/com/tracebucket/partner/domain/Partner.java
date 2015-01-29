@@ -115,4 +115,6 @@ public class Partner extends BaseAggregateRoot{
     public void setOwner(Owner owner) {
         this.owner = owner;
     }
+
+    public PartnerCategory getPartnerCategory(){return this.partnerCategory;}
 }

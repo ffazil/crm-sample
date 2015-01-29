@@ -51,7 +51,6 @@ public class PartnerServiceImpl implements PartnerService {
             return partnerRepository.save(partner);
         }
         return null;
-
     }
 
     /*@Override
