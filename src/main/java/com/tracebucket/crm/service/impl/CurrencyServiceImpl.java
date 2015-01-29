@@ -1,9 +1,9 @@
 package com.tracebucket.crm.service.impl;
 
 import com.tracebucket.common.domain.Currency;
-import com.tracebucket.crm.repository.jpa.CurrencyRepository;
+import com.tracebucket.crm.repository.jpa.CurrencyJpaRepository;
 import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.infrastructure.ddd.repository.jpa.BaseRepository;
+import com.tracebucket.infrastructure.ddd.repository.jpa.BaseJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +20,14 @@ public class CurrencyServiceImpl extends BaseEntityServiceImpl<Currency> impleme
     private static final Logger log = LoggerFactory.getLogger(CurrencyServiceImpl.class);
 
     @Autowired
-    private CurrencyRepository currencyRepository;
+    private CurrencyJpaRepository currencyRepository;
 
     public CurrencyServiceImpl() {
         super(Currency.class);
     }
 
     @Override
-    protected BaseRepository<Currency, Long> getDao() {
+    protected BaseJpaRepository<Currency, Long> getDao() {
         return currencyRepository;
     }
 }

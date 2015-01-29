@@ -13,16 +13,17 @@ import java.io.Serializable;
 /**
  * Created by sadath on 28-Jan-15.
  */
-public class BaseRepositoryImpl<T extends BaseDomain, ID extends Serializable> extends SimpleJpaRepository<T , ID> implements BaseRepository<T, ID> {
+@NoRepositoryBean
+public class BaseJpaRepositoryImpl<T extends BaseDomain, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
 
     private EntityManager entityManager;
 
-    public BaseRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseJpaRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
     }
 
-    public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
+    public BaseJpaRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
         super(domainClass, entityManager);
         this.entityManager = entityManager;
     }
@@ -45,5 +46,4 @@ public class BaseRepositoryImpl<T extends BaseDomain, ID extends Serializable> e
         entity.setPassive(true);
         save(entity);
     }
-
 }

@@ -1,24 +1,6 @@
 package com.tracebucket.crm.test.repository;
 
-import com.tracebucket.crm.test.config.JPATestConfig;
-import com.tracebucket.crm.test.fixture.CustomerFixture;
-import com.tracebucket.organization.domain.Organization;
-import com.tracebucket.partner.domain.Partner;
-import com.tracebucket.organization.repository.jpa.OrganizationRepository;
-import com.tracebucket.partner.repository.jpa.PartnerRepository;
-import com.tracebucket.crm.test.config.ApplicationTestConfig;
-import com.tracebucket.crm.test.fixture.PartnerFixture;
 import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by vishwa on 13-01-2015.

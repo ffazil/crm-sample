@@ -7,9 +7,9 @@ import com.tracebucket.crm.service.OrganizationService;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.crm.test.fixture.*;
+import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.domain.OrganizationUnit;
-import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import org.junit.After;
 import org.junit.Assert;
@@ -17,7 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -237,12 +236,12 @@ public class OrganizationServiceTest {
         if(organization != null && organization.getAggregateId() != null) {
             organizationService.delete(organization.getAggregateId());
             organization = organizationService.findOne(organization.getAggregateId());
-            Assert.assertNull(organization);
+            Assert.assertTrue(((BaseDomain) organization).isPassive());
         }
         if(currency != null && currency.getId() != null) {
             currencyService.deleteOne(currency.getId());
             currency = currencyService.findOne(currency.getId());
-            Assert.assertNull(currency);
+            Assert.assertTrue(((BaseDomain) currency).isPassive());
         }
     }
 }

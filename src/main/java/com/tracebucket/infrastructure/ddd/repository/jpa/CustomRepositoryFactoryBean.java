@@ -4,7 +4,6 @@ import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
-import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
@@ -30,11 +29,11 @@ public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I ex
         }
 
         protected Object getTargetRepository(RepositoryMetadata metadata) {
-            return new BaseRepositoryImpl<T, ID>((Class<T>) metadata.getDomainType(), entityManager);
+            return new BaseJpaRepositoryImpl<T, ID>((Class<T>) metadata.getDomainType(), entityManager);
         }
 
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
-            return BaseRepository.class;
+            return BaseJpaRepository.class;
         }
     }
 }
