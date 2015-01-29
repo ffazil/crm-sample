@@ -13,13 +13,27 @@ import javax.persistence.*;
 @Embeddable
 public class Owner {
 
-    @Embedded
+    /*@Embedded
     @AttributeOverrides({
             @AttributeOverride(name = "aggregateId", column = @Column(name = "clientId", nullable = false))})
-    private AggregateId aggregateId;
+    private AggregateId aggregateId;*/
 
     @Column(name = "NAME", nullable = false, unique = true)
     @Basic(fetch = FetchType.EAGER)
     private String name;
 
+    public Owner() {
+    }
+
+    public Owner(String name){
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

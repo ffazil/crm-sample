@@ -1,8 +1,6 @@
 package com.tracebucket.partner.domain;
 
 import com.tracebucket.common.domain.Address;
-import com.tracebucket.infrastructure.ddd.domain.AggregateId;
-import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
@@ -47,8 +45,22 @@ public class Partner extends BaseAggregateRoot{
     protected Set<PartnerRole> partnerRoles = new HashSet<PartnerRole>(0);
 
     public Partner() {
-
     }
+
+    public Partner(String title, String website){
+
+        this.title = title;
+        this.website = website;
+    }
+
+    public Partner (String title, String website, String image, PartnerCategory partnerCategory){
+
+        this.title = title;
+        this.website = website;
+        this.image = image;
+        this.partnerCategory = partnerCategory;
+    }
+
 
     public void setPartnerCategory(PartnerCategory partnerCategory){
 
@@ -96,4 +108,13 @@ public class Partner extends BaseAggregateRoot{
 
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
+    public PartnerCategory getPartnerCategory(){return this.partnerCategory;}
 }
