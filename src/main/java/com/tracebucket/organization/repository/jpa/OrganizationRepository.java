@@ -8,5 +8,5 @@ import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 /**
  * Created by sadath on 13-Jan-15.
  */
-public interface OrganizationJpaRepository extends BaseJpaRepository<Organization, AggregateId> {
+public interface OrganizationRepository extends BaseJpaRepository<Organization, AggregateId> {
 }

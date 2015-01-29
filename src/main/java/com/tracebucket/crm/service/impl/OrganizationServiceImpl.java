@@ -6,7 +6,7 @@ import com.tracebucket.crm.service.OrganizationService;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.domain.OrganizationUnit;
-import com.tracebucket.organization.repository.jpa.OrganizationJpaRepository;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ import java.util.Set;
 public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
-    private OrganizationJpaRepository organizationRepository;
+    private OrganizationRepository organizationRepository;
 
     @Autowired
     private CurrencyService currencyService;
