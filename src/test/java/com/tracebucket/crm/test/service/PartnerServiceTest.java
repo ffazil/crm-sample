@@ -10,6 +10,7 @@ import com.tracebucket.crm.test.fixture.AddressFixture;
 import com.tracebucket.crm.test.fixture.CustomerFixture;
 import com.tracebucket.crm.test.fixture.OwnerFixture;
 import com.tracebucket.crm.test.fixture.PartnerFixture;
+import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.partner.domain.Owner;
 import com.tracebucket.partner.domain.Partner;
@@ -128,7 +129,7 @@ public class PartnerServiceTest {
         if(partner != null && partner.getAggregateId() != null) {
             partnerService.delete(partner.getAggregateId());
             partner = partnerService.findOne(partner.getAggregateId());
-            Assert.assertNull(partner);
+            Assert.assertTrue(((BaseDomain) partner).isPassive());
         }
       /*  if(owner != null ) {
             currencyService.deleteOne(currency.getId());

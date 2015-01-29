@@ -1,5 +1,7 @@
 package com.tracebucket.crm.test.repository;
 
+import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.fixture.CustomerFixture;
@@ -7,7 +9,6 @@ import com.tracebucket.crm.test.fixture.OwnerFixture;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.partner.domain.Owner;
 import com.tracebucket.partner.domain.Partner;
-import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.partner.repository.jpa.PartnerRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
@@ -37,7 +38,7 @@ public class PartnerRepositoryTest {
     private PartnerRepository partnerRepository;
 
     @Autowired
-    private OrganizationRepository organizationRepository;
+    private OrganizationRepository organizationJpaRepository;
 
     private Partner partner = null;
 
@@ -88,7 +89,7 @@ public class PartnerRepositoryTest {
         if(partner != null && partner.getAggregateId() != null) {
             partnerRepository.delete(partner.getAggregateId());
             partner = partnerRepository.findOne(partner.getAggregateId());
-            Assert.assertNull(partner);
+            Assert.assertTrue(((BaseDomain) partner).isPassive());
         }
         /*if(organization != null && organization.getAggregateId() != null) {
             organizationRepository.delete(organization.getAggregateId());
