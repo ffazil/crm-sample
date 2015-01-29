@@ -4,6 +4,7 @@ import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.crm.service.OrganizationService;
+import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.crm.test.fixture.*;
@@ -24,7 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by sadath on 13-Jan-15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class})
+@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
 public class OrganizationServiceTest {
     @Autowired
     private OrganizationService organizationService;

@@ -3,6 +3,7 @@ package com.tracebucket.organization.domain;
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
+import com.tracebucket.infrastructure.ddd.annotation.DomainMethod;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
 import org.hibernate.annotations.*;
 
@@ -26,6 +27,7 @@ import static java.util.stream.Collectors.toSet;
 @AggregateRoot
 @Entity
 @Table(name = "ORGANIZATION")
+@EntityListeners(value = {})
 public class Organization extends BaseAggregateRoot {
 
     @Column(name = "CODE", nullable = false)
@@ -107,14 +109,17 @@ public class Organization extends BaseAggregateRoot {
         this.image = image;
     }
 
+    @DomainMethod(event = "BaseCurrencyAdded")
     public void addBaseCurrency(Currency baseCurrency){
         this.currencies.put(baseCurrency, CurrencyType.Base);
     }
 
+    @DomainMethod(event = "TimeZoneAdded")
     public void addTimezone(Timezone timezone){
         this.timezones.add(timezone);
     }
 
+    @DomainMethod(event = "OrganizationUnitAdded")
     public void addOrganizationUnit(OrganizationUnit organizationUnit){
         if(organizationUnit != null) {
             organizationUnit.setOrganization(this);
@@ -122,6 +127,7 @@ public class Organization extends BaseAggregateRoot {
         }
     }
 
+    @DomainMethod(event = "OrganizationUnitAddedBelow")
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
         OrganizationUnit parentOrganizationUnitFetched = organizationUnits.parallelStream()
                 .filter(t -> t.getId() == parentOrganizationUnit.getId())
@@ -132,34 +138,42 @@ public class Organization extends BaseAggregateRoot {
         }
     }
 
+    @DomainMethod(event = "ContactPersonAdded")
     public void addContactPerson(Person contactPerson){
         this.contactPersons.add(contactPerson);
     }
 
+    @DomainMethod(event = "DefaultContactPersonSet")
     public void setDefaultContactPerson(Person defaultContactPerson){
         this.contactPersons.add(defaultContactPerson);
     }
 
+    @DomainMethod(event = "ContactNumberAdded")
     public void addContactNumber(Phone phone){
         this.phones.add(phone);
     }
 
+    @DomainMethod(event = "DefaultContactNumberSet")
     public void setDefaultContactNumber(Phone defaultContactNumber){
         this.phones.add(defaultContactNumber);
     }
 
+    @DomainMethod(event = "EmailAdded")
     public void addEmail(Email email){
         this.emails.add(email);
     }
 
+    @DomainMethod(event = "DefaultEmailSet")
     public void setDefaultEmail(Email defaultEmail){
         this.emails.add(defaultEmail);
     }
 
+    @DomainMethod(event = "HeadOfficeSet")
     public void setHeadOffice(Address headOfficeAddress){
         this.addresses.add(headOfficeAddress);
     }
 
+    @DomainMethod(event = "HeadOfficeMoved")
     public void moveHeadOfficeTo(Address newHeadOfficeAddress){
         this.addresses.add(newHeadOfficeAddress);
     }

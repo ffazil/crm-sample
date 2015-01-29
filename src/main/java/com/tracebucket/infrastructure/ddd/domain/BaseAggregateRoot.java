@@ -60,7 +60,7 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
     private EventHandlerHelper eventHandlerHelper;
 
     @Transient
-    transient private Map<String, Event> events = new HashMap<String, Event>(0);
+    transient private Set<String> events = new HashSet<>(0);
 
 
 
@@ -104,12 +104,15 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
 		return false;
 	}
 
-    protected BaseAggregateRoot queue(String name, Event event){
-        events.put(name, event);
-        return this;
+    public void fireEvent(String event){
+        events.add(event);
     }
 
-    public Map<String, Event> getEvents() {
+    public EventHandlerHelper getEventHandlerHelper() {
+        return eventHandlerHelper;
+    }
+
+    public Set<String> getEvents() {
         return events;
     }
 

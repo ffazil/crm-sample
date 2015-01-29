@@ -27,6 +27,6 @@ public class Customer extends BaseAggregateRoot{
         /*StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         System.out.println(stackTraceElements.length);*/
 		//eventPublisher.publish(new CustomerStatusChangedEvent(getAggregateId(), status));
-       queue(DomainEvent.name("customerStatusChanged"), DomainEvent.wrap(this));
+//       queue(DomainEvent.name("customerStatusChanged"), DomainEvent.wrap(this));
 	}
 }

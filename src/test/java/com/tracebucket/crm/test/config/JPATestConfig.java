@@ -7,9 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -27,9 +29,10 @@ import java.beans.PropertyVetoException;
  */
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"}, repositoryFactoryBeanClass = CustomRepositoryFactoryBean.class)
+@EnableJpaAuditing
 @EntityScan(basePackages = {"com.tracebucket.**.domain"})
 @PropertySource(value = "classpath:jpa-test.properties")
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement(proxyTargetClass = true, mode = AdviceMode.ASPECTJ)
 public class JPATestConfig {
     private static final Logger log = LoggerFactory.getLogger(JPATestConfig.class);
 
