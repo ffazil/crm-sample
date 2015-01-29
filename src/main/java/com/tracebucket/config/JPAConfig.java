@@ -1,5 +1,6 @@
 package com.tracebucket.config;
 
+import com.tracebucket.infrastructure.ddd.repository.jpa.CustomRepositoryFactoryBean;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ import java.beans.PropertyVetoException;
  * Time: 4:00 PM
  */
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"})
+@EnableJpaRepositories(basePackages = {"com.tracebucket.**.repository.jpa"}, repositoryFactoryBeanClass = CustomRepositoryFactoryBean.class)
 @EntityScan(basePackages = {"com.tracebucket.**.domain"})
 @PropertySource(value = "classpath:jpa.properties")
 @EnableTransactionManagement(proxyTargetClass = true)
@@ -99,4 +100,5 @@ public class JPAConfig {
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter());
         return factoryBean;
     }
+
 }

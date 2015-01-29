@@ -3,7 +3,7 @@ package com.tracebucket.infrastructure.ddd.domain;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class BaseEntity {
+public abstract class BaseEntity extends BaseDomain{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,4 +22,5 @@ public abstract class BaseEntity {
     public void setId(Long id) {
         this.id = id;
     }
+
 }

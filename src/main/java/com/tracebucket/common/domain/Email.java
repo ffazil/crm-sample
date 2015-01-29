@@ -2,12 +2,13 @@ package com.tracebucket.common.domain;
 
 import com.tracebucket.common.dictionary.EmailType;
 import com.tracebucket.infrastructure.ddd.annotation.ValueObject;
+import com.tracebucket.infrastructure.ddd.domain.BaseValueObject;
 
 import javax.persistence.*;
 
 @ValueObject
 @Embeddable
-public class Email {
+public class Email extends BaseValueObject {
 
     @Column(name = "EMAIL")
     @Basic(fetch = FetchType.EAGER)
@@ -16,6 +17,10 @@ public class Email {
     @Column(name = "EMAIL_TYPE", nullable = false, columnDefinition = "ENUM('PERSONAL', 'BUSINESS') default 'BUSINESS'")
     @Enumerated(EnumType.STRING)
     private EmailType emailType;
+
+    @Column(name = "DEFAULT_EMAIL", nullable = false, columnDefinition = "boolean default true")
+    @Basic(fetch = FetchType.EAGER)
+    private boolean defaultEmail;
 
     public String getEmail() {
         return email;
@@ -31,6 +36,14 @@ public class Email {
 
     public void setEmailType(EmailType emailType) {
         this.emailType = emailType;
+    }
+
+    public boolean isDefaultEmail() {
+        return defaultEmail;
+    }
+
+    public void setDefaultEmail(boolean defaultEmail) {
+        this.defaultEmail = defaultEmail;
     }
 
     @Override
