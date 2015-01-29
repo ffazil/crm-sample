@@ -2,7 +2,7 @@ package com.tracebucket.crm.test.repository;
 
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.organization.domain.Organization;
-import com.tracebucket.organization.repository.jpa.OrganizationJpaRepository;
+import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.fixture.AddressFixture;
 import com.tracebucket.crm.test.fixture.OrganizationFixture;
@@ -23,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class})
 public class OrganizationRepositoryTest {
     @Autowired
-    private OrganizationJpaRepository organizationRepository;
+    private OrganizationRepository organizationRepository;
 
     private Organization organization = null;
 
