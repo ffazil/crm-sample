@@ -1,6 +1,7 @@
 package com.tracebucket.crm.test.repository;
 
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
@@ -70,7 +71,7 @@ public class OrganizationRepositoryTest {
         if(organization != null && organization.getAggregateId() != null) {
             organizationRepository.delete(organization.getAggregateId());
             organization = organizationRepository.findOne(organization.getAggregateId());
-            Assert.assertNull(organization);
+            Assert.assertTrue(((BaseDomain) organization).isPassive());
         }
     }
 }
