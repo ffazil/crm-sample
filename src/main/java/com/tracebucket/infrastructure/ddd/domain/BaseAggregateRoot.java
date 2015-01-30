@@ -65,7 +65,7 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
 
 
     public BaseAggregateRoot(){
-
+        aggregateId = AggregateId.generate();
     }
 	
 	public void markAsRemoved() {

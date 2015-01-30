@@ -35,10 +35,10 @@ public class AggregateRootListener extends AuditingEntityListener {
 
     @PrePersist
     public void init(BaseAggregateRoot aggregateRoot){
-        if(aggregateRoot.getAggregateId() == null){
+        /*if(aggregateRoot.getAggregateId() == null){
             aggregateRoot.aggregateId = AggregateId.generate();
 
-        }
+        }*/
     }
 
 
