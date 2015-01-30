@@ -54,6 +54,7 @@ public class PartnerServiceTest {
     private void createPartner() throws Exception{
         partner = PartnerFixture.standardPartner();
         owner = OwnerFixture.standardOwner();
+        partner = partnerService.save(partner);
         partner.setOwner(owner);
         partner = partnerService.save(partner);
     }

@@ -56,8 +56,8 @@ public class PartnerRepositoryTest {
     private void createPartner() throws Exception{
         partner = PartnerFixture.standardPartner();
         owner = OwnerFixture.standardOwner();
+        partner = partnerRepository.save(partner);
         partner.setOwner(owner);
-        //organization = organizationRepository.save(partner.getOwner());
         partner = partnerRepository.save(partner);
     }
 
