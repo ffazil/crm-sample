@@ -1,5 +1,7 @@
 package com.tracebucket.crm.test.repository;
 
+import com.tracebucket.crm.test.config.InfrastructureTestConfig;
+import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.partner.domain.Customer;
@@ -30,7 +32,7 @@ import javax.transaction.Transactional;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class})
+@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
 @Transactional
 public class PartnerRepositoryTest {
 

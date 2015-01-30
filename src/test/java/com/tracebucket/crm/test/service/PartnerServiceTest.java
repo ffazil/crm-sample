@@ -4,6 +4,7 @@ import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.crm.service.PartnerService;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
+import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.crm.test.fixture.AddressFixture;
@@ -31,7 +32,7 @@ import javax.transaction.Transactional;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class})
+@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
 @Transactional
 public class PartnerServiceTest {
 

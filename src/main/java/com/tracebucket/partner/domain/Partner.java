@@ -3,6 +3,7 @@ package com.tracebucket.partner.domain;
 import com.tracebucket.common.domain.Address;
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
+import com.tracebucket.infrastructure.ddd.annotation.DomainMethod;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -18,6 +19,7 @@ import java.util.Set;
 @AggregateRoot
 @Entity
 @Table(name = "PARTNER")
+@EntityListeners(value = {})
 public class Partner extends BaseAggregateRoot{
     @Column(name = "TITLE", nullable = false)
     @Basic(fetch = FetchType.EAGER)
@@ -61,16 +63,18 @@ public class Partner extends BaseAggregateRoot{
         this.partnerCategory = partnerCategory;
     }
 
-
+    @DomainMethod(event = "PartnerCategorySet")
     public void setPartnerCategory(PartnerCategory partnerCategory){
 
         this.partnerCategory = partnerCategory;
     }
 
+    @DomainMethod(event = "PartnerMoved")
     public void movePartnerToCategory(PartnerCategory newPartnerCategory){
         this.partnerCategory = newPartnerCategory;
     }
 
+    @DomainMethod(event = "PartnerRoleAdded")
     public void addPartnerRole(PartnerRole newPartnerRole){
         this.partnerRoles.add(newPartnerRole);
     }
@@ -82,10 +86,12 @@ public class Partner extends BaseAggregateRoot{
         return (found != null && found > 0) ? true : false;
     }
 
+    @DomainMethod(event = "AddressAddedToRole")
     public void addAddressToRole(PartnerRole partnerRole, Address address){
        partnerRole.getAddresses().add(address);
     }
 
+    @DomainMethod(event = "RoleAddressMoved")
     public void moveRoleAddressTo(PartnerRole partnerRole, Address newAddress){
 
         Long foundId = partnerRoles.parallelStream()
@@ -98,6 +104,7 @@ public class Partner extends BaseAggregateRoot{
         }
     }
 
+    @DomainMethod(event = "OwnerChanged")
     public void changeOwner(Owner newOwner){
         this.owner = newOwner;
     }
@@ -112,6 +119,7 @@ public class Partner extends BaseAggregateRoot{
         return owner;
     }
 
+    @DomainMethod(event = "OwnerSet")
     public void setOwner(Owner owner) {
         this.owner = owner;
     }

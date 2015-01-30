@@ -1,6 +1,8 @@
 package com.tracebucket.crm.test.repository;
 
+import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
+import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
@@ -21,7 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Created by sadath on 13-Jan-15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class})
+@ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
 public class OrganizationRepositoryTest {
     @Autowired
     private OrganizationRepository organizationRepository;
