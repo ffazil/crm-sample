@@ -6,5 +6,5 @@ import com.tracebucket.infrastructure.ddd.repository.jpa.BaseJpaRepository;
 /**
  * Created by sadath on 27-Jan-15.
  */
-public interface CurrencyJpaRepository extends BaseJpaRepository<Currency, Long> {
+public interface CurrencyRepository extends BaseJpaRepository<Currency, Long> {
 }

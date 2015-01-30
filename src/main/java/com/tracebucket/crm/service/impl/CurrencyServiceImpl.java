@@ -1,7 +1,7 @@
 package com.tracebucket.crm.service.impl;
 
 import com.tracebucket.common.domain.Currency;
-import com.tracebucket.crm.repository.jpa.CurrencyJpaRepository;
+import com.tracebucket.crm.repository.jpa.CurrencyRepository;
 import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseJpaRepository;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ public class CurrencyServiceImpl extends BaseEntityServiceImpl<Currency> impleme
     private static final Logger log = LoggerFactory.getLogger(CurrencyServiceImpl.class);
 
     @Autowired
-    private CurrencyJpaRepository currencyRepository;
+    private CurrencyRepository currencyRepository;
 
     public CurrencyServiceImpl() {
         super(Currency.class);
