@@ -28,10 +28,7 @@ import reactor.core.Reactor;
 import reactor.event.Event;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Configurable
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
@@ -62,10 +59,14 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
     @Transient
     transient private Set<String> events = new HashSet<>(0);
 
+    @Transient
+    private final String _instanceId;
+
 
 
     public BaseAggregateRoot(){
         aggregateId = AggregateId.generate();
+        _instanceId = UUID.randomUUID().toString();
     }
 	
 	public void markAsRemoved() {
@@ -120,4 +121,8 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
 	public int hashCode() {	
 		return aggregateId.hashCode();
 	}
+
+    public String instanceId(){
+        return _instanceId;
+    }
 }

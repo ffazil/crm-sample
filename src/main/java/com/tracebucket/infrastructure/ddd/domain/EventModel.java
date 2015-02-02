@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class EventModel implements Serializable{
     private final int identifier;
+    private final String instance;
     private final String event;
     private final BaseAggregateRoot aggregateRoot;
     private final Date timestamp;
@@ -17,6 +18,7 @@ public class EventModel implements Serializable{
     private Cloner cloner;
 
     public EventModel(BaseAggregateRoot aggregateRoot, String event){
+        this.instance = aggregateRoot.instanceId();
         this.identifier = aggregateRoot.hashCode();
         this.event = event;
         cloner = new Cloner();
