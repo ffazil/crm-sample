@@ -18,7 +18,7 @@ public class Owner {
             @AttributeOverride(name = "aggregateId", column = @Column(name = "clientId", nullable = false))})
     private AggregateId aggregateId;*/
 
-    @Column(name = "NAME", nullable = false, unique = true)
+    @Column(name = "NAME", /*nullable = false, */unique = true)
     @Basic(fetch = FetchType.EAGER)
     private String name;
 
