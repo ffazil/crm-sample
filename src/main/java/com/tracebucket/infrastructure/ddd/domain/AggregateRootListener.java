@@ -33,19 +33,12 @@ public class AggregateRootListener extends AuditingEntityListener {
     public void publishEvents(BaseAggregateRoot aggregateRoot){
 
         Set<EventModel> eventModels = eventRegistry.events(aggregateRoot);
-        Iterator<EventModel> eventModelIterator = eventModels.iterator();
-        while(eventModelIterator.hasNext()){
-            EventModel eventModel = eventModelIterator.next();
-            eventHandlerHelper.notify(eventModel.getEvent(), eventModel);
-            log.info("Publishing " + eventModel.getEvent() + " " + eventModel.toString());
-            eventModelIterator.remove();
-        }
-        /*
         eventModels.stream()
                 .forEach(eventModel -> {
                     eventHandlerHelper.notify(eventModel.getEvent(), eventModel);
                     log.info("Publishing " + eventModel.getEvent() + " " + eventModel.toString());
-                });*/
+                });
+        eventRegistry.deleteInstanceEvents(aggregateRoot);
     }
 
    /* @PostPersist

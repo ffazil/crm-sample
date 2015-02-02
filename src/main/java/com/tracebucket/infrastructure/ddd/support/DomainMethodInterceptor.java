@@ -58,6 +58,6 @@ public class DomainMethodInterceptor{
         BaseAggregateRoot aggregateRoot = (BaseAggregateRoot) joinPoint.getTarget();
         eventRegistry.addEvent(aggregateRoot, event);
 
-        log.info("Adding  " + event + " " + aggregateRoot.toString());
+
     }
 }

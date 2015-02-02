@@ -11,6 +11,6 @@ import java.util.Set;
 public interface EventRegistry {
     public void addEvent(BaseAggregateRoot aggregateRoot, String event);
     public Set<EventModel> events(BaseAggregateRoot aggregateRoot);
-    public void deleteEvent(BaseAggregateRoot aggregateRoot, EventModel eventModel);
+    public void deleteInstanceEvents(BaseAggregateRoot aggregateRoot);
 
 }
