@@ -1,7 +1,6 @@
 package com.tracebucket.infrastructure.ddd.domain;
 
 import com.rits.cloning.Cloner;
-import sk.nociar.jpacloner.JpaCloner;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,9 +21,7 @@ public class EventModel implements Serializable{
         this.instance = aggregateRoot.instanceId();
         this.identifier = aggregateRoot.hashCode();
         this.event = event;
-/*        cloner = new Cloner();
-        this.aggregateRoot = cloner.deepClone(aggregateRoot);*/
-        this.aggregateRoot = JpaCloner.clone(aggregateRoot, "*");
+        this.aggregateRoot = aggregateRoot;
         this.timestamp = new Date();
     }
 
