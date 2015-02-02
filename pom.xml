@@ -105,6 +105,12 @@
             <artifactId>guava</artifactId>
             <version>13.0.1</version>
         </dependency>
+        <!--Deep cloner-->
+        <dependency>
+            <groupId>uk.com.robust-it</groupId>
+            <artifactId>cloning</artifactId>
+            <version>1.9.1</version>
+        </dependency>
     </dependencies>
 
     <build>
