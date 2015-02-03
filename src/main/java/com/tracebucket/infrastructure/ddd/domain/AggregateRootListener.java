@@ -36,7 +36,7 @@ public class AggregateRootListener extends AuditingEntityListener {
         eventModels.stream()
                 .forEach(eventModel -> {
                     eventHandlerHelper.notify(eventModel.getEvent(), eventModel);
-                    log.info("Publishing " + eventModel.getEvent() + " " + eventModel.toString());
+                    log.info("Publishing event " + eventModel.getEvent()+ " for " + eventModel.getAggregateRoot().getClass().getSimpleName() + " having instance " + eventModel.getAggregateRoot().instanceId());
                 });
         eventRegistry.deleteInstanceEvents(aggregateRoot);
     }

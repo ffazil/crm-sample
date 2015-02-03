@@ -19,7 +19,6 @@ import java.util.Set;
 @AggregateRoot
 @Entity
 @Table(name = "PARTNER")
-@EntityListeners(value = {})
 public class Partner extends BaseAggregateRoot{
     @Column(name = "TITLE", nullable = false)
     @Basic(fetch = FetchType.EAGER)
@@ -42,7 +41,7 @@ public class Partner extends BaseAggregateRoot{
     private Owner owner;
 
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, /*orphanRemoval = true, */fetch = FetchType.EAGER)
     @JoinColumn(name = "PARTNER__ID")
     protected Set<PartnerRole> partnerRoles = new HashSet<PartnerRole>(0);
 

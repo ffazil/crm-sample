@@ -10,6 +10,7 @@ import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.partner.repository.jpa.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -59,7 +60,7 @@ public class PartnerServiceImpl implements PartnerService {
     }
 */
     @Override
-    public Partner addPartnerRole(PartnerRole newPartnerRole,AggregateId partnerAggregateId){
+    public Partner addPartnerRole(PartnerRole newPartnerRole, AggregateId partnerAggregateId){
 
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
@@ -71,7 +72,7 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner addAddressToRole(PartnerRole partnerRole, Address address,AggregateId partnerAggregateId){
+    public Partner addAddressToRole(PartnerRole partnerRole, Address address, AggregateId partnerAggregateId){
 
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
@@ -87,8 +88,7 @@ public class PartnerServiceImpl implements PartnerService {
     }*/
 
     @Override
-    public Partner changeOwner(Owner newOwner,AggregateId partnerAggregateId){
-
+    public Partner changeOwner(Owner newOwner, AggregateId partnerAggregateId){
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             partner.changeOwner(newOwner);
@@ -99,7 +99,7 @@ public class PartnerServiceImpl implements PartnerService {
     }
     
     @Override
-    public Boolean hasPartnerRole(PartnerRole partnerRole,AggregateId partnerAggregateId){
+    public Boolean hasPartnerRole(PartnerRole partnerRole, AggregateId partnerAggregateId){
 
         Long found = null;
         Partner partner = partnerRepository.findOne(partnerAggregateId);
