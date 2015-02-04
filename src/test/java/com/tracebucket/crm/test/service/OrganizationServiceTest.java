@@ -237,12 +237,12 @@ public class OrganizationServiceTest {
         if(organization != null && organization.getAggregateId() != null) {
             organizationService.delete(organization.getAggregateId());
             organization = organizationService.findOne(organization.getAggregateId());
-            Assert.assertTrue(((BaseDomain) organization).isPassive());
+            Assert.assertNull(organization);
         }
-        if(currency != null && currency.getId() != null) {
+/*        if(currency != null && currency.getId() != null) {
             currencyService.deleteOne(currency.getId());
             currency = currencyService.findOne(currency.getId());
-            Assert.assertTrue(((BaseDomain) currency).isPassive());
-        }
+            Assert.assertNull(currency);
+        }*/
     }
 }

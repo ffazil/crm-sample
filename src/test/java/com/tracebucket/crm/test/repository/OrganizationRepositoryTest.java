@@ -73,7 +73,7 @@ public class OrganizationRepositoryTest {
         if(organization != null && organization.getAggregateId() != null) {
             organizationRepository.delete(organization.getAggregateId());
             organization = organizationRepository.findOne(organization.getAggregateId());
-            Assert.assertTrue(((BaseDomain) organization).isPassive());
+            Assert.assertNull(organization);
         }
     }
 }

@@ -2,8 +2,10 @@ package com.tracebucket.infrastructure.ddd.repository.jpa;
 
 import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
@@ -28,11 +30,18 @@ public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I ex
             this.entityManager = entityManager;
         }
 
-        protected Object getTargetRepository(RepositoryMetadata metadata) {
+/*       @Override
+       protected Object getTargetRepository(RepositoryMetadata metadata) {
             return new BaseJpaRepositoryImpl<T, ID>((Class<T>) metadata.getDomainType(), entityManager);
-        }
+       }*/
 
-        protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
+       @Override
+       protected <T, ID extends Serializable> SimpleJpaRepository<?, ?> getTargetRepository(RepositoryMetadata metadata, EntityManager entityManager) {
+           JpaEntityInformation<?, Serializable> entityInformation = getEntityInformation(metadata.getDomainType());
+           return new BaseJpaRepositoryImpl(entityInformation, entityManager);
+       }
+
+       protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
             return BaseJpaRepository.class;
         }
     }

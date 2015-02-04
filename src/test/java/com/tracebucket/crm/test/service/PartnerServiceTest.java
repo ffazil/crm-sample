@@ -31,7 +31,6 @@ import javax.transaction.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, JPATestConfig.class, ServiceTestConfig.class, InfrastructureTestConfig.class})
-@Transactional
 public class PartnerServiceTest {
 
     @Autowired
@@ -62,7 +61,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testCreate()  {
         createPartner();
         Assert.assertNotNull(partner);
@@ -70,7 +68,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testSetPartnerCategory() {
         createPartner();
         if(partner != null) {
@@ -81,7 +78,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testAddPartnerRole() {
         createPartner();
         if(partner != null) {
@@ -93,7 +89,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testAddAddressToRole() {
         createPartner();
         if(partner != null) {
@@ -108,7 +103,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testChangeOwner() {
         createPartner();
         if(partner != null) {
@@ -120,7 +114,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testHasPartnerRole() {
         createPartner();
         if(partner != null) {
@@ -135,7 +128,6 @@ public class PartnerServiceTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void testFindById()  {
         createPartner();
         if(partner != null) {
@@ -149,9 +141,9 @@ public class PartnerServiceTest {
         if(partner != null && partner.getAggregateId() != null) {
             partnerService.delete(partner.getAggregateId());
             partner = partnerService.findOne(partner.getAggregateId());
-            Assert.assertTrue(((BaseDomain) partner).isPassive());
+            Assert.assertNull(partner);
         }
-      /*  if(owner != null ) {
+/*        if(owner != null ) {
             currencyService.deleteOne(currency.getId());
             currency = currencyService.findOne(currency.getId());
             Assert.assertNull(currency);

@@ -33,7 +33,6 @@ import javax.transaction.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
-@Transactional
 public class PartnerRepositoryTest {
 
    @Autowired
@@ -62,7 +61,7 @@ public class PartnerRepositoryTest {
     }
 
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     public void testCreate() throws Exception{
         createPartner();
         Assert.assertNotNull(partner.getAggregateId());
@@ -80,7 +79,7 @@ public class PartnerRepositoryTest {
         Assert.assertEquals(1, partner.getAllAssignedRoles().size());
     }
     @Test
-    @Rollback(false)
+    //@Rollback(false)
     public void testFindById() throws Exception {
         createPartner();
         partner = partnerRepository.findOne(partner.getAggregateId());
@@ -91,7 +90,7 @@ public class PartnerRepositoryTest {
         if(partner != null && partner.getAggregateId() != null) {
             partnerRepository.delete(partner.getAggregateId());
             partner = partnerRepository.findOne(partner.getAggregateId());
-            Assert.assertTrue(((BaseDomain) partner).isPassive());
+            Assert.assertNull(partner);
         }
         /*if(organization != null && organization.getAggregateId() != null) {
             organizationRepository.delete(organization.getAggregateId());
