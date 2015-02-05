@@ -61,7 +61,6 @@ public class PartnerRepositoryTest {
     }
 
     @Test
-    //@Rollback(false)
     public void testCreate() throws Exception{
         createPartner();
         Assert.assertNotNull(partner.getAggregateId());
@@ -79,7 +78,6 @@ public class PartnerRepositoryTest {
         Assert.assertEquals(1, partner.getAllAssignedRoles().size());
     }
     @Test
-    //@Rollback(false)
     public void testFindById() throws Exception {
         createPartner();
         partner = partnerRepository.findOne(partner.getAggregateId());

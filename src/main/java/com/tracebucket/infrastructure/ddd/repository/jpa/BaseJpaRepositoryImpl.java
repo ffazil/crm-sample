@@ -59,20 +59,9 @@ public class BaseJpaRepositoryImpl<T extends BaseDomain, ID extends Serializable
         }
     }
 
-/*    @Transactional(propagation = Propagation.SUPPORTS)
-    public <S extends T> S save(S entity) {
-        if (entityInformation.isNew(entity)) {
-            entityManager.persist(entity);
-            return entity;
-        } else {
-            return entityManager.merge(entity);
-        }
-    }*/
-
     @Override
-    /*@Transactional(propagation = Propagation.SUPPORTS)*/
     public T findOne(ID id) {
-        T aggregate = entityManager.find(entityInformation.getJavaType(), id, LockModeType.OPTIMISTIC);
+        T aggregate = entityManager.find(entityInformation.getJavaType(), id, LockModeType.PESSIMISTIC_READ);
         if (aggregate != null && aggregate.isPassive())
             return null;
         return aggregate;
