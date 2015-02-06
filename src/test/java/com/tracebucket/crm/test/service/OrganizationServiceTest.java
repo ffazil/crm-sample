@@ -8,7 +8,6 @@ import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
 import com.tracebucket.crm.test.fixture.*;
-import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.domain.OrganizationUnit;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;

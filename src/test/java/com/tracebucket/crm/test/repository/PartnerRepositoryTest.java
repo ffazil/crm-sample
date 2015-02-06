@@ -2,7 +2,6 @@ package com.tracebucket.crm.test.repository;
 
 import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;
-import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import com.tracebucket.partner.domain.Customer;
 import com.tracebucket.crm.test.config.JPATestConfig;

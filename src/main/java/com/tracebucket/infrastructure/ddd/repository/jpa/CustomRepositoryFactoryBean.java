@@ -1,6 +1,9 @@
 package com.tracebucket.infrastructure.ddd.repository.jpa;
 
-import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
+import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
+import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
@@ -16,12 +19,15 @@ import java.io.Serializable;
  * Created by sadath on 28-Jan-15.
  */
 public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I extends Serializable> extends JpaRepositoryFactoryBean<R, T, I> {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomRepositoryFactoryBean.class);
+
     protected RepositoryFactorySupport createRepositoryFactory(EntityManager entityManager) {
 
         return new CustomRepositoryFactory(entityManager);
     }
 
-   private static class CustomRepositoryFactory<T extends BaseDomain, ID extends Serializable> extends JpaRepositoryFactory {
+   private static class CustomRepositoryFactory<T extends BaseAggregateRoot, ID extends Serializable> extends JpaRepositoryFactory {
 
         private EntityManager entityManager;
 
@@ -38,11 +44,16 @@ public class CustomRepositoryFactoryBean <R extends JpaRepository<T, I>, T, I ex
        @Override
        protected <T, ID extends Serializable> SimpleJpaRepository<?, ?> getTargetRepository(RepositoryMetadata metadata, EntityManager entityManager) {
            JpaEntityInformation<?, Serializable> entityInformation = getEntityInformation(metadata.getDomainType());
-           return new BaseJpaRepositoryImpl(entityInformation, entityManager);
+           if(metadata.getDomainType().getGenericSuperclass().getTypeName().equals(BaseAggregateRoot.class.getTypeName())) {
+               return new BaseAggregateRepositoryImpl(entityInformation, entityManager);
+           } else if(metadata.getDomainType().getGenericSuperclass().getTypeName().equals(BaseEntity.class.getTypeName())) {
+               return new SimpleJpaRepository(entityInformation, entityManager);
+           }
+           return new SimpleJpaRepository(entityInformation, entityManager);
        }
 
        protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
-            return BaseJpaRepository.class;
+            return BaseAggregateRepository.class;
         }
     }
 }

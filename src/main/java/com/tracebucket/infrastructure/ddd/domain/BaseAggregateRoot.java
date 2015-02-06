@@ -34,7 +34,7 @@ import java.util.*;
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
 @EntityListeners(AggregateRootListener.class)
-public abstract class  BaseAggregateRoot extends BaseDomain{
+public abstract class  BaseAggregateRoot {
 	public static enum AggregateStatus {
 		ACTIVE, ARCHIVE
 	}
@@ -62,7 +62,9 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
     @Transient
     private final String _instanceId;
 
-
+    @Column(name = "PASSIVE", nullable = false, columnDefinition = "boolean default false")
+    @Basic(fetch = FetchType.EAGER)
+    private boolean passive;
 
     public BaseAggregateRoot(){
         aggregateId = AggregateId.generate();
@@ -126,5 +128,11 @@ public abstract class  BaseAggregateRoot extends BaseDomain{
         return _instanceId;
     }
 
+    public boolean isPassive() {
+        return passive;
+    }
 
+    public void setPassive(boolean passive) {
+        this.passive = passive;
+    }
 }

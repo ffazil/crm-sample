@@ -1,38 +1,33 @@
 package com.tracebucket.infrastructure.ddd.repository.jpa;
 
-import com.tracebucket.infrastructure.ddd.domain.BaseDomain;
-import org.springframework.data.jpa.repository.Lock;
+import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by sadath on 28-Jan-15.
  */
 @NoRepositoryBean
-public class BaseJpaRepositoryImpl<T extends BaseDomain, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
+public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseAggregateRepository<T, ID> {
 
     private EntityManager entityManager;
 
     private JpaEntityInformation<T, ?> entityInformation;
 
-    public BaseJpaRepositoryImpl(final JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseAggregateRepositoryImpl(final JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityInformation = entityInformation;
         this.entityManager = entityManager;
     }
 
-    public BaseJpaRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
+    public BaseAggregateRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
         super(domainClass, entityManager);
         this.entityManager = entityManager;
     }
