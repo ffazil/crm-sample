@@ -7,6 +7,8 @@ import com.tracebucket.crm.test.config.*;
 import com.tracebucket.crm.test.fixture.CurrencyFixture;
 import com.tracebucket.crm.test.fixture.OrganizationFixture;
 import com.tracebucket.organization.domain.Organization;
+import com.tracebucket.organization.rest.assembler.resource.CurrencyResourceAssembler;
+import com.tracebucket.organization.rest.command.AddBaseCurrencyCommand;
 import com.tracebucket.organization.service.OrganizationService;
 import org.junit.After;
 import org.junit.Assert;
@@ -79,12 +81,15 @@ public class OrganizationControllerTest {
         currency = currencyService.create(currency);
         Assert.assertNotNull(currency);
 
+        AddBaseCurrencyCommand addBaseCurrencyCommand = new AddBaseCurrencyCommand();
+        addBaseCurrencyCommand.setOrganizationAggregateId(organization.getAggregateId().toString());
+        addBaseCurrencyCommand.setCurrencyResource(CurrencyResourceAssembler.toResource(currency));
 
         MvcResult mvcResult = null;
         log.info("Add Base Currency : "+ objectMapper.writeValueAsString(currency));
         mvcResult = mockMvc
-                .perform(MockMvcRequestBuilders.put("/organization/basecurrency/"+organization.getAggregateId())
-                        .content(objectMapper.writeValueAsString(currency))
+                .perform(MockMvcRequestBuilders.put("/organization/basecurrency/")
+                        .content(objectMapper.writeValueAsString(addBaseCurrencyCommand))
                         .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();

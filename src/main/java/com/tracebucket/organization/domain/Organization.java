@@ -84,7 +84,7 @@ public class Organization extends BaseAggregateRoot {
     @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<OrganizationUnit> organizationUnits = new HashSet<OrganizationUnit>(0);
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(name = "ORGANIZATION_CONTACT_PHONE", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     private Set<Phone> phones = new HashSet<Phone>(0);
 
