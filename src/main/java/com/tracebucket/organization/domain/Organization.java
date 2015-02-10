@@ -50,7 +50,7 @@ public class Organization extends BaseAggregateRoot {
     @Basic(fetch = FetchType.EAGER)
     protected String image;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(name = "ORGANIZATION_ADDRESS", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     private Set<Address> addresses = new HashSet<Address>(0);
 
@@ -59,7 +59,7 @@ public class Organization extends BaseAggregateRoot {
         Optional
     }
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "ORGANIZATION_CURRENCY", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     @Column(name = "CURRENCY_TYPE")
     @MapKeyJoinColumn(name = "CURRENCY__ID", referencedColumnName = "ID")
@@ -88,7 +88,7 @@ public class Organization extends BaseAggregateRoot {
     @JoinTable(name = "ORGANIZATION_CONTACT_PHONE", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     private Set<Phone> phones = new HashSet<Phone>(0);
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(name = "ORGANIZATION_CONTACT_EMAIL", joinColumns = @JoinColumn(name = "ORGANIZATION__ID"))
     private Set<Email> emails = new HashSet<Email>(0);
 

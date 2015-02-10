@@ -3,6 +3,7 @@ package com.tracebucket.crm.service.impl;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.crm.service.CurrencyService;
 import com.tracebucket.crm.service.OrganizationService;
+import com.tracebucket.infrastructure.ddd.annotation.PersistChanges;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.domain.OrganizationUnit;
@@ -48,34 +49,37 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @PersistChanges
     public Organization addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             Currency currency = currencyService.findOne(baseCurrency.getId());
             if(currency != null) {
                 organization.addBaseCurrency(currency);
-                return organizationRepository.save(organization);
+                return organization;
             }
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addTimezone(Timezone timezone, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addTimezone(timezone);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addOrganizationUnit(OrganizationUnit organizationUnit, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addOrganizationUnit(organizationUnit);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
@@ -85,87 +89,95 @@ public class OrganizationServiceImpl implements OrganizationService {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addOrganizationUnitBelow(organizationUnit, parentOrganizationUnit);
-            return  organizationRepository.save(organization);
+            return  organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addContactPerson(Person contactPerson, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addContactPerson(contactPerson);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization setDefaultContactPerson(Person defaultContactPerson, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultContactPerson(defaultContactPerson);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addContactNumber(Phone phone, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addContactNumber(phone);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization setDefaultContactNumber(Phone defaultContactNumber, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultContactNumber(defaultContactNumber);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addEmail(Email email, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.addEmail(email);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization setDefaultEmail(Email defaultEmail, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setDefaultEmail(defaultEmail);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization setHeadOffice(Address headOfficeAddress, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.setHeadOffice(headOfficeAddress);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization moveHeadOfficeTo(Address newHeadOfficeAddress, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
             organization.moveHeadOfficeTo(newHeadOfficeAddress);
-            return organizationRepository.save(organization);
+            return organization;
         }
         return null;
     }

@@ -18,13 +18,13 @@ import java.lang.reflect.Method;
  * @since 29-01-2015
  * @version 0.1
  *
- * DomainMethodInterceptor creates and adds domain events to a queue, whenever a domain method is intercepted.
+ * DomainMethodAdvisor creates and adds domain events to a queue, whenever a domain method is intercepted.
  */
 @Aspect
 @Configurable
-public class DomainMethodInterceptor{
+public class DomainMethodAdvisor {
 
-    private static Logger log = LoggerFactory.getLogger(DomainMethodInterceptor.class);
+    private static Logger log = LoggerFactory.getLogger(DomainMethodAdvisor.class);
 
     @Autowired
     private EventRegistry eventRegistry;
