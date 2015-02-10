@@ -1,8 +1,8 @@
-package com.tracebucket.crm.service.impl;
+package com.tracebucket.partner.service.impl;
 
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.common.domain.Address;
-import com.tracebucket.crm.service.PartnerService;
+import com.tracebucket.partner.service.PartnerService;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.partner.domain.Owner;
 import com.tracebucket.partner.domain.Partner;
@@ -10,7 +10,6 @@ import com.tracebucket.partner.domain.PartnerRole;
 import com.tracebucket.partner.repository.jpa.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

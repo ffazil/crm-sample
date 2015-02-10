@@ -2,7 +2,7 @@ package com.tracebucket.crm.test.service;
 
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.crm.service.PartnerService;
+import com.tracebucket.partner.service.PartnerService;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
@@ -18,11 +18,8 @@ import com.tracebucket.partner.domain.PartnerRole;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by vishwa on 28-01-2015.

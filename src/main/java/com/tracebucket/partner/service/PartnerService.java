@@ -1,4 +1,4 @@
-package com.tracebucket.crm.service;
+package com.tracebucket.partner.service;
 
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.common.domain.Address;

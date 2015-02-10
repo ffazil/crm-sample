@@ -1,8 +1,8 @@
-package com.tracebucket.crm.service.impl;
+package com.tracebucket.organization.service.impl;
 
 import com.tracebucket.common.domain.*;
 import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.crm.service.OrganizationService;
+import com.tracebucket.organization.service.OrganizationService;
 import com.tracebucket.infrastructure.ddd.annotation.PersistChanges;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
@@ -10,7 +10,6 @@ import com.tracebucket.organization.domain.OrganizationUnit;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;

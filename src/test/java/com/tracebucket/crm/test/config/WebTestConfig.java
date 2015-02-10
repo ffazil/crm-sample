@@ -1,4 +1,4 @@
-package com.tracebucket.config;
+package com.tracebucket.crm.test.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dozer.DozerBeanMapper;
@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(basePackages = {"com.tracebucket.organization.rest.controller"})
 @EnableWebMvc
-public class WebConfig {
+public class WebTestConfig {
     @Bean
     public Mapper mapper() {
         return new DozerBeanMapper();

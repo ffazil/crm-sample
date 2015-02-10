@@ -1,4 +1,4 @@
-package com.tracebucket.crm.service;
+package com.tracebucket.organization.service;
 
 import com.tracebucket.common.domain.*;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;

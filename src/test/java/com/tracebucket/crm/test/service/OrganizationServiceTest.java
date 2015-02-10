@@ -3,7 +3,7 @@ package com.tracebucket.crm.test.service;
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
 import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.crm.service.OrganizationService;
+import com.tracebucket.organization.service.OrganizationService;
 import com.tracebucket.crm.test.config.InfrastructureTestConfig;
 import com.tracebucket.crm.test.config.JPATestConfig;
 import com.tracebucket.crm.test.config.ServiceTestConfig;

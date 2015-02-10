@@ -1,5 +1,8 @@
 package com.tracebucket.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
 import org.springframework.context.annotation.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -7,10 +10,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by vishwa on 24-11-2014.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tracebucket.crm.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
+@ComponentScan(basePackages = {"com.tracebucket.**.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
 @EnableTransactionManagement(proxyTargetClass = true)
 public class ServiceConfig {
+    @Bean
+    public Mapper mapper() {
+        return new DozerBeanMapper();
+    }
 
-
+    @Bean
+    public ObjectMapper objectMapper()
+    {
+        return new ObjectMapper();
+    }
 
 }

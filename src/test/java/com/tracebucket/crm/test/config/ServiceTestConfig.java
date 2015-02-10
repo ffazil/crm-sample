@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by sadath on 23-Jan-15.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tracebucket.crm.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
+@ComponentScan(basePackages = {"com.tracebucket.**.service.impl"}, scopedProxy = ScopedProxyMode.INTERFACES)
 @EnableTransactionManagement(proxyTargetClass = true)
 public class ServiceTestConfig {
     @Bean
