@@ -21,8 +21,8 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Configurable
-public class PersistenceChangesAdvisor {
-    private static Logger log = LoggerFactory.getLogger(PersistenceChangesAdvisor.class);
+public class PersistChangesAdvisor {
+    private static Logger log = LoggerFactory.getLogger(PersistChangesAdvisor.class);
 
     @Autowired
     private AutowireCapableBeanFactory beanFactory;
