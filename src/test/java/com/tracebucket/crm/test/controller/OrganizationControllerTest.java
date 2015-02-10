@@ -94,7 +94,7 @@ public class OrganizationControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
-        log.info("Organization after base currency added: "+mvcResult.getResponse().getContentAsString());
+        log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
     }
 
 /*    @After
