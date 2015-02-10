@@ -48,7 +48,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    @PersistChanges
+    @PersistChanges(repository = "organizationRepository")
     public Organization addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
@@ -84,6 +84,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @PersistChanges(repository = "organizationRepository")
     public Organization addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {

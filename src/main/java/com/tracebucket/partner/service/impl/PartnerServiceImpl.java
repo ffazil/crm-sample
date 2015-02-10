@@ -2,6 +2,7 @@ package com.tracebucket.partner.service.impl;
 
 import com.tracebucket.common.dictionary.PartnerCategory;
 import com.tracebucket.common.domain.Address;
+import com.tracebucket.infrastructure.ddd.annotation.PersistChanges;
 import com.tracebucket.partner.service.PartnerService;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.partner.domain.Owner;
@@ -43,12 +44,13 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
+    @PersistChanges(repository = "partnerRepository")
     public Partner setPartnerCategory(PartnerCategory partnerCategory, AggregateId partnerAggregateId){
 
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             partner.setPartnerCategory(partnerCategory);
-            return partnerRepository.save(partner);
+            return partner;
         }
         return null;
     }
@@ -59,24 +61,26 @@ public class PartnerServiceImpl implements PartnerService {
     }
 */
     @Override
+    @PersistChanges(repository = "partnerRepository")
     public Partner addPartnerRole(PartnerRole newPartnerRole, AggregateId partnerAggregateId){
 
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             partner.addPartnerRole(newPartnerRole);
-            return partnerRepository.save(partner);
+            return partner;
         }
         return null;
 
     }
 
     @Override
+    @PersistChanges(repository = "partnerRepository")
     public Partner addAddressToRole(PartnerRole partnerRole, Address address, AggregateId partnerAggregateId){
 
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             partner.addAddressToRole(partnerRole, address);
-            return partnerRepository.save(partner);
+            return partner;
         }
         return null;
     }
@@ -87,11 +91,12 @@ public class PartnerServiceImpl implements PartnerService {
     }*/
 
     @Override
+    @PersistChanges(repository = "partnerRepository")
     public Partner changeOwner(Owner newOwner, AggregateId partnerAggregateId){
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             partner.changeOwner(newOwner);
-            return partnerRepository.save(partner);
+            return partner;
         }
         return null;
 
