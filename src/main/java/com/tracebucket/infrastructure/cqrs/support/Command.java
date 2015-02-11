@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import reactor.event.Event;
 import reactor.function.Consumer;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.UUID;
 

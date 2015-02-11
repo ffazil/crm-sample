@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 /**
  * Created by sadath on 10-Feb-15.
@@ -92,6 +92,7 @@ public class OrganizationControllerTest {
                         .content(objectMapper.writeValueAsString(addBaseCurrencyCommand))
                         .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.forwardedUrl("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString()))
                 .andReturn();
 
         log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
