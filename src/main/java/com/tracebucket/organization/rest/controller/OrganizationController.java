@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.async.DeferredResult;
 import reactor.core.Reactor;
 
 /**
@@ -34,7 +35,9 @@ public class OrganizationController {
     }
 
     @QueryMapping(value = "/organization/{uid}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getOrganization(@PathVariable("uid") String uid){
-        return "test";
+    public DeferredResult<String> getOrganization(@PathVariable("uid") String uid){
+        DeferredResult<String> deferredResult = new DeferredResult<>();
+        deferredResult.setResult("test");
+        return deferredResult;
     }
 }
