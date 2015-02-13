@@ -48,6 +48,7 @@ public class DomainMethodAdvisor {
 
     @After("@annotation(com.tracebucket.infrastructure.ddd.annotation.DomainMethod)")
     public void invoke(JoinPoint joinPoint) throws Throwable {
+
         Object[] args = joinPoint.getArgs();
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method m = ms.getMethod();
@@ -56,6 +57,7 @@ public class DomainMethodAdvisor {
         String event = method.event();
 
         BaseAggregateRoot aggregateRoot = (BaseAggregateRoot) joinPoint.getTarget();
+        log.info("Intercepting domain method to publish event " + event + " for " + aggregateRoot.getClass().getSimpleName() + " with instance ID = " + aggregateRoot.instanceId());
         eventRegistry.addEvent(aggregateRoot, event);
 
 

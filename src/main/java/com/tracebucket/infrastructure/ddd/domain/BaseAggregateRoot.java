@@ -15,8 +15,7 @@ import java.util.*;
 /**
  * @author FFL
  */
-
-@Configurable
+@Component
 @Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
 @EntityListeners(AggregateRootListener.class)
@@ -37,13 +36,6 @@ public abstract class  BaseAggregateRoot {
 
 	@Enumerated(EnumType.ORDINAL)
 	private AggregateStatus aggregateStatus = AggregateStatus.ACTIVE;
-
-    @Transient
-    @Autowired
-    private EventHandlerHelper eventHandlerHelper;
-
-    @Transient
-    transient private Set<String> events = new HashSet<>(0);
 
     @Transient
     private final String _instanceId;
@@ -73,11 +65,7 @@ public abstract class  BaseAggregateRoot {
 		throw new DomainOperationException(aggregateId, message);
 	}
 
-    protected EventHandlerHelper eventHandlerHelper(){
-        return eventHandlerHelper;
-    }
-	
-	@Override
+    @Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -92,18 +80,6 @@ public abstract class  BaseAggregateRoot {
 		
 		return false;
 	}
-
-    public void fireEvent(String event){
-        events.add(event);
-    }
-
-    public EventHandlerHelper getEventHandlerHelper() {
-        return eventHandlerHelper;
-    }
-
-    public Set<String> getEvents() {
-        return events;
-    }
 
     @Override
 	public int hashCode() {	

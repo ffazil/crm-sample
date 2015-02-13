@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
@@ -18,9 +19,11 @@ import java.util.Set;
 /**
  * Created by ffl on 13-01-2015.
  */
-@Configurable
 public class AggregateRootListener extends AuditingEntityListener {
     private static Logger log = LoggerFactory.getLogger(AggregateRootListener.class);
+
+    @Autowired
+    private AutowireCapableBeanFactory spring;
 
     @Autowired
     private EventHandlerHelper eventHandlerHelper;
@@ -51,6 +54,11 @@ public class AggregateRootListener extends AuditingEntityListener {
                     log.info("Publishing " + event + " " + aggregateRoot.toString());
                 });
     }*/
+
+    @PostLoad
+    public void wire(BaseAggregateRoot aggregateRoot){
+        spring.autowireBean(aggregateRoot);
+    }
 
     @PrePersist
     public void init(BaseAggregateRoot aggregateRoot){

@@ -6,8 +6,11 @@
         </encoder>
     </appender>
 
-    <logger name="reactor">
-        <level value="TRACE" />
+    <logger name="org.hibernate">
+        <level value="ERROR" />
+    </logger>
+    <logger name="org.dozer">
+        <level value="ERROR" />
     </logger>
 
     <root>
