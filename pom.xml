@@ -40,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>org.projectreactor.spring</groupId>
-            <artifactId>reactor-spring-context</artifactId>
+            <artifactId>reactor-spring-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>

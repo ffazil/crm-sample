@@ -1,19 +1,17 @@
 package com.tracebucket.crm.test.config;
 
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import com.tracebucket.infrastructure.context.EnableTron;
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import reactor.core.Environment;
 import reactor.core.Reactor;
 import reactor.core.spec.Reactors;
-import reactor.spring.context.config.EnableReactor;
 
 /**
  * Created by ffl on 12-01-2015.
  */
 @Configuration
-@EnableReactor
+@EnableTron
 @EnableSpringConfigured
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = {"com.tracebucket.infrastructure.cqrs.support", "com.tracebucket.infrastructure.event.domain", "com.tracebucket.infrastructure.ddd.support", "com.tracebucket.infrastructure.ddd.domain"})
