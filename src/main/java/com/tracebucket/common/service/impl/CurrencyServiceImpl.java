@@ -1,9 +1,8 @@
-package com.tracebucket.crm.service.impl;
+package com.tracebucket.common.service.impl;
 
 import com.tracebucket.common.domain.Currency;
-import com.tracebucket.crm.repository.jpa.CurrencyRepository;
-import com.tracebucket.crm.service.CurrencyService;
-import com.tracebucket.infrastructure.ddd.repository.jpa.BaseAggregateRepository;
+import com.tracebucket.common.repository.jpa.CurrencyRepository;
+import com.tracebucket.common.service.CurrencyService;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

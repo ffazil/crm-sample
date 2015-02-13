@@ -1,4 +1,4 @@
-package com.tracebucket.crm.repository.jpa;
+package com.tracebucket.common.repository.jpa;
 
 import com.tracebucket.common.domain.Currency;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;

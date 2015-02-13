@@ -2,7 +2,6 @@ package com.tracebucket.infrastructure.ddd.annotation;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import reactor.spring.context.annotation.Consumer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

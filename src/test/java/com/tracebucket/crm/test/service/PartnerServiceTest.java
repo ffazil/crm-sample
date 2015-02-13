@@ -1,7 +1,7 @@
 package com.tracebucket.crm.test.service;
 
 import com.tracebucket.common.dictionary.PartnerCategory;
-import com.tracebucket.crm.service.CurrencyService;
+import com.tracebucket.common.service.CurrencyService;
 import com.tracebucket.partner.service.PartnerService;
 import com.tracebucket.crm.test.config.ApplicationTestConfig;
 import com.tracebucket.crm.test.config.InfrastructureTestConfig;

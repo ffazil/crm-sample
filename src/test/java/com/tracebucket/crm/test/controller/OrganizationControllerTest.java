@@ -2,15 +2,13 @@ package com.tracebucket.crm.test.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tracebucket.common.domain.Currency;
-import com.tracebucket.crm.service.CurrencyService;
+import com.tracebucket.common.service.CurrencyService;
 import com.tracebucket.crm.test.config.*;
 import com.tracebucket.crm.test.fixture.CurrencyFixture;
 import com.tracebucket.crm.test.fixture.OrganizationFixture;
 import com.tracebucket.organization.domain.Organization;
-import com.tracebucket.organization.rest.assembler.resource.CurrencyResourceAssembler;
 import com.tracebucket.organization.rest.command.AddBaseCurrencyCommand;
 import com.tracebucket.organization.service.OrganizationService;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

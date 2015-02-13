@@ -1,4 +1,4 @@
-package com.tracebucket.crm.service;
+package com.tracebucket.common.service;
 
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 import com.tracebucket.infrastructure.ddd.domain.EntityId;

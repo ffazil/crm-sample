@@ -1,4 +1,4 @@
-package com.tracebucket.crm.service;
+package com.tracebucket.common.service;
 
 import com.tracebucket.common.domain.Currency;
 

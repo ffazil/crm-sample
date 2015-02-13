@@ -1,12 +1,11 @@
-package com.tracebucket.crm.service.impl;
+package com.tracebucket.common.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.tracebucket.crm.service.BaseEntityService;
+import com.tracebucket.common.service.BaseEntityService;
 import com.tracebucket.exception.DuplicateEntityException;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
 import com.tracebucket.infrastructure.ddd.domain.EntityId;
-import com.tracebucket.infrastructure.ddd.repository.jpa.BaseAggregateRepository;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseEntityRepository;
 import org.dozer.Mapper;
 import org.slf4j.Logger;
