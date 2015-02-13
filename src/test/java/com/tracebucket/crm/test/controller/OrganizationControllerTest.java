@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -25,6 +26,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.asyncDispatch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 /**
@@ -84,6 +88,7 @@ public class OrganizationControllerTest {
         addBaseCurrencyCommand.setCurrencyId(currency.getEntityId().toString());
 
         MvcResult mvcResult = null;
+
         log.info("Add Base Currency : "+ objectMapper.writeValueAsString(addBaseCurrencyCommand));
         mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.put("/organization/basecurrency/")
@@ -92,6 +97,14 @@ public class OrganizationControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.forwardedUrl("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString()))
                 .andReturn();
+
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(request().asyncStarted())
+                .andReturn();
+        mvcResult.getAsyncResult();
+        this.mockMvc.perform(asyncDispatch(mvcResult));
+        mvcResult.getAsyncResult();
 
         log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
     }
