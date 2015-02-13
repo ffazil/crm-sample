@@ -130,7 +130,7 @@ public class Organization extends BaseAggregateRoot {
     @DomainMethod(event = "OrganizationUnitAddedBelow")
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
         OrganizationUnit parentOrganizationUnitFetched = organizationUnits.parallelStream()
-                .filter(t -> t.getId() == parentOrganizationUnit.getId())
+                .filter(t -> t.getEntityId() == parentOrganizationUnit.getEntityId())
                 .findFirst()
                 .get();
         if(parentOrganizationUnitFetched != null) {

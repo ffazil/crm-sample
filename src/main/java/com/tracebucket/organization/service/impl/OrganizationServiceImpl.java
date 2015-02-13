@@ -65,7 +65,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     public Organization addBaseCurrency(Currency baseCurrency, AggregateId organizationAggregateId) {
         Organization organization = organizationRepository.findOne(organizationAggregateId);
         if(organization != null) {
-            Currency currency = currencyService.findOne(baseCurrency.getId());
+            Currency currency = currencyService.findOne(baseCurrency.getEntityId());
             if(currency != null) {
                 organization.addBaseCurrency(currency);
                 return organization;

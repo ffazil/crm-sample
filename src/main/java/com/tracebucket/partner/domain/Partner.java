@@ -80,7 +80,7 @@ public class Partner extends BaseAggregateRoot{
 
     public Boolean hasPartnerRole(PartnerRole partnerRole){
         Long found = partnerRoles.parallelStream()
-            .filter(t -> t.getId() == partnerRole.getId())
+            .filter(t -> t.getEntityId() == partnerRole.getEntityId())
             .count();
         return (found != null && found > 0) ? true : false;
     }
@@ -93,13 +93,12 @@ public class Partner extends BaseAggregateRoot{
     @DomainMethod(event = "RoleAddressMoved")
     public void moveRoleAddressTo(PartnerRole partnerRole, Address newAddress){
 
-        Long foundId = partnerRoles.parallelStream()
-                .filter(t -> t.getId() == partnerRole.getId())
-                .count();
+        PartnerRole roleFound = partnerRoles.parallelStream()
+                .filter(t -> t.getEntityId().equals(partnerRole.getEntityId()))
+                .findFirst().get();
 
-        if(partnerRole.getId() == foundId){
-
-            partnerRole.getAddresses().add(newAddress);
+        if(roleFound != null){
+            roleFound.getAddresses().add(newAddress);
         }
     }
 

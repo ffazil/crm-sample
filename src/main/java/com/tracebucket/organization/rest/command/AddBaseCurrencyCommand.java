@@ -7,7 +7,7 @@ import com.tracebucket.organization.rest.resource.CurrencyResource;
  */
 public class AddBaseCurrencyCommand {
     private String organizationAggregateId;
-    private CurrencyResource currencyResource;
+    private String currencyId;
 
     public String getOrganizationAggregateId() {
         return organizationAggregateId;
@@ -17,11 +17,11 @@ public class AddBaseCurrencyCommand {
         this.organizationAggregateId = organizationAggregateId;
     }
 
-    public CurrencyResource getCurrencyResource() {
-        return currencyResource;
+    public String getCurrencyId() {
+        return currencyId;
     }
 
-    public void setCurrencyResource(CurrencyResource currencyResource) {
-        this.currencyResource = currencyResource;
+    public void setCurrencyId(String currencyId) {
+        this.currencyId = currencyId;
     }
 }

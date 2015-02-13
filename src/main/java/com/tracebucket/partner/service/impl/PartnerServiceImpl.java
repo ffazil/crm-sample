@@ -109,10 +109,9 @@ public class PartnerServiceImpl implements PartnerService {
         Partner partner = partnerRepository.findOne(partnerAggregateId);
         if(partner != null) {
             found = partner.getAllAssignedRoles().parallelStream()
-                    .filter(t -> t.getId() == partnerRole.getId())
+                    .filter(t -> t.getEntityId().equals(partnerRole.getEntityId()))
                     .count();
         }
-
         return (found != null && found > 0) ? true : false;
 
     }

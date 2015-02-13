@@ -18,7 +18,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * Created by vishwa on 26-11-2014.
  */
 @Configuration
-@ComponentScan(basePackages = {"com.tracebucket.organization.rest.controller"})
+@ComponentScan(basePackages = {"com.tracebucket.**.rest.controller"})
 @EnableWebMvc
 public class WebTestConfig extends WebMvcConfigurerAdapter{
     @Autowired
