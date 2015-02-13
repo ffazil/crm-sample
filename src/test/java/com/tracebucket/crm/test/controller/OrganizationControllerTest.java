@@ -83,10 +83,10 @@ public class OrganizationControllerTest {
 
         AddBaseCurrencyCommand addBaseCurrencyCommand = new AddBaseCurrencyCommand();
         addBaseCurrencyCommand.setOrganizationAggregateId(organization.getAggregateId().toString());
-        addBaseCurrencyCommand.setCurrencyResource(CurrencyResourceAssembler.toResource(currency));
+        addBaseCurrencyCommand.setCurrencyId(currency.getEntityId().toString());
 
         MvcResult mvcResult = null;
-        log.info("Add Base Currency : "+ objectMapper.writeValueAsString(currency));
+        log.info("Add Base Currency : "+ objectMapper.writeValueAsString(addBaseCurrencyCommand));
         mvcResult = mockMvc
                 .perform(MockMvcRequestBuilders.put("/organization/basecurrency/")
                         .content(objectMapper.writeValueAsString(addBaseCurrencyCommand))

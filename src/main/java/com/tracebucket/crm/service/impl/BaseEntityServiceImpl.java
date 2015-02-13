@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.tracebucket.crm.service.BaseEntityService;
 import com.tracebucket.exception.DuplicateEntityException;
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+import com.tracebucket.infrastructure.ddd.domain.EntityId;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseAggregateRepository;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseEntityRepository;
 import org.dozer.Mapper;
@@ -39,10 +40,10 @@ public abstract class BaseEntityServiceImpl<T extends BaseEntity> implements Bas
 
     @Override
     public T create(T entity){
-        if(entity != null && entity.getId() == null) {
+        if(entity != null && entity.getEntityId() == null) {
             return getDao().save(entity);
         } else {
-            T existingEntity = getDao().findOne(entity.getId());
+            T existingEntity = getDao().findByEntityId(entity.getEntityId());
             if (existingEntity == null) {
                 existingEntity = getDao().save(entity);
                 return existingEntity;
@@ -53,12 +54,12 @@ public abstract class BaseEntityServiceImpl<T extends BaseEntity> implements Bas
 
     @Override
     public T update(T entity){
-        if(entity.getId() != null) {
-            T target = getDao().findOne(entity.getId());
-            Long id = target.getId();
+        if(entity.getEntityId() != null) {
+            T target = getDao().findByEntityId(entity.getEntityId());
+            EntityId id = target.getEntityId();
 
             target = mapper.map(entity, clazz);
-            target.setId(id);
+            target.setEntityId(id);
 
             target = getDao().save(target);
             return target;
@@ -78,6 +79,12 @@ public abstract class BaseEntityServiceImpl<T extends BaseEntity> implements Bas
     @Override
     public T findOne(Long uid) {
         T target = getDao().findOne(uid);
+        return target;
+    }
+
+    @Override
+    public T findOne(EntityId entityId) {
+        T target = getDao().findByEntityId(entityId);
         return target;
     }
 

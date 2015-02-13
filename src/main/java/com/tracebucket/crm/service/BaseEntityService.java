@@ -1,6 +1,7 @@
 package com.tracebucket.crm.service;
 
 import com.tracebucket.infrastructure.ddd.domain.BaseEntity;
+import com.tracebucket.infrastructure.ddd.domain.EntityId;
 
 import java.util.List;
 
@@ -20,5 +21,5 @@ public interface BaseEntityService<T extends BaseEntity> {
     public void deleteAll();
     public void deleteOne(Long id);
     public T suspend(T entity);
-
+    public T findOne(EntityId entityId);
 }

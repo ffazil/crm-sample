@@ -1,30 +1,22 @@
 package com.tracebucket.infrastructure.ddd.domain;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional = false)
-    @Column(name = "ID", nullable = false, columnDefinition = "BIGINT UNSIGNED")
-    private Long id;
+    @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "entityId", column = @Column(name = "ID", nullable = false))})
+    protected EntityId entityId;
 
     @Column(name = "PASSIVE", nullable = false, columnDefinition = "boolean default false")
     @Basic(fetch = FetchType.EAGER)
     private boolean passive;
 
     public BaseEntity(){
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        entityId = EntityId.generate();
     }
 
     public boolean isPassive() {
@@ -33,5 +25,13 @@ public abstract class BaseEntity {
 
     public void setPassive(boolean passive) {
         this.passive = passive;
+    }
+
+    public EntityId getEntityId() {
+        return entityId;
+    }
+
+    public void setEntityId(EntityId entityId) {
+        this.entityId = entityId;
     }
 }
