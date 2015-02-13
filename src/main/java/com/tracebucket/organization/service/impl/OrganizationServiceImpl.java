@@ -2,24 +2,37 @@ package com.tracebucket.organization.service.impl;
 
 import com.tracebucket.common.domain.*;
 import com.tracebucket.crm.service.CurrencyService;
+import com.tracebucket.infrastructure.cqrs.support.Command;
+import com.tracebucket.infrastructure.ddd.annotation.DomainService;
+import com.tracebucket.organization.rest.command.AddBaseCurrencyCommand;
 import com.tracebucket.organization.service.OrganizationService;
 import com.tracebucket.infrastructure.ddd.annotation.PersistChanges;
 import com.tracebucket.infrastructure.ddd.domain.AggregateId;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.domain.OrganizationUnit;
 import com.tracebucket.organization.repository.jpa.OrganizationRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import reactor.spring.context.annotation.Consumer;
+import reactor.spring.context.annotation.Selector;
 
 import java.util.Set;
 
 /**
- * Created by sadath on 22-Jan-15.
+ * @author sadath
+ * @modified ffl
+ * @since 22-Jan-15
+ *
+ * Domain service
  */
-@Service
-@Transactional
+@DomainService
 public class OrganizationServiceImpl implements OrganizationService {
+    private static Logger log = LoggerFactory.getLogger(OrganizationServiceImpl.class);
 
     @Autowired
     private OrganizationRepository organizationRepository;
@@ -60,6 +73,8 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
         return null;
     }
+
+
 
     @Override
     @PersistChanges(repository = "organizationRepository")

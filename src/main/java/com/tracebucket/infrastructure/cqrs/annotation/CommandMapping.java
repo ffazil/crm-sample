@@ -21,6 +21,5 @@ public @interface CommandMapping {
     String[] headers() default {};
     String[] consumes() default {};
     String[] produces() default {};
-    String commandBus() default "";
     String command() default "";
 }

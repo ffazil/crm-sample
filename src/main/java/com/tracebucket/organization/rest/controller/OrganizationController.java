@@ -27,7 +27,7 @@ public class OrganizationController {
     @Autowired
     private OrganizationService organizationService;
 
-    @CommandMapping(value = "/organization/basecurrency", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, commandBus = "@commandBus")
+    @CommandMapping(value = "/organization/basecurrency", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, command = "addBaseCurrency")
     public String addBaseCurrency(@RequestBody  AddBaseCurrencyCommand addBaseCurrencyCommand, CommandWrapper commandWrapper) {
         Command<AddBaseCurrencyCommand> baseCurrencyCommand = Command.wrap(addBaseCurrencyCommand);
         commandWrapper.setCommand(baseCurrencyCommand);
