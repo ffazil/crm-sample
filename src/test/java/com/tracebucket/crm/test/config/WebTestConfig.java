@@ -3,10 +3,16 @@ package com.tracebucket.crm.test.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**
  * Created by vishwa on 26-11-2014.
@@ -14,7 +20,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(basePackages = {"com.tracebucket.organization.rest.controller"})
 @EnableWebMvc
-public class WebTestConfig {
+public class WebTestConfig extends WebMvcConfigurerAdapter{
+    @Autowired
+    @Qualifier("commandInterceptor")
+    private HandlerInterceptorAdapter commandInterceptor;
+
     @Bean
     public Mapper mapper() {
         return new DozerBeanMapper();
@@ -24,6 +34,11 @@ public class WebTestConfig {
     public ObjectMapper objectMapper()
     {
         return new ObjectMapper();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(commandInterceptor);
     }
 
 }

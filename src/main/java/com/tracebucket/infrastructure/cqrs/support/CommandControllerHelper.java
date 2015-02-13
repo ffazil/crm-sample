@@ -69,6 +69,13 @@ public class CommandControllerHelper {
         return command.getCid();
     }
 
+    public String intent(String commandName, Command command){
+        addToQueue(command, new DeferredResult());
+        log.info("Command: " + commandName + " | " + command.getData().toString());
+        commandBus.notify(commandName, command);
+        return command.getCid();
+    }
+
 
 
 

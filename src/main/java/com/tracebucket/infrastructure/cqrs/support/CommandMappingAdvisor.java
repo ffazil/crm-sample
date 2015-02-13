@@ -11,7 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.beans.Introspector;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -39,7 +42,24 @@ public class CommandMappingAdvisor {
         Method method = ms.getMethod();
         CommandMapping annotation = AnnotationUtils.getAnnotation(method, CommandMapping.class);
 
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+        String commandName = null;
+        if(annotation.command() == null || annotation.command().isEmpty()){
+            commandName = new StringBuilder()
+                    .append(Introspector.decapitalize(command.getData().getClass().getSimpleName()))
+                    .toString();
+        }
+        else{
+            commandName = annotation.command();
+        }
+
+
+        commandControllerHelper.intent(Command.name(commandName), command);
+
+
         log.info(command.getData().toString());
         log.info(annotation.toString());
+        log.info(attr.toString());
     }
 }

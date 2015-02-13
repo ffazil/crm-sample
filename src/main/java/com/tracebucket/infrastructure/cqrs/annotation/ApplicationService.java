@@ -9,11 +9,9 @@ import java.lang.annotation.*;
 /**
  * Created by ffl on 07-01-2015.
  */
-@Consumer
-@Transactional
+
 @Retention(RetentionPolicy.RUNTIME)
-@Inherited
 @Target(ElementType.TYPE)
-@Service
+@Consumer
 public @interface ApplicationService {
 }
