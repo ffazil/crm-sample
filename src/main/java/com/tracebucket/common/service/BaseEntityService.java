@@ -20,6 +20,7 @@ public interface BaseEntityService<T extends BaseEntity> {
     public T findOne(Long id);
     public void deleteAll();
     public void deleteOne(Long id);
+    public void deleteOne(String uuid);
     public T suspend(T entity);
     public T findOne(EntityId entityId);
 }

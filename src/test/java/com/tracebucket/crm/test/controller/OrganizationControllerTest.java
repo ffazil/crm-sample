@@ -9,6 +9,7 @@ import com.tracebucket.crm.test.fixture.OrganizationFixture;
 import com.tracebucket.organization.domain.Organization;
 import com.tracebucket.organization.rest.command.AddBaseCurrencyCommand;
 import com.tracebucket.organization.service.OrganizationService;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -106,21 +107,27 @@ public class OrganizationControllerTest {
         this.mockMvc.perform(asyncDispatch(mvcResult));
         mvcResult.getAsyncResult();
 
+        if(mvcResult.getAsyncResult() instanceof Organization) {
+            organization = (Organization) mvcResult.getAsyncResult();
+        }
+        Assert.assertNotNull(organization);
+        Assert.assertNotNull(organization.getAggregateId());
+
         log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
     }
 
-/*    @After
+    @After
     public void tearDown(){
         if(organization != null && organization.getAggregateId() != null) {
             organizationService.delete(organization.getAggregateId());
             organization = organizationService.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
         }
-        if(currency != null && currency.getId() != null) {
-            currencyService.deleteOne(currency.getId());
-            currency = currencyService.findOne(currency.getId());
+        if(currency != null && currency.getEntityId() != null) {
+            currencyService.deleteOne(currency.getEntityId().toString());
+            currency = currencyService.findOne(currency.getEntityId());
             Assert.assertNull(currency);
         }
-    }*/
+    }
 
 }

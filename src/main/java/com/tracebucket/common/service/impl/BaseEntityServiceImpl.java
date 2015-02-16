@@ -98,6 +98,11 @@ public abstract class BaseEntityServiceImpl<T extends BaseEntity> implements Bas
     }
 
     @Override
+    public void deleteOne(String uuid){
+        getDao().delete(getDao().findByEntityId(new EntityId(uuid)));
+    }
+
+    @Override
     public T suspend(T entity){
         return entity;
     }
