@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.lang.annotation.*;
 
 /**
- * Created by ffl on 10-02-2015.
+ * @author ffl
+ * @since 10-02-2015
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

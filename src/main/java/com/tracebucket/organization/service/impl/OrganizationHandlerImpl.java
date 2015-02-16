@@ -1,8 +1,12 @@
 package com.tracebucket.organization.service.impl;
 
+import com.tracebucket.common.domain.Currency;
+import com.tracebucket.common.repository.jpa.CurrencyRepository;
 import com.tracebucket.infrastructure.cqrs.annotation.ApplicationService;
 import com.tracebucket.infrastructure.cqrs.support.Command;
 import com.tracebucket.infrastructure.cqrs.annotation.CommandHandler;
+import com.tracebucket.infrastructure.ddd.domain.AggregateId;
+import com.tracebucket.infrastructure.ddd.domain.EntityId;
 import com.tracebucket.organization.rest.command.AddBaseCurrencyCommand;
 import com.tracebucket.organization.service.OrganizationHandler;
 import com.tracebucket.organization.service.OrganizationService;
@@ -22,10 +26,16 @@ public class OrganizationHandlerImpl implements OrganizationHandler{
     @Autowired
     private OrganizationService organizationService;
 
+    @Autowired
+    private CurrencyRepository currencyRepository;
+
     @CommandHandler(value = "Command|addBaseCurrency", reactor = "@commandBus")
     public void onAddBaseCurrency(Command<AddBaseCurrencyCommand> command){
         log.info("Received command " + command.toString());
         AddBaseCurrencyCommand baseCurrencyCommand = command.getData();
+
+        Currency currency = currencyRepository.findByEntityId(new EntityId(baseCurrencyCommand.getCurrencyId()));
+        organizationService.addBaseCurrency(currency, new AggregateId(baseCurrencyCommand.getOrganizationAggregateId()));
         log.info(command.getData().getOrganizationAggregateId());
     }
 }
