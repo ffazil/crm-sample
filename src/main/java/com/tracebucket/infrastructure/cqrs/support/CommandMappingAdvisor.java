@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.beans.Introspector;
 import java.lang.reflect.Method;
@@ -37,6 +38,7 @@ public class CommandMappingAdvisor {
                 .findFirst()
                 .get();
         Command command = commandWrapper.getCommand();
+        DeferredResult deferredResult = commandWrapper.getDeferredResult();
 
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method method = ms.getMethod();
@@ -55,7 +57,7 @@ public class CommandMappingAdvisor {
         }
 
 
-        commandControllerHelper.intent(Command.name(commandName), command);
+        commandControllerHelper.intent(Command.name(commandName), command, deferredResult);
 
 
         log.info(command.getData().toString());

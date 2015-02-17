@@ -31,16 +31,14 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
     @CommandMapping(value = "/organization/basecurrency", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, command = "addBaseCurrency")
-    public String addBaseCurrency(@RequestBody  AddBaseCurrencyCommand addBaseCurrencyCommand, CommandWrapper commandWrapper) {
+    public DeferredResult<Organization> addBaseCurrency(@RequestBody  AddBaseCurrencyCommand addBaseCurrencyCommand, CommandWrapper commandWrapper) {
         Command<AddBaseCurrencyCommand> baseCurrencyCommand = Command.wrap(addBaseCurrencyCommand);
+        DeferredResult<Organization> deferredResult = new DeferredResult<>();
         commandWrapper.setCommand(baseCurrencyCommand);
-        return "forward:/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId();
+        commandWrapper.setDeferredResult(deferredResult);
+        return deferredResult;
+        //return "forward:/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId();
     }
 
-    @RequestMapping(value = "/organization/{uid}", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
-    public DeferredResult<Organization> getOrganization(@PathVariable("uid") String uid){
-        DeferredResult<Organization> deferredResult = new DeferredResult<>();
-        deferredResult.setResult(organizationService.findOne(new AggregateId(uid)));
-        return deferredResult;
-    }
+
 }

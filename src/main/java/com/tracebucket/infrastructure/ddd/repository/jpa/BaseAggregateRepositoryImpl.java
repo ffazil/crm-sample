@@ -56,10 +56,25 @@ public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends
 
     @Override
     public T findOne(ID id) {
-        T aggregate = entityManager.find(entityInformation.getJavaType(), id, LockModeType.PESSIMISTIC_READ);
+        T aggregate = entityManager.find(entityInformation.getJavaType(), id, LockModeType.OPTIMISTIC);
         if (aggregate != null && aggregate.isPassive())
             return null;
         return aggregate;
     }
+
+    @Transactional
+    @Override
+    public <S extends T> S save(S aggregate) {
+        if (entityManager.contains(aggregate)){
+            //locking Aggregate Root logically protects whole aggregate
+            entityManager.lock(aggregate, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+        }
+        else{
+            entityManager.persist(aggregate);
+        }
+        return aggregate;
+    }
+
+
 
 }

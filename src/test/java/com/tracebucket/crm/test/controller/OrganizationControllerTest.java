@@ -95,11 +95,10 @@ public class OrganizationControllerTest {
                 .perform(MockMvcRequestBuilders.put("/organization/basecurrency/")
                         .content(objectMapper.writeValueAsString(addBaseCurrencyCommand))
                         .contentType(org.springframework.http.MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.forwardedUrl("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString()))
+                .andExpect(request().asyncStarted())
                 .andReturn();
 
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString())
+        /*mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(request().asyncStarted())
                 .andReturn();
@@ -111,14 +110,20 @@ public class OrganizationControllerTest {
             organization = (Organization) mvcResult.getAsyncResult();
         }
         Assert.assertNotNull(organization);
-        Assert.assertNotNull(organization.getAggregateId());
+        Assert.assertNotNull(organization.getAggregateId());*/
+        mvcResult.getAsyncResult();
+        this.mockMvc.perform(asyncDispatch(mvcResult));
+        organization = (Organization) mvcResult.getAsyncResult();
 
-        log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
+        organization.getBaseCurrencies().stream()
+                .forEach(c -> log.info("Base currency = " + c.getName()));
+
+        //log.info("Base Currencies: "+ organization.getBaseCurrenc
     }
 
     @After
     public void tearDown(){
-        if(organization != null && organization.getAggregateId() != null) {
+        /*if(organization != null && organization.getAggregateId() != null) {
             organizationService.delete(organization.getAggregateId());
             organization = organizationService.findOne(organization.getAggregateId());
             Assert.assertNull(organization);
@@ -127,7 +132,7 @@ public class OrganizationControllerTest {
             currencyService.deleteOne(currency.getEntityId().toString());
             currency = currencyService.findOne(currency.getEntityId());
             Assert.assertNull(currency);
-        }
+        }*/
     }
 
 }
