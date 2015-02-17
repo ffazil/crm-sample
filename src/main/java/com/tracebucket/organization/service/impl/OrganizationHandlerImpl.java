@@ -37,7 +37,6 @@ public class OrganizationHandlerImpl implements OrganizationHandler{
 
         Currency currency = currencyRepository.findByEntityId(new EntityId(baseCurrencyCommand.getCurrencyId()));
         Organization organization = organizationService.addBaseCurrency(currency, new AggregateId(baseCurrencyCommand.getOrganizationAggregateId()));
-        log.info(command.getData().getOrganizationAggregateId());
         return organization;
     }
 }

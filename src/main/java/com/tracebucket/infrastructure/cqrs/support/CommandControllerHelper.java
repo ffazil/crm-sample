@@ -58,6 +58,7 @@ public class CommandControllerHelper {
     }
 
     public DeferredResult fetch(String key){
+        log.info("Fetching deferred result for key = " + key);
         return queue.get(key);
     }
 

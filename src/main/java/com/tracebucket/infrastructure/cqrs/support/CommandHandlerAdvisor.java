@@ -31,8 +31,8 @@ public class CommandHandlerAdvisor {
                 .filter(a -> a instanceof Command)
                 .findFirst()
                 .get();
-        log.info(command.getCid());
         DeferredResult deferredResult = commandControllerHelper.fetch(command.getCid());
+        log.info("Setting result for command " + command.getCid());
         deferredResult.setResult(result);
     }
 }
