@@ -33,7 +33,6 @@ public class OrganizationHandlerImpl implements OrganizationHandler{
     public void onAddBaseCurrency(Command<AddBaseCurrencyCommand> command){
         log.info("Received command " + command.toString());
         AddBaseCurrencyCommand baseCurrencyCommand = command.getData();
-
         Currency currency = currencyRepository.findByEntityId(new EntityId(baseCurrencyCommand.getCurrencyId()));
         organizationService.addBaseCurrency(currency, new AggregateId(baseCurrencyCommand.getOrganizationAggregateId()));
         log.info(command.getData().getOrganizationAggregateId());

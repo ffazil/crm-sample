@@ -39,6 +39,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization findOne(AggregateId aggregateId) {
+        organizationRepository.flush();
         return organizationRepository.findOne(aggregateId);
     }
 

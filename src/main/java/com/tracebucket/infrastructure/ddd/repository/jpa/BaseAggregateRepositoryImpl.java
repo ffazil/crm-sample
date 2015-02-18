@@ -61,5 +61,16 @@ public class BaseAggregateRepositoryImpl<T extends BaseAggregateRoot, ID extends
             return null;
         return aggregate;
     }
-
+/*
+    @Override
+    public <S extends T> S save(S entity) {
+        if (entityInformation.isNew(entity)) {
+            entityManager.persist(entity);
+            return entity;
+        } else {
+            entity = entityManager.merge(entity);
+            entityManager.lock(entity, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+            return entity;
+        }
+    }*/
 }

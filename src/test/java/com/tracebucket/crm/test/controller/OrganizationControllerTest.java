@@ -99,24 +99,26 @@ public class OrganizationControllerTest {
                 .andExpect(MockMvcResultMatchers.forwardedUrl("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString()))
                 .andReturn();
 
+       // Thread.sleep(100);
+
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/organization/" + addBaseCurrencyCommand.getOrganizationAggregateId().toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(request().asyncStarted())
                 .andReturn();
-        mvcResult.getAsyncResult();
+        Object result = mvcResult.getAsyncResult();
         this.mockMvc.perform(asyncDispatch(mvcResult));
-        mvcResult.getAsyncResult();
 
-        if(mvcResult.getAsyncResult() instanceof Organization) {
+        if(result instanceof Organization) {
             organization = (Organization) mvcResult.getAsyncResult();
         }
         Assert.assertNotNull(organization);
         Assert.assertNotNull(organization.getAggregateId());
+        Assert.assertEquals(1, organization.getBaseCurrencies().size());
 
         log.info("Base Currencies: "+mvcResult.getResponse().getContentAsString());
     }
 
-    @After
+/*    @After
     public void tearDown(){
         if(organization != null && organization.getAggregateId() != null) {
             organizationService.delete(organization.getAggregateId());
@@ -128,6 +130,6 @@ public class OrganizationControllerTest {
             currency = currencyService.findOne(currency.getEntityId());
             Assert.assertNull(currency);
         }
-    }
+    }*/
 
 }

@@ -15,6 +15,9 @@ public abstract class BaseEntity {
     @Basic(fetch = FetchType.EAGER)
     private boolean passive;
 
+    @Version
+    private Long version;
+
     public BaseEntity(){
         entityId = EntityId.generate();
     }
@@ -33,5 +36,13 @@ public abstract class BaseEntity {
 
     public void setEntityId(EntityId entityId) {
         this.entityId = entityId;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }
