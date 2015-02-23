@@ -115,6 +115,10 @@ public class OrganizationControllerTest {
         this.mockMvc.perform(asyncDispatch(mvcResult));
         organization = (Organization) mvcResult.getAsyncResult();
 
+        Assert.assertNotNull(organization);
+        Assert.assertNotNull(organization.getAggregateId());
+        Assert.assertEquals(1, organization.getBaseCurrencies().size());
+
         organization.getBaseCurrencies().stream()
                 .forEach(c -> log.info("Base currency = " + c.getName()));
 

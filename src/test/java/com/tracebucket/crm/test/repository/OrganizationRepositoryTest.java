@@ -18,11 +18,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by sadath on 13-Jan-15.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes  = {ApplicationTestConfig.class, ServiceTestConfig.class, JPATestConfig.class, InfrastructureTestConfig.class})
+@Transactional
 public class OrganizationRepositoryTest {
     @Autowired
     private OrganizationRepository organizationRepository;
