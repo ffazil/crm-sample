@@ -2,8 +2,8 @@ package com.tracebucket.infrastructure.ddd.support;
 
 import com.tracebucket.infrastructure.ddd.annotation.PersistChanges;
 import com.tracebucket.infrastructure.ddd.repository.jpa.BaseAggregateRepository;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.stereotype.Component;
 
 import java.beans.Introspector;
 import java.lang.reflect.Method;
@@ -50,12 +51,14 @@ public class PersistChangesAdvisor {
     }*/
 
 
-    @AfterReturning(value = "@annotation(com.tracebucket.infrastructure.ddd.annotation.PersistChanges)", returning = "result")
-    public void invoke(JoinPoint joinPoint, Object result){
+    @Around(value = "@annotation(com.tracebucket.infrastructure.ddd.annotation.PersistChanges) && !within(com.tracebucket.infrastructure.ddd.annotation.PersistChanges)")
+    public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
 
         MethodSignature ms = (MethodSignature) joinPoint.getSignature();
         Method m = ms.getMethod();
         PersistChanges annotation = AnnotationUtils.getAnnotation(m, PersistChanges.class);
+
+        Object result = joinPoint.proceed();
 
         BaseAggregateRepository aggregateRepository = null;
         String repositoryBeanName = null;
@@ -79,14 +82,15 @@ public class PersistChangesAdvisor {
             }
         }
         if(aggregateRepository != null){
-            result = aggregateRepository.save(result);
             log.info("Attempting to persist " + Introspector.decapitalize(result.getClass().getSimpleName() + " using ") + repositoryBeanName);
+            result = aggregateRepository.save(result);
+
         }
         else{
             log.info("Unable to find a matching repository");
         }
 
-
+        return result;
 
     }
 

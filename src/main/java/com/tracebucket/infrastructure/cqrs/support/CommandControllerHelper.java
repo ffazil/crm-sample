@@ -58,16 +58,16 @@ public class CommandControllerHelper {
     }
 
     public DeferredResult fetch(String key){
+        log.info("Fetching deferred result for key = " + key);
         return queue.get(key);
     }
 
-    public String intent(String commandName, Object o, DeferredResult deferredResult){
-        Command command = Command.wrap(o);
+    /*public String intent(String commandName, Object o, DeferredResult deferredResult){
         addToQueue(command, deferredResult);
         log.info("Command: " + commandName + " | " + o.toString());
         commandBus.notify(commandName, command);
         return command.getCid();
-    }
+    }*/
 
     public String intent(String commandName, Command command){
         addToQueue(command, new DeferredResult());
@@ -75,6 +75,15 @@ public class CommandControllerHelper {
         commandBus.notify(commandName, command);
         return command.getCid();
     }
+
+    public String intent(String commandName, Command command, DeferredResult result){
+        addToQueue(command, result);
+        log.info("Command: " + commandName + " | " + command.getData().toString());
+        commandBus.notify(commandName, command);
+        return command.getCid();
+    }
+
+
 
 
 

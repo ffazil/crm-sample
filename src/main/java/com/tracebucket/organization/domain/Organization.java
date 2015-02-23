@@ -2,6 +2,7 @@ package com.tracebucket.organization.domain;
 
 import com.tracebucket.common.dictionary.AddressType;
 import com.tracebucket.common.domain.*;
+import com.tracebucket.common.domain.Currency;
 import com.tracebucket.infrastructure.ddd.annotation.AggregateRoot;
 import com.tracebucket.infrastructure.ddd.annotation.DomainMethod;
 import com.tracebucket.infrastructure.ddd.domain.BaseAggregateRoot;
@@ -11,10 +12,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -129,12 +127,12 @@ public class Organization extends BaseAggregateRoot {
 
     @DomainMethod(event = "OrganizationUnitAddedBelow")
     public void addOrganizationUnitBelow(OrganizationUnit organizationUnit, OrganizationUnit parentOrganizationUnit){
-        OrganizationUnit parentOrganizationUnitFetched = organizationUnits.parallelStream()
+        Optional<OrganizationUnit> parentOrganizationUnitFetched = organizationUnits.parallelStream()
                 .filter(t -> t.getEntityId() == parentOrganizationUnit.getEntityId())
-                .findFirst()
-                .get();
-        if(parentOrganizationUnitFetched != null) {
-            parentOrganizationUnitFetched.addChild(organizationUnit);
+                .findFirst();
+
+        if(parentOrganizationUnitFetched.isPresent()) {
+            parentOrganizationUnitFetched.get().addChild(organizationUnit);
         }
     }
 
